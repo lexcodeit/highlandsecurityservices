@@ -1,0 +1,83 @@
+import { UploadButton, useUploadThing } from "@/utils/uploadthing";
+import Image from "next/image";
+
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
+
+    // Change "imageUploader" to your actual endpoint name
+    const { startUpload, isUploading } = useUploadThing("imageUploader", {
+        onClientUploadComplete: res => {
+            console.log("Files: ", res);
+            alert("Upload Completed");
+            setSelectedFile(null);
+            setPreview(null);
+        },
+        onUploadError: error => {
+            alert(`ERROR! ${error.message}`);
+        },
+        onUploadProgress(p) {
+            console.log("Upload progress:", p);
+        },
+    });
+    
+
+     
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setSelectedFile(file);
+            setPreview(URL.createObjectURL(file));
+        }
+    };
+
+    const handleConfirmUpload = () => {
+        if (selectedFile) {
+            startUpload([selectedFile]); // Upload only when confirmed
+        }
+    };
+
+    console.log("is uploading:", isUploading);
+
+
+          <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={res => {
+                    // Do something with the response
+                    console.log("Files: ", res);
+                    alert("Upload Completed");
+                }}
+                onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    alert(`ERROR! ${error.message}`);
+                }}
+            />
+
+
+      <div className="space-y-4">
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                />
+
+                {preview && (
+                    <div>
+                        <Image
+                            src={preview}
+                            alt="Preview"
+                            width={128}
+                            height={128}
+                            className="w-32 h-32 object-cover"
+                        />
+                        <button
+                            onClick={handleConfirmUpload}
+                            className="px-3 py-1 bg-blue-500 text-white rounded"
+                        >
+                            Confirm Upload
+                        </button>
+                    </div>
+                )}
+            </div>
+

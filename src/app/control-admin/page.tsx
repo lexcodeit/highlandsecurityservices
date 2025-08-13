@@ -5,7 +5,6 @@ import CardTitle from "@/components/screens/admin/resusables/card-title";
 import JobApplicationsRow from "@/components/tables/row-columns/job-applications-row";
 import JobApplicationsHeader from "@/components/tables/row-headers/job-applications-header";
 import { useGetDashboardData } from "@/lib/features/admin/use-get-dashboard-data";
-import React from "react";
 
 const HighlandAdmin = () => {
     const { data, isLoading } = useGetDashboardData();
@@ -13,7 +12,6 @@ const HighlandAdmin = () => {
     return (
         <div className="p-4">
             <div className="grid grid-cols-2 gap-4">
-                {/* Fighter Registrations */}
                 <div className="bg-white rounded-lg shadow-md mb-4">
                     <CardTitle
                         title="Job Applications"
