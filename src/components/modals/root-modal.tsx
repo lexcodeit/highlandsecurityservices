@@ -5,7 +5,6 @@ import InviteUserModal from "./invite-user-modal";
 
 const RootModal = () => {
     const [mounted, setMounted] = useState(false);
-
     useEffect(() => {
         setMounted(true);
     }, []);

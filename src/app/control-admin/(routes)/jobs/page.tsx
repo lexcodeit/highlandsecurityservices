@@ -6,6 +6,7 @@ import JobsListHeader from "@/components/tables/row-headers/jobs-list-header";
 import { Button } from "@/components/ui/button";
 import { useGetJobsList } from "@/lib/features/admin/jobs/use-get-jobs";
 import { useGetJobsCount } from "@/lib/features/admin/jobs/use-get-jobs-count";
+import { formatTimeFn } from "@/utils/helpers";
 import { Loader, PlusIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -55,8 +56,15 @@ const JobsPage = () => {
                             {jobs.map(job => {
                                 return (
                                     <JobsListRow
-                                        // user={user}
                                         key={job._id}
+                                        status={
+                                            job.isActive ? "Active" : "Inactive"
+                                        }
+                                        jobId={job._id}
+                                        title={job.title}
+                                        uploaded={formatTimeFn(
+                                            job._creationTime
+                                        )}
                                     />
                                 );
                             })}

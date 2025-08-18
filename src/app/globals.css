@@ -144,3 +144,8 @@
         @apply p-3 text-sm text-header-text;
     }
 }
+
+.table-body-row {
+    display: grid;
+    align-items: center;
+}

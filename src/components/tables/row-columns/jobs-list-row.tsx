@@ -1,12 +1,30 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
+import { Id } from "../../../../convex/_generated/dataModel";
 
-const JobsListRow = () => {
+interface Props {
+    title: string;
+    uploaded: string;
+    status: string;
+    jobId: Id<"jobs">;
+}
+
+const JobsListRow = ({ status, title, uploaded, jobId }: Props) => {
     return (
-        <div className="grid grid-cols-5 gap-x-4 border-b border-b-border">
-            <div className="table-col-body">Title</div>
-            <div className="table-col-body">Status</div>
-            <div className="table-col-body">Uploaded</div>
-            <div className="table-col-body"></div>
+        <div className="grid-cols-5 gap-x-4 border-b border-b-border table-body-row">
+            <div className="table-col-body font-semibold text-header-text">
+                {title}
+            </div>
+            <div className="table-col-body font-medium">{status}</div>
+            <div className="table-col-body text-supporting-text">
+                {uploaded}
+            </div>
+            <div className="table-col-body">
+                <Link href={`/control-admin/jobs/${jobId}`}>
+                    <Button variant={"outline"}>View</Button>
+                </Link>
+            </div>
         </div>
     );
 };

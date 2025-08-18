@@ -4,6 +4,112 @@ import { getAuthUserId } from "@convex-dev/auth/server";
 import { CustomError } from "../errorUtils";
 import { paginationOptsValidator } from "convex/server";
 
+export const createRequirement = mutation({
+    args: {
+        jobId: v.id("jobs"),
+        requirement: v.string(),
+    },
+    async handler(ctx, args) {
+        try {
+            const userId = await getAuthUserId(ctx);
+
+            if (!userId) throw new CustomError("User Id not found.");
+
+            const job = await ctx.db.get(args.jobId);
+
+            if (!job) {
+                throw new CustomError("Job not found");
+            }
+
+            const requirements = await ctx.db
+                .query("jobListingRequirements")
+                .withIndex("by_job_id", q => q.eq("jobId", args.jobId))
+                .collect();
+
+            if (requirements.length > 10)
+                throw new CustomError(
+                    "A job shouldn't have more than 10 requirments."
+                );
+
+            const requirementId = await ctx.db.insert(
+                "jobListingRequirements",
+                {
+                    jobId: args.jobId,
+                    requirement: args.requirement,
+                }
+            );
+
+            return {
+                status: true,
+                data: requirementId,
+            };
+        } catch (err: unknown) {
+            console.log("[ADD_REQUIREMENT_ERR]:", err);
+
+            if (err instanceof Error) {
+                return {
+                    status: false,
+                    error: err.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to add requirement",
+            };
+        }
+    },
+});
+
+export const deleteRequirement = mutation({
+    args: {
+        requirementId: v.optional(v.id("jobListingRequirements")),
+    },
+    async handler(ctx, args) {
+        try {
+            const requirementId = args.requirementId;
+            if (!requirementId) {
+                throw new CustomError("Requirement ID is required");
+            }
+            const requirement = await ctx.db.get(requirementId);
+
+            if (!requirement) {
+                throw new CustomError("Requirement not found");
+            }
+
+            const requirements = await ctx.db
+                .query("jobListingRequirements")
+                .withIndex("by_job_id", q => q.eq("jobId", requirement.jobId))
+                .collect();
+
+            if (requirements.length === 1)
+                throw new CustomError(
+                    "You can't delete the only requirement for a job."
+                );
+
+            await ctx.db.delete(requirementId);
+
+            return {
+                status: true,
+            };
+        } catch (err: unknown) {
+            console.log("[DELETE_REQUIREMENT_ERR]:", err);
+
+            if (err instanceof Error) {
+                return {
+                    status: false,
+                    error: err.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to delete requirement",
+            };
+        }
+    },
+});
+
 export const getJobDetail = query({
     args: {
         jobId: v.optional(v.id("jobs")),
