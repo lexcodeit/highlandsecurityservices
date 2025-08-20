@@ -5,3 +5,9 @@ export type WorkspaceMembersPageTab = "members" | "invites";
 export type JobDetailsPageTab = "overview" | "applications";
 
 export type WorkspaceRoleEnum = "ADMIN" | "MANAGER" | "WORKER";
+
+export type PositionEnums =
+    | "chief-security-officer"
+    | "assistant-secretary"
+    | "company-driver"
+    | "security-guard";

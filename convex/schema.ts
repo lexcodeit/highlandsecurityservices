@@ -35,7 +35,9 @@ const schema = defineSchema({
         order: v.number(), // For ordering in UI
         userId: v.id("users"),
         lastUpdated: v.optional(v.number()),
-    }).index("by_slug", ["slug"]),
+    })
+        .index("by_slug", ["slug"])
+        .index("by_status", ["isActive"]),
     jobListingRequirements: defineTable({
         jobId: v.id("jobs"),
         requirement: v.string(),
