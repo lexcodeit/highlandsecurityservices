@@ -56,7 +56,7 @@ export const ResendOTP = Email({
             // TODO: Update with your app name and email address
             from:
                 process.env.AUTH_EMAIL ??
-                "Highland Security Admin Verification <highlandsecurity@lexcodeit.com>",
+                "Highland Security Admin Verification <auth@highlandsecurityservices.com>",
             to: [email],
             // TODO: Update with your app name
             subject: `Verify Your Account`,
