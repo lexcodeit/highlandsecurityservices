@@ -34,7 +34,7 @@ const PerPosition = ({ job }: Props) => {
             </div>
 
             <p className="text-sm text-supporting-text mb-2">
-                {job.description}
+                {job.shortDescription}
             </p>
 
             <Link href={`/careers/${job.slug}`} className="w-full">

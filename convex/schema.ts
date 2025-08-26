@@ -31,6 +31,7 @@ const schema = defineSchema({
         slug: v.string(), // e.g., "chief-security-officer"
         label: v.optional(v.string()), // e.g., "(Must be Bold, Neat, and Humble)"
         description: v.string(), // Rich description if needed
+        shortDescription: v.optional(v.string()),
         location: v.string(), // Default to "Lagos"
         isActive: v.boolean(), // To show/hide role from UI
         order: v.number(), // For ordering in UI
