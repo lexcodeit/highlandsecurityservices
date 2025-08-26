@@ -21,3 +21,12 @@ export const JobApplicationStatusUnion = v.union(
     v.literal("PENDING"),
     v.literal("PROCESSED")
 );
+export const SourceOfInfoUnion = v.union(
+    v.literal("LinkedIn"),
+    v.literal("Facebook"),
+    v.literal("Instagram"),
+    v.literal("Website"),
+    v.literal("FriendOrEmployee"),
+    v.literal("Google"),
+    v.literal("Others")
+);

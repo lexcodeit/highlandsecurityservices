@@ -5,6 +5,7 @@ import {
     AccountRoleUnion,
     AccountStatusUnion,
     JobApplicationStatusUnion,
+    SourceOfInfoUnion,
     UserGenderUnion,
     WorkspaceRoleUnion,
 } from "./unions";
@@ -48,14 +49,23 @@ const schema = defineSchema({
         phone: v.string(),
         email: v.string(),
         roleId: v.id("jobs"), // Reference to the job they're applying for
-        location: v.optional(v.string()),
-        hasGuarantor: v.boolean(),
-        experience: v.optional(v.string()),
-        fileUrl: v.optional(v.string()), // If you upload CV/ID
+        location: v.string(),
+        experienceLevel: v.string(),
+        resumeUrl: v.string(), // If you upload CV/ID
+        coverLetterUrl: v.optional(v.string()), // If you upload Cover Letter
+        gender: UserGenderUnion,
         status: JobApplicationStatusUnion,
+        sourceOfInfo: SourceOfInfoUnion,
+        answers: v.object({
+            q1: v.string(),
+            q2: v.string(),
+            q3: v.string(),
+        }),
     })
         .index("by_status", ["status"])
-        .index("by_role_id", ["roleId"]),
+        .index("by_role_id", ["roleId"])
+        .index("by_phone", ["phone"])
+        .index("by_email", ["email"]),
     workspaceInvites: defineTable({
         email: v.string(),
         role: WorkspaceRoleUnion,

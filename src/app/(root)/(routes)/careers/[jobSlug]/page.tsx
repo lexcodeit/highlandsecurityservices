@@ -7,6 +7,7 @@ import React from "react";
 import PerTab from "@/components/screens/admin/tabs/per-tab";
 import { JobDetailsPageTab } from "@/utils/enums";
 import RoleOverview from "./role-overview";
+import ApplicationForm from "./application-form";
 
 const JobDetailPage = () => {
     const [activeTab, setActiveTab] =
@@ -60,7 +61,9 @@ const JobDetailPage = () => {
                             location={job.location}
                         />
                     ) : activeTab === "applications" ? (
-                        <div>{/* <ApplicationForm /> */}</div>
+                        <div>
+                            <ApplicationForm roleId={job._id} />
+                        </div>
                     ) : null}
                 </div>
             </div>

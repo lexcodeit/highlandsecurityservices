@@ -25,7 +25,11 @@ const CustomSelect = ({
 }: CustomSelectProps) => {
     return (
         <div className={`my-4 ${className}`}>
-            {label && <Label>{label || "Select an option"}</Label>}
+            {label && (
+                <Label className="text-supporting-text">
+                    {label || "Select an option"}
+                </Label>
+            )}
             <Select
                 onChange={onChange}
                 value={options.filter(v => v.value === value)}
@@ -41,9 +45,24 @@ const CustomSelect = ({
                     borderRadius: 6,
                     colors: {
                         ...theme.colors,
-                        primary: "#000000",
+                        // primary: "#000000",
+                        primary: "#f7c74b",
                         primary25: "#FFAE00",
                         primary75: "yellow",
+                        danger: "blue",
+                        dangerLight: "blue",
+                        // neutral0: "red", // Background of the container
+                        neutral10: "blue",
+                        neutral20: "#e5e7eb", // Border Color
+                        neutral30: "#f7c74b", // Hover Border
+                        // neutral40: "blue",
+                        // neutral5: "blue",
+                        neutral50: "#6b7280",
+                        neutral60: "#f7c74b", // Arrow Down Colour
+                        neutral70: "red",
+                        neutral80: "#1e293b", // Selected text colour
+                        neutral90: "red",
+                        primary50: "#FFAE00", // On Select Value
                     },
                 })}
             />

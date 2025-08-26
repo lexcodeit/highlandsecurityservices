@@ -31,6 +31,7 @@ import type * as noAuth_jobs from "../noAuth/jobs.js";
 import type * as otp_ResendOTP from "../otp/ResendOTP.js";
 import type * as tests from "../tests.js";
 import type * as unions from "../unions.js";
+import type * as user_applications from "../user/applications.js";
 import type * as user_auth from "../user/auth.js";
 import type * as workspace_workspaceActions from "../workspace/workspaceActions.js";
 import type * as workspace_workspaceInvites from "../workspace/workspaceInvites.js";
@@ -62,6 +63,7 @@ declare const fullApi: ApiFromModules<{
   "otp/ResendOTP": typeof otp_ResendOTP;
   tests: typeof tests;
   unions: typeof unions;
+  "user/applications": typeof user_applications;
   "user/auth": typeof user_auth;
   "workspace/workspaceActions": typeof workspace_workspaceActions;
   "workspace/workspaceInvites": typeof workspace_workspaceInvites;

@@ -22,9 +22,9 @@ const buttonVariants = cva(
                 transparent: "bg-transparent hover:bg-accent/10 text-black",
             },
             size: {
-                default: " px-4 py-3",
-                sm: " rounded-md px-3 text-xs",
-                lg: "h-10 rounded-md px-8",
+                default: "px-4 py-3",
+                sm: "rounded-md px-3 text-xs",
+                lg: "rounded-md px-8",
                 icon: " w-9",
             },
         },

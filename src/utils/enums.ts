@@ -11,3 +11,12 @@ export type PositionEnums =
     | "assistant-secretary"
     | "company-driver"
     | "security-guard";
+
+export type SourceInfo =
+    | "LinkedIn"
+    | "Facebook"
+    | "Instagram"
+    | "Website"
+    | "FriendOrEmployee"
+    | "Google"
+    | "Others";

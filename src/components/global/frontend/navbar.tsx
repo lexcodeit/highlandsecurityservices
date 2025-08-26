@@ -33,9 +33,11 @@ const Navbar = () => {
                 </div>
 
                 <div>
-                    <Button className="bg-primary-gold text-header-text">
-                        Book Now
-                    </Button>
+                    <Link href={"/book-security"}>
+                        <Button className="bg-primary-gold text-header-text">
+                            Book Now
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

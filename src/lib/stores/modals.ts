@@ -4,6 +4,7 @@ const completeAccountState = atom(false);
 const inviteUserState = atom(false);
 const deleteRequirementState = atom(false);
 const createRequirementState = atom(false);
+const successModalState = atom(false);
 
 export const useCompleteAccountModal = () => {
     return useAtom(completeAccountState);
@@ -19,4 +20,8 @@ export const useDeleteRequirementModal = () => {
 
 export const useCreateRequirementModal = () => {
     return useAtom(createRequirementState);
+};
+
+export const useSuccessModal = () => {
+    return useAtom(successModalState);
 };
