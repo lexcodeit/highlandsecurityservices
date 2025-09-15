@@ -38,3 +38,13 @@ export const getAllJobOpenings = query({
         return jobs;
     },
 });
+
+export const getLandingPageJobOpenings = query({
+    handler: async ctx => {
+        const jobs = await ctx.db
+            .query("jobs")
+            .withIndex("by_status", q => q.eq("isActive", true))
+            .take(2);
+        return jobs;
+    },
+});

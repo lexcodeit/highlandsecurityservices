@@ -7,6 +7,7 @@ import { JotaiProvider } from "@/components/providers/jotai-provider";
 import { Toaster } from "sonner";
 import RootModal from "@/components/modals/root-modal";
 import NextTopLoader from "nextjs-toploader";
+import localFont from "next/font/local";
 
 const dmSans = DM_Sans({
     variable: "--font-dm-sans",
@@ -16,6 +17,11 @@ const dmSans = DM_Sans({
 const outfit = Outfit({
     variable: "--font-outfit",
     subsets: ["latin"],
+});
+
+const scriptFont = localFont({
+    src: "../utils/fonts/brushsci.ttf",
+    variable: "--font-brush-script", // optional: create CSS variable
 });
 
 export const metadata: Metadata = {
@@ -32,7 +38,7 @@ export default function RootLayout({
         <ConvexAuthNextjsServerProvider>
             <html lang="en">
                 <body
-                    className={`${dmSans.variable} ${outfit.variable} antialiased`}
+                    className={`${dmSans.variable} ${outfit.variable} ${scriptFont.className} antialiased`}
                 >
                     <ConvexClientProvider>
                         <JotaiProvider>

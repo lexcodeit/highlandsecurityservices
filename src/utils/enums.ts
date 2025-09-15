@@ -6,6 +6,17 @@ export type JobDetailsPageTab = "overview" | "applications";
 
 export type WorkspaceRoleEnum = "ADMIN" | "MANAGER" | "WORKER";
 
+export type PostCategoryEnums = "tips" | "insights";
+
+export type ServicesEnums =
+    | "bodyguard"
+    | "corporate"
+    | "event"
+    | "residential"
+    | "escort"
+    | "surveillance"
+    | "specialized";
+
 export type PositionEnums =
     | "chief-security-officer"
     | "assistant-secretary"

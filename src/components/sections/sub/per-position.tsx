@@ -1,8 +1,5 @@
 import React from "react";
 import { Doc } from "../../../../convex/_generated/dataModel";
-import { JOB_POSITION_MAP } from "@/utils/maps";
-import { PositionEnums } from "@/utils/enums";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -11,18 +8,9 @@ interface Props {
 }
 
 const PerPosition = ({ job }: Props) => {
-    const icon = JOB_POSITION_MAP[job.slug as PositionEnums];
-
     return (
-        <div className="shadow-lg bg-white rounded-xl p-3 w-[30%] py-5">
-            <div className="flex items-center gap-x-4 mb-2">
-                <Image
-                    src={"/assets/images/" + icon.icon}
-                    alt={job.slug}
-                    width={50}
-                    height={50}
-                    className="w-[50px] h-[50px] object-cover"
-                />
+        <div className=" bg-white rounded-xl px-6 flex-1 py-8 border border-border">
+            <div className="flex items-center gap-x-4 mb-4 justify-between">
                 <div>
                     <h3 className="text-header-text text-lg font-semibold">
                         {job.title}
@@ -31,17 +19,19 @@ const PerPosition = ({ job }: Props) => {
                         {job.location}
                     </span>
                 </div>
+
+                <div>
+                    <Link href={`/careers/${job.slug}`} className="w-full">
+                        <Button className="w-full" variant={"outline"}>
+                            Apply Now
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
             <p className="text-sm text-supporting-text mb-2">
                 {job.shortDescription}
             </p>
-
-            <Link href={`/careers/${job.slug}`} className="w-full">
-                <Button className="w-full" variant={"outline"}>
-                    Learn More
-                </Button>
-            </Link>
         </div>
     );
 };

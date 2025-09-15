@@ -5,14 +5,14 @@ import React from "react";
 
 const Navbar = () => {
     return (
-        <div className=" h-[15vh] border-b border-b-border-color">
-            <div className="flex items-center justify-between max-w-[1200px] mx-auto py-2">
+        <div className="w-full border-b border-b-border-color top-0 left-0">
+            <div className="flex items-center justify-between max-w-[1200px] mx-auto py-4">
                 <Link href="/">
                     <Image
                         src={"/assets/images/bg-logo.svg"}
-                        width={100}
-                        height={100}
-                        className="w-[100px] h-[80px] object-contain"
+                        width={75}
+                        height={75}
+                        className="w-[100px] h-[75px] object-contain"
                         alt="contain"
                     />
                 </Link>
@@ -34,7 +34,7 @@ const Navbar = () => {
 
                 <div>
                     <Link href={"/book-security"}>
-                        <Button className="bg-primary-gold text-header-text">
+                        <Button className="bg-transparent border border-primary-gold text-header-text">
                             Book Now
                         </Button>
                     </Link>
