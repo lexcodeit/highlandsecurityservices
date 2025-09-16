@@ -1,8 +1,15 @@
+import {
+    FacebookPage,
+    InstagramPage,
+    LinkedInPage,
+    TiktokPage,
+} from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
+import { BsTiktok } from "react-icons/bs";
 
 const Footer = () => {
     return (
@@ -33,30 +40,25 @@ const Footer = () => {
                         </p>
                         <Link
                             href={"mailto:info@highlandsecurityservices.com"}
-                            className="text-primary-gold font-semibold block my-4"
+                            className="text-primary-gold font-semibold block my-4 underline text-xl"
                         >
                             info@highlandsecurityservices.com
                         </Link>
 
                         <div>
                             <div className="flex items-center gap-x-6 text-supporting-text font-semibold">
-                                <Link
-                                    target="_blank"
-                                    href={"https://linkedin.com/"}
-                                >
+                                <Link target="_blank" href={LinkedInPage}>
                                     <FaLinkedin className="size-8 text-header-text" />
                                 </Link>
-                                <Link
-                                    target="_blank"
-                                    href={"https://instagram.com/"}
-                                >
+                                <Link target="_blank" href={InstagramPage}>
                                     <FiInstagram className="size-8 text-header-text" />
                                 </Link>
-                                <Link
-                                    target="_blank"
-                                    href={"https://facebook.com/"}
-                                >
+                                <Link target="_blank" href={FacebookPage}>
                                     <FiFacebook className="size-8 text-header-text" />
+                                </Link>
+
+                                <Link target="_blank" href={TiktokPage}>
+                                    <BsTiktok className="size-8 text-header-text" />
                                 </Link>
                             </div>
                         </div>

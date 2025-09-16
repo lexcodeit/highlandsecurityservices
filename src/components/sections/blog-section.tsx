@@ -8,9 +8,6 @@ const BlogSection = () => {
     const mainPost = PostListArr[0];
     const arrayPosts = PostListArr.slice(1);
 
-    console.log("mainPost:", mainPost);
-    console.log("arrayPosts:", arrayPosts);
-
     return (
         <div>
             <SectionTitle

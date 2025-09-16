@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const ValuesSection = () => {
     return (
-        <div className="min-h-screen flex flex-col ">
+        <div className="min-h-screen flex flex-col overflow-x-hidden">
             <SectionTitle
                 title="Why Choose Eagle Eye Security"
                 subtitle="We go beyond standard security. With years of proven expertise, professional personnel, and a commitment to vigilance, we deliver protection you can trust — anytime, anywhere."

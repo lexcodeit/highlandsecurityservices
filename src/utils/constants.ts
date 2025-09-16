@@ -1,6 +1,14 @@
 import { ServicesEnums } from "./enums";
 import { PostProps, ValuePropProps } from "./interfaces";
 
+// Instagram page
+export const InstagramPage =
+    "https://www.instagram.com/highland_securityservices/";
+export const LinkedInPage =
+    "https://www.linkedin.com/company/highland-security-services-ng";
+export const FacebookPage = "https://web.facebook.com/highlandfbteam";
+export const TiktokPage = "https://www.tiktok.com/@highlandsecurity";
+
 export const ServicesListArr: ServicesEnums[] = [
     "bodyguard",
     "corporate",

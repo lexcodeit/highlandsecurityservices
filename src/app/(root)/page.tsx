@@ -12,7 +12,7 @@ export default function Home() {
             <div className="h-[100vh] relative hero-cover">
                 <div className="max-w-[1200px] mx-auto h-full flex justify-center">
                     <div className="pt-[100px] flex flex-col items-center gap-y-5">
-                        <h3 className="mx-auto px-8 py-3 rounded-[8px] bg-white hero-button">
+                        <h3 className="mx-auto px-8 py-3 rounded-[8px] bg-white hero-button font-semibold">
                             #1 Security Provider App
                         </h3>
                         <h1 className="font-outfit font-bold text-[60px] text-center mb-1">
@@ -30,7 +30,7 @@ export default function Home() {
                             accessible than ever.
                         </p>
                         <div className="mx-auto w-full flex justify-center mt-4">
-                            <Button className="font-semibold text-base py-6 px-6">
+                            <Button className="font-semibold text-base py-4 px-8 z-10">
                                 Get Started
                             </Button>
                         </div>
