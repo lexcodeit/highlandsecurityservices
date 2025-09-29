@@ -25,7 +25,7 @@ const Footer = () => {
                             alt="contain"
                         />
 
-                        <h1 className="font-bold text-header-text text-[48px]">
+                        <h1 className="font-bold text-primary-gold text-[48px]">
                             HSSL
                         </h1>
                     </div>

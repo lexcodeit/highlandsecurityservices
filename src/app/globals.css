@@ -183,12 +183,10 @@
 .eagle-eye {
     /* Eagle Eye */
 
-    position: absolute;
-
     font-family: "Brush Script MT";
     font-style: italic;
     font-weight: 400;
-    font-size: 320px;
+    font-size: 250px;
     line-height: 330px;
 
     background: linear-gradient(180deg, #ffd700 0%, #ff4500 100%);

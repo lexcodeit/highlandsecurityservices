@@ -7,7 +7,7 @@ export const SERVICES_MAP: {
     bodyguard: {
         description:
             "Our trained bodyguards provide discreet, 24/7 personal protection for executives, VIPs, and high-profile individuals. With professionalism and vigilance, we ensure your safety in every environment.",
-        image: "bodyguard-services.jpg",
+        image: "guards.jpg",
         title: "Bodyguard Services",
     },
     corporate: {
