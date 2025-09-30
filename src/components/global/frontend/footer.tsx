@@ -1,3 +1,5 @@
+"use client";
+
 import {
     FacebookPage,
     InstagramPage,
@@ -6,16 +8,84 @@ import {
 } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { BsTiktok } from "react-icons/bs";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+    const footerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (!footerRef.current) return;
+
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: footerRef.current,
+                    start: "top 70%", // when footer enters viewport
+                },
+            });
+
+            // wrapper fade
+            tl.from(footerRef.current, {
+                opacity: 0,
+                y: 50,
+                duration: 0.6,
+                ease: "power3.out",
+            });
+
+            // logo block
+            tl.from(
+                ".footer-logo-block",
+                {
+                    x: -50,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                },
+                "-=0.4"
+            );
+
+            // links columns
+            tl.from(
+                ".footer-col",
+                {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.6,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                },
+                "-=0.5"
+            );
+
+            // bottom bar
+            tl.from(
+                ".footer-bottom",
+                {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.6,
+                    ease: "power2.out",
+                },
+                "-=0.3"
+            );
+        }, footerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="p-10  border-t border-t-border-color">
+        <div ref={footerRef} className="p-10 border-t border-t-border-color">
             <div className="flex justify-between max-w-[1200px] mx-auto gap-x-10 py-4">
-                <div className="flex-2">
+                {/* Logo + About */}
+                <div className="flex-2 footer-logo-block">
                     <div className="flex mb-2 items-center">
                         <Image
                             src={"/assets/images/bg-logo.svg"}
@@ -65,7 +135,8 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-y-3 px-4 flex-1">
+                {/* Columns */}
+                <div className="footer-col flex flex-col gap-y-3 px-4 flex-1">
                     <h3 className="text-supporting-text font-medium text-sm">
                         Company
                     </h3>
@@ -79,7 +150,7 @@ const Footer = () => {
                         Careers
                     </Link>
                 </div>
-                <div className="flex flex-col gap-y-3 px-4 flex-1">
+                <div className="footer-col flex flex-col gap-y-3 px-4 flex-1">
                     <h3 className="text-supporting-text font-medium text-sm">
                         Legal
                     </h3>
@@ -90,7 +161,7 @@ const Footer = () => {
                         Terms and Conditions
                     </Link>
                 </div>
-                <div className="flex flex-col gap-y-3 px-4 flex-1">
+                <div className="footer-col flex flex-col gap-y-3 px-4 flex-1">
                     <h3 className="text-supporting-text font-medium text-sm">
                         Platform
                     </h3>
@@ -105,7 +176,9 @@ const Footer = () => {
                     </Link>
                 </div>
             </div>
-            <div className="border-t border-t-border-color p-6 flex items-center justify-center">
+
+            {/* Bottom */}
+            <div className="footer-bottom border-t border-t-border-color p-6 flex items-center justify-center">
                 <p className="text-supporting-text text-sm font-outfit text-center">
                     © 2025 Highland Security Services. All rights reserved.
                 </p>

@@ -171,6 +171,14 @@
     );
 }
 
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+
 .gradient-header {
     background: linear-gradient(90deg, #f7c74b, #5270a1);
     -webkit-background-clip: text; /* For Safari/Chrome */
@@ -189,7 +197,15 @@
     font-size: 250px;
     line-height: 330px;
 
-    background: linear-gradient(180deg, #ffd700 0%, #ff4500 100%);
+    background: linear-gradient(
+        180deg,
+        #f5cc4e,
+        #f7cb51,
+        #e47741,
+        #c64a48,
+        #da433f,
+        #ff4500
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

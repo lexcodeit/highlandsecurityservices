@@ -1,6 +1,13 @@
+"use client";
+
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
     title: string;
@@ -9,21 +16,53 @@ interface Props {
 }
 
 const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 80%",
+                    toggleActions: "restart none none reset", // replay every time
+                },
+            });
+
+            tl.from(".section-title", {
+                clipPath: "inset(0 100% 0 0)", // hidden from right
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            }).from(
+                ".section-subtitle",
+                {
+                    clipPath: "inset(0 100% 0 0)",
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                },
+                "-=0.6" // start a bit before title finishes
+            );
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="py-12 ">
+        <div ref={containerRef} className="py-12">
             <div className="mx-auto max-w-[1200px] flex items-center">
                 <div>
-                    <h2 className="text-header-text font-outfit text-[48px] font-bold max-w-[80%]">
+                    <h2 className="section-title text-header-text font-outfit text-[48px] font-bold max-w-[80%]">
                         {title}
                     </h2>
-                    <p className="text-supporting-text max-w-[60%] text-xl ">
+                    <p className="section-subtitle text-supporting-text max-w-[60%] text-xl">
                         {subtitle}
                     </p>
                 </div>
                 <div>
                     {buttonLink ? (
                         <Link href={buttonLink}>
-                            <Button variant={"outline"}>View More</Button>
+                            <Button variant="outline">View More</Button>
                         </Link>
                     ) : null}
                 </div>
