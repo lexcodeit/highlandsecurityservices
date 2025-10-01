@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import CompleteAccountModal from "./complete-account-modal";
 import InviteUserModal from "./invite-user-modal";
+import CreatePostCategory from "./create-post-category-modal";
 
 const RootModal = () => {
     const [mounted, setMounted] = useState(false);
@@ -15,6 +16,7 @@ const RootModal = () => {
         <>
             <CompleteAccountModal />
             <InviteUserModal />
+            <CreatePostCategory />
         </>
     );
 };

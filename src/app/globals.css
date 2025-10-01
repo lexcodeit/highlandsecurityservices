@@ -132,6 +132,18 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    h1 {
+        @apply text-2xl font-bold;
+    }
+
+    h2 {
+        @apply text-xl font-bold;
+    }
+
+    h3 {
+        @apply text-lg font-bold;
+    }
 }
 
 @layer components {
@@ -153,6 +165,7 @@
 .table-body-row {
     display: grid;
     align-items: center;
+    padding: 16px 0px;
 }
 
 /* Hero Styles */
@@ -195,7 +208,7 @@
     font-style: italic;
     font-weight: 400;
     font-size: 250px;
-    line-height: 330px;
+    line-height: 1.2;
 
     background: linear-gradient(
         180deg,
@@ -210,4 +223,11 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+
+    padding-right: 0.3em; /* give extra breathing room */
+
+    /* display: inline-block;  */
+    /* ensures text box matches content */
+    /* overflow: visible;  */
+    /* prevents clipping */
 }

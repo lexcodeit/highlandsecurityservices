@@ -12,6 +12,7 @@ interface CustomSelectProps {
     disabled?: boolean;
     className?: string;
     error?: FieldError;
+    isMulti?: boolean;
 }
 
 const CustomSelect = ({

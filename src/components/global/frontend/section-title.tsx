@@ -23,7 +23,7 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 80%",
+                    start: "top 70%",
                     toggleActions: "restart none none reset", // replay every time
                 },
             });

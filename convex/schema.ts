@@ -5,6 +5,7 @@ import {
     AccountRoleUnion,
     AccountStatusUnion,
     JobApplicationStatusUnion,
+    PostPublishStatusUnion,
     SourceOfInfoUnion,
     UserGenderUnion,
     WorkspaceRoleUnion,
@@ -78,6 +79,23 @@ const schema = defineSchema({
         userId: v.id("users"),
         role: WorkspaceRoleUnion,
     }).index("by_role", ["role"]),
+    postCategories: defineTable({
+        slug: v.string(),
+        title: v.string(),
+    }),
+    posts: defineTable({
+        title: v.string(),
+        slug: v.string(), // unique identifier for URL
+        shortBody: v.string(), // excerpt
+        bodyHtml: v.string(), // full HTML for rendering
+        bodyJson: v.any(), // Tiptap JSON doc
+        categories: v.array(v.id("postCategories")),
+        tags: v.optional(v.array(v.string())), // flexible tags
+        coverImage: v.optional(v.string()), // featured image
+        author: v.id("users"), // can later change to v.id("users") if you add users table
+        publishStatus: PostPublishStatusUnion, // draft, published, etc.
+        postDate: v.optional(v.number()), // timestamp (ms)
+    }),
 });
 
 export default schema;

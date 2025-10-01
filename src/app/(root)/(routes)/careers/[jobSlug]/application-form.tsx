@@ -51,7 +51,6 @@ const ApplicationForm = ({ roleId }: Props) => {
             setUploading(true);
         },
         onClientUploadComplete: res => {
-            console.log("Files: ", res);
             setFileLocation(res[0].ufsUrl);
             setUploading(false);
             toast.success("File Uploaded");

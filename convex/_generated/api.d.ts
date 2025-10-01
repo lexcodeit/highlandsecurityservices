@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as admin_auth from "../admin/auth.js";
+import type * as admin_blog from "../admin/blog.js";
 import type * as admin_dashboard from "../admin/dashboard.js";
 import type * as admin_jobs from "../admin/jobs.js";
 import type * as admin_profile from "../admin/profile.js";
@@ -46,6 +47,7 @@ import type * as workspace_workspaceInvites from "../workspace/workspaceInvites.
  */
 declare const fullApi: ApiFromModules<{
   "admin/auth": typeof admin_auth;
+  "admin/blog": typeof admin_blog;
   "admin/dashboard": typeof admin_dashboard;
   "admin/jobs": typeof admin_jobs;
   "admin/profile": typeof admin_profile;

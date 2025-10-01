@@ -20,8 +20,6 @@ const JobsPage = () => {
 
     const totalPages = data ? Math.ceil(data / ITEMS_PER_PAGE) : 0;
 
-    console.log("Data:", data);
-
     return (
         <div className="p-4 h-full flex flex-col">
             <div className="mt-2 mb-6 flex flex-row items-center justify-between space-x-6">

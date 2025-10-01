@@ -7,6 +7,8 @@ const HomeAboutSection = () => {
     useGSAP(() => {
         const aboutText = gsap.utils.toArray(`.about-text`) as HTMLElement[];
 
+        const eagleEyeText = document.querySelector(".eagle-eye");
+
         gsap.fromTo(
             aboutText,
             { opacity: 0 }, // start state
@@ -22,6 +24,42 @@ const HomeAboutSection = () => {
                     toggleActions: "play none none reverse",
                     // markers: true, // uncomment for debugging
                     // scrub: 1,
+                },
+            }
+        );
+
+        gsap.fromTo(
+            eagleEyeText,
+            {
+                y: 100,
+            },
+            {
+                y: 0,
+                duration: 0.8,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: eagleEyeText,
+                    start: "top 80%",
+                    toggleActions: "restart none none reset", // replay every time
+                    scrub: 1,
+                },
+            }
+        );
+
+        gsap.fromTo(
+            ".eagle",
+            {
+                x: 100,
+            },
+            {
+                x: 0,
+                duration: 0.8,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: ".eagle",
+                    start: "top 70%",
+                    toggleActions: "restart none none reset", // replay every time
+                    scrub: 1,
                 },
             }
         );
@@ -51,15 +89,24 @@ const HomeAboutSection = () => {
                 </h3>
             </div>
 
-            <div className="absolute bottom-0 left-0 eagle-eye w-full flex items-center">
+            <div
+                className="absolute bottom-0 left-0 w-full flex items-center gap-x-4"
+                style={{
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                }}
+            >
+                {/* <div
+                    className="bg-red-100 px-4"
+                > */}
                 <h1 className=" font-brush-script eagle-eye">Eagle Eye</h1>
+                {/* </div> */}
                 {/* <div className="flex-1 relative"> */}
                 <Image
                     src={"/assets/images/eagle-head.png"}
                     width={100}
                     height={100}
                     alt="landing-eagle"
-                    className="object-cover w-[200px]"
+                    className="object-cover w-[200px] eagle"
                 />
                 {/* </div> */}
             </div>

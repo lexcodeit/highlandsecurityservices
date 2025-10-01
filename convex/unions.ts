@@ -30,3 +30,9 @@ export const SourceOfInfoUnion = v.union(
     v.literal("Google"),
     v.literal("Others")
 );
+
+export const PostPublishStatusUnion = v.union(
+    v.literal("PUBLISHED"),
+    v.literal("DRAFT"),
+    v.literal("UNPUBLISHED")
+);

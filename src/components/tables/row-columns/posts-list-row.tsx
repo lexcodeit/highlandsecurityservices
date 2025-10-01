@@ -1,15 +1,14 @@
 import Link from "next/link";
 import React from "react";
-import { Id } from "../../../../convex/_generated/dataModel";
 
 interface Props {
     title: string;
     uploaded: string;
     status: string;
-    jobId: Id<"jobs">;
+    postSlug: string;
 }
 
-const JobsListRow = ({ status, title, uploaded, jobId }: Props) => {
+const PostListRow = ({ status, title, uploaded, postSlug }: Props) => {
     return (
         <div className="grid-cols-5 gap-x-4 border-b border-b-border table-body-row">
             <div className="table-col-body font-semibold text-header-text">
@@ -21,7 +20,7 @@ const JobsListRow = ({ status, title, uploaded, jobId }: Props) => {
             </div>
             <div className="table-col-body">
                 <Link
-                    href={`/control-admin/jobs/${jobId}`}
+                    href={`/control-admin/posts/${postSlug}`}
                     className="border border-border-color py-3 px-6 cursor-pointer hover:bg-light-bg rounded-md"
                 >
                     View
@@ -31,4 +30,4 @@ const JobsListRow = ({ status, title, uploaded, jobId }: Props) => {
     );
 };
 
-export default JobsListRow;
+export default PostListRow;
