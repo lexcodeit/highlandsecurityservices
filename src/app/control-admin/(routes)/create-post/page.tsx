@@ -16,13 +16,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useCreatePost } from "@/lib/features/admin/blog/use-create-post";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useUploadThing } from "@/utils/uploadthing";
 import { LuLoaderCircle } from "react-icons/lu";
-import { RiAttachment2 } from "react-icons/ri";
-import { Trash2Icon, TriangleAlert } from "lucide-react";
-import { IoAttach } from "react-icons/io5";
+import { ImageIcon, Trash2Icon, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { useGetPostsCategories } from "@/lib/features/admin/blog/use-get-posts-categories";
 import LoaderComponent from "@/components/global/loader-component";
@@ -31,6 +28,8 @@ import { Id } from "../../../../../convex/_generated/dataModel";
 import DashboardTitle from "@/components/screens/admin/dashboard-title";
 import { useCreatePostCategoryModal } from "@/lib/stores/modals";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 const CreatePostPage = () => {
     const [uploading, setUploading] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -38,6 +37,9 @@ const CreatePostPage = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [, setFileLocation] = useState<string>();
     const [, setOpenModal] = useCreatePostCategoryModal();
+    const [preview, setPreview] = useState<string | null>(null);
+
+    const router = useRouter();
 
     const { mutate: createPost, isPending } = useCreatePost();
 
@@ -73,6 +75,8 @@ const CreatePostPage = () => {
         const file = e.target.files?.[0];
         if (file) {
             setSelectedFile(file);
+            const url = URL.createObjectURL(file);
+            setPreview(url);
         }
     };
 
@@ -121,18 +125,30 @@ const CreatePostPage = () => {
         }
 
         startUpload([selectedFile]).then(value => {
+            console.log("now create post:", value);
             if (!value) {
                 return toast.error("Failed to upload cover image.");
             }
-            createPost({
-                bodyHtml: values.body,
-                bodyJson,
-                categoryId: [values.categoryId as Id<"postCategories">],
-                coverImage: value[0].ufsUrl,
-                shortBody: values.shortBody,
-                slug: values.slug,
-                title: values.title,
-            });
+            createPost(
+                {
+                    bodyHtml: values.body,
+                    bodyJson,
+                    categoryId: [values.categoryId as Id<"postCategories">],
+                    coverImage: value[0].ufsUrl,
+                    shortBody: values.shortBody,
+                    slug: values.slug.toLowerCase(),
+                    title: values.title,
+                },
+                {
+                    onSuccess(data) {
+                        toast.success("Post created successfully");
+                        router.push(`/control-admin/posts/${data}`);
+                    },
+                    onError(error) {
+                        toast.error(error.message || "Failed to create post.");
+                    },
+                }
+            );
         });
     };
 
@@ -150,51 +166,65 @@ const CreatePostPage = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
                         <div>
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
+                                className="hidden"
+                                ref={fileInputRef}
+                            />
                             <FormLabel>Cover Image</FormLabel>
                             <div
-                                className="border border-border-color min-h-[150px] rounded-xl flex items-center justify-center flex-col mt-1"
+                                className="border border-border-color min-h-[150px] rounded-xl flex items-center justify-center mt-1 p-5 gap-x-4"
                                 style={{
                                     borderStyle: "dashed",
                                 }}
                             >
-                                <input
-                                    type="file"
-                                    onChange={handleFileChange}
-                                    className="hidden"
-                                    ref={fileInputRef}
-                                />
-                                {selectedFile ? (
-                                    <div className="bg-off-white p-2 flex items-center gap-x-3 w-full mb-3 rounded-md px-4">
-                                        <div>
-                                            {uploading ? (
-                                                <LuLoaderCircle className="animate-spin" />
-                                            ) : (
-                                                <RiAttachment2 />
-                                            )}
-                                        </div>
-                                        <h3 className="flex-1 text-header-text">
-                                            {selectedFile?.name ||
-                                                "File Name.ext"}
-                                        </h3>
-                                        <Trash2Icon className="text-error size-4" />
+                                {preview ? (
+                                    <div className=" relative h-[300px]  flex-1 rounded-md overflow-hidden">
+                                        <Image
+                                            src={preview}
+                                            alt="Cover Image Preview"
+                                            fill
+                                            className="object-contain rounded-md"
+                                        />
                                     </div>
                                 ) : null}
-                                <div
-                                    className="px-5 py-2 rounded-full border-2 border-header-text flex items-center justify-center gap-x-1 transition-all hover:border-primary-gold hover:text-primary-gold cursor-pointer group"
-                                    onClick={() =>
-                                        fileInputRef.current?.click()
-                                    }
-                                >
-                                    <IoAttach className="size-6" />
-                                    <p className="font-semibold text-header-text group-hover:text-primary-gold">
-                                        {!selectedFile
-                                            ? "Upload Post Cover Image"
-                                            : "Replace Post Cover Image"}
-                                    </p>
+                                <div className="flex-1">
+                                    <div>
+                                        {selectedFile ? (
+                                            <div className="bg-off-white p-2 flex items-center gap-x-3 w-full mb-3 rounded-md px-4">
+                                                <div>
+                                                    {uploading ? (
+                                                        <LuLoaderCircle className="animate-spin" />
+                                                    ) : (
+                                                        <ImageIcon />
+                                                    )}
+                                                </div>
+                                                <h3 className="flex-1 text-header-text">
+                                                    {selectedFile?.name ||
+                                                        "File Name.ext"}
+                                                </h3>
+                                                <Trash2Icon className="text-error size-4" />
+                                            </div>
+                                        ) : null}
+                                        <div
+                                            className="px-5 py-2 rounded-full border-2 border-header-text flex items-center justify-center gap-x-1 transition-all hover:border-primary-gold hover:text-primary-gold cursor-pointer group"
+                                            onClick={() =>
+                                                fileInputRef.current?.click()
+                                            }
+                                        >
+                                            <ImageIcon className="size-6" />
+                                            <p className="font-semibold text-header-text group-hover:text-primary-gold">
+                                                {!selectedFile
+                                                    ? "Upload Post Cover Image"
+                                                    : "Replace Post Cover Image"}
+                                            </p>
+                                        </div>
+                                        <p className="text-supporting-text text-xs mt-1 text-center">
+                                            JPEG (4MB)
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-supporting-text text-xs mt-1">
-                                    JPEG (4MB)
-                                </p>
                             </div>
                         </div>
                         <FormField
@@ -313,6 +343,7 @@ const CreatePostPage = () => {
                                             href={
                                                 "/control-admin/post-categories"
                                             }
+                                            className="text-primary-gold text-sm block text-right font-semibold"
                                         >
                                             Manage Post Categories
                                         </Link>
@@ -322,7 +353,7 @@ const CreatePostPage = () => {
                         />
 
                         <div>
-                            <Label>Post Content</Label>
+                            <FormLabel className="mb-1">Post Content</FormLabel>
                             <TextEditor
                                 content={bodyHtml}
                                 onChange={handleBlogContent}
@@ -330,7 +361,7 @@ const CreatePostPage = () => {
                         </div>
 
                         <div>
-                            <Button>Save Post</Button>
+                            <Button disabled={isPending}>Save Post</Button>
                         </div>
                     </form>
                 </Form>

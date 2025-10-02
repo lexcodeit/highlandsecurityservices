@@ -55,7 +55,7 @@ export const ourFileRouter = {
         return { file: file.ufsUrl };
     }),
     postImageUploader: f({
-        pdf: {
+        "image/jpeg": {
             maxFileSize: "4MB",
             maxFileCount: 1,
         },

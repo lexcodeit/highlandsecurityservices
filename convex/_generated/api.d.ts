@@ -34,6 +34,7 @@ import type * as tests from "../tests.js";
 import type * as unions from "../unions.js";
 import type * as user_applications from "../user/applications.js";
 import type * as user_auth from "../user/auth.js";
+import type * as user_blog from "../user/blog.js";
 import type * as workspace_workspaceActions from "../workspace/workspaceActions.js";
 import type * as workspace_workspaceInvites from "../workspace/workspaceInvites.js";
 
@@ -67,6 +68,7 @@ declare const fullApi: ApiFromModules<{
   unions: typeof unions;
   "user/applications": typeof user_applications;
   "user/auth": typeof user_auth;
+  "user/blog": typeof user_blog;
   "workspace/workspaceActions": typeof workspace_workspaceActions;
   "workspace/workspaceInvites": typeof workspace_workspaceInvites;
 }>;

@@ -91,11 +91,14 @@ const schema = defineSchema({
         bodyJson: v.any(), // Tiptap JSON doc
         categories: v.array(v.id("postCategories")),
         tags: v.optional(v.array(v.string())), // flexible tags
-        coverImage: v.optional(v.string()), // featured image
+        coverImage: v.string(), // featured image
         author: v.id("users"), // can later change to v.id("users") if you add users table
         publishStatus: PostPublishStatusUnion, // draft, published, etc.
         postDate: v.optional(v.number()), // timestamp (ms)
-    }),
+        isFeatured: v.boolean(),
+    })
+        .index("by_slug", ["slug"])
+        .index("by_is_featured", ["isFeatured"]),
 });
 
 export default schema;

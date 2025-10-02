@@ -4,6 +4,26 @@ import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 import { CustomError } from "../errorUtils";
 
+export const getPostContent = query({
+    args: {
+        postSlug: v.optional(v.string()),
+    },
+    async handler(ctx, args) {
+        const postSlug = args.postSlug;
+
+        if (!postSlug) return null;
+
+        const post = await ctx.db
+            .query("posts")
+            .withIndex("by_slug", q => q.eq("slug", postSlug))
+            .first();
+
+        if (!post) return null;
+
+        return post;
+    },
+});
+
 export const createPostCategory = mutation({
     args: {
         slug: v.string(),
@@ -64,6 +84,15 @@ export const createPost = mutation({
             const userId = await getAuthUserId(ctx);
             if (!userId) throw new CustomError("User not found");
 
+            const post = await ctx.db
+                .query("posts")
+                .withIndex("by_slug", q => q.eq("slug", args.slug))
+                .first();
+
+            if (post) {
+                throw new CustomError("Post exists already");
+            }
+
             const postId = await ctx.db.insert("posts", {
                 author: userId,
                 bodyHtml: args.bodyHtml,
@@ -74,6 +103,7 @@ export const createPost = mutation({
                 slug: args.slug,
                 title: args.title,
                 coverImage: args.coverImage,
+                isFeatured: false,
             });
 
             return {

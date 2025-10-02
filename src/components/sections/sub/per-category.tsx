@@ -1,8 +1,7 @@
-import { PostCategoryEnums } from "@/utils/enums";
 import React from "react";
 
 interface Props {
-    category: PostCategoryEnums;
+    category: string;
 }
 
 const PerCategory = ({ category }: Props) => {

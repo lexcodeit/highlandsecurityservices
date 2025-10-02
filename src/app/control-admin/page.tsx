@@ -24,10 +24,13 @@ const HighlandAdmin = () => {
                         ) : !data.jobApplications.length ? (
                             <EmptySection text="No registrations at the moment" />
                         ) : (
-                            data.jobApplications.map(fighter => (
+                            data.jobApplications.map(applicant => (
                                 <JobApplicationsRow
-                                    key={fighter._id}
-                                    // fighter={fighter}
+                                    key={applicant._id}
+                                    date={applicant._creationTime}
+                                    email={applicant.email}
+                                    name={`${applicant.firstName} ${applicant.lastName}`}
+                                    position={applicant.role?.title || "Role"}
                                 />
                             ))
                         )}

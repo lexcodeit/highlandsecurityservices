@@ -12,8 +12,18 @@ export const getMainDashboard = query({
             .order("desc")
             .collect();
 
+        const applicationsWithRoles = await Promise.all(
+            jobApplications.map(async application => {
+                const role = await ctx.db.get(application.roleId);
+                return {
+                    ...application,
+                    role,
+                };
+            })
+        );
+
         return {
-            jobApplications,
+            jobApplications: applicationsWithRoles,
         };
     },
 });

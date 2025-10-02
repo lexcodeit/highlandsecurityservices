@@ -130,7 +130,9 @@ const CreatePostCategory = () => {
                                 />
 
                                 <div className="flex items-center justify-end mt-4">
-                                    <Button>Create Category</Button>
+                                    <Button disabled={isPending}>
+                                        Create Category
+                                    </Button>
                                 </div>
                             </form>
                         </Form>
