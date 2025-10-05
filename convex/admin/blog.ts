@@ -4,11 +4,174 @@ import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 import { CustomError } from "../errorUtils";
 
+export const toggleFeaturedPost = mutation({
+    args: {
+        postId: v.id("posts"),
+    },
+    async handler(ctx, args) {
+        try {
+            const postId = args.postId;
+
+            if (!postId) throw new CustomError("Post Id is required");
+
+            const post = await ctx.db.get(postId);
+
+            if (!post) throw new CustomError("Post not found");
+
+            await ctx.db.patch(post._id, {
+                isFeatured: post.isFeatured ? false : true,
+            });
+
+            return {
+                status: true,
+            };
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return {
+                    status: false,
+                    error: error.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to toggle featured post.",
+            };
+        }
+    },
+});
+
+export const deletePost = mutation({
+    args: {
+        postId: v.id("posts"),
+    },
+    async handler(ctx, args) {
+        try {
+            const postId = args.postId;
+
+            if (!postId) throw new CustomError("Post Id is required");
+
+            const post = await ctx.db.get(postId);
+
+            if (!post) throw new CustomError("Post not found");
+
+            await ctx.db.delete(post._id);
+
+            return {
+                status: true,
+            };
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return {
+                    status: false,
+                    error: error.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to delete post.",
+            };
+        }
+    },
+});
+
+export const unpublishPost = mutation({
+    args: {
+        postId: v.id("posts"),
+    },
+    async handler(ctx, args) {
+        try {
+            const postId = args.postId;
+
+            if (!postId) throw new CustomError("Post Id is required");
+
+            const post = await ctx.db.get(postId);
+
+            if (!post) throw new CustomError("Post not found");
+
+            if (post.publishStatus === "UNPUBLISHED") {
+                throw new CustomError("Post is already unpublished.");
+            }
+
+            if (post.publishStatus === "DRAFT") {
+                throw new CustomError("You can't unpublish a draft post");
+            }
+
+            await ctx.db.patch(post._id, {
+                publishStatus: "UNPUBLISHED",
+                unpublishDate: Date.now(),
+                isFeatured: false,
+            });
+
+            return {
+                status: true,
+            };
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return {
+                    status: false,
+                    error: error.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to unpublish post.",
+            };
+        }
+    },
+});
+
+export const publishPost = mutation({
+    args: {
+        postId: v.id("posts"),
+    },
+    async handler(ctx, args) {
+        try {
+            const postId = args.postId;
+
+            if (!postId) throw new CustomError("Post Id is required");
+
+            const post = await ctx.db.get(postId);
+
+            if (!post) throw new CustomError("Post not found");
+
+            if (post.publishStatus === "PUBLISHED") {
+                throw new CustomError("Post is already published.");
+            }
+
+            await ctx.db.patch(post._id, {
+                publishStatus: "PUBLISHED",
+                postDate: Date.now(),
+            });
+
+            return {
+                status: true,
+            };
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return {
+                    status: false,
+                    error: error.message,
+                };
+            }
+
+            return {
+                status: false,
+                error: "Failed to publish post.",
+            };
+        }
+    },
+});
+
 export const getPostContent = query({
     args: {
         postSlug: v.optional(v.string()),
     },
     async handler(ctx, args) {
+        const userId = await getAuthUserId(ctx);
+        if (!userId) return null;
         const postSlug = args.postSlug;
 
         if (!postSlug) return null;

@@ -31,3 +31,9 @@ export type SourceInfo =
     | "FriendOrEmployee"
     | "Google"
     | "Others";
+
+export type PostActionsModal =
+    | "publish"
+    | "unpublish"
+    | "toggleFeatured"
+    | "delete";

@@ -16,19 +16,22 @@ interface Props {
 const FeaturedPost = ({ post }: Props) => {
     const { category, title, slug, _creationTime, coverImage, shortBody } =
         post;
-    return (
-        <div className="shadow bg-white rounded-[16px] p-4 w-[90%] h-fit">
-            <Image
-                src={`/assets/images/blogs/${coverImage}`}
-                alt={title}
-                width={300}
-                height={200}
-                className="rounded-lg w-full object-cover"
-            />
 
-            <div className="flex flex-col gap-y-3">
-                <div className="flex items-center justify-between py-2">
-                    <PerCategory category={category!.title} />
+    return (
+        <div className="shadow bg-white rounded-[16px] overflow-hidden w-full h-fit flex flex-col">
+            <div className="relative w-full h-[320px] sm:h-[400px]">
+                <Image
+                    src={coverImage}
+                    alt={title}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                />
+            </div>
+
+            <div className="flex flex-col gap-y-3 p-4 flex-grow">
+                <div className="flex items-center justify-between py-1">
+                    <PerCategory category={category?.title || "General"} />
 
                     <div className="flex items-center gap-x-2">
                         <IoCalendarOutline className="text-primary-gold" />
@@ -37,19 +40,18 @@ const FeaturedPost = ({ post }: Props) => {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-1">
-                    <h3 className="font-outfit text-lg font-semibold">
-                        {title}
-                    </h3>
-                    <p className="text-supporting-text text-sm">{shortBody}</p>
-                    <Link
-                        className="text-primary-gold text-sm font-medium flex items-center gap-x-1"
-                        href={`/blog/${slug}`}
-                    >
-                        Read More
-                        <FiArrowRight className="size-3" />
-                    </Link>
-                </div>
+
+                <h3 className="font-outfit text-xl font-semibold">{title}</h3>
+                <p className="text-supporting-text text-sm flex-grow">
+                    {shortBody}
+                </p>
+
+                <Link
+                    className="text-primary-gold text-sm font-medium flex items-center gap-x-1"
+                    href={`/blog/${slug}`}
+                >
+                    Read More <FiArrowRight className="size-3" />
+                </Link>
             </div>
         </div>
     );

@@ -94,8 +94,10 @@ const schema = defineSchema({
         coverImage: v.string(), // featured image
         author: v.id("users"), // can later change to v.id("users") if you add users table
         publishStatus: PostPublishStatusUnion, // draft, published, etc.
-        postDate: v.optional(v.number()), // timestamp (ms)
         isFeatured: v.boolean(),
+
+        postDate: v.optional(v.number()), // timestamp (ms)
+        unpublishDate: v.optional(v.number()), // timestamp (ms)
     })
         .index("by_slug", ["slug"])
         .index("by_is_featured", ["isFeatured"]),

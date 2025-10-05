@@ -6,6 +6,7 @@ const deleteRequirementState = atom(false);
 const createRequirementState = atom(false);
 const successModalState = atom(false);
 const createPostCategoryState = atom(false);
+const confirmModalState = atom(false);
 
 export const useCompleteAccountModal = () => {
     return useAtom(completeAccountState);
@@ -29,4 +30,8 @@ export const useSuccessModal = () => {
 
 export const useCreatePostCategoryModal = () => {
     return useAtom(createPostCategoryState);
+};
+
+export const useConfirmModal = () => {
+    return useAtom(confirmModalState);
 };

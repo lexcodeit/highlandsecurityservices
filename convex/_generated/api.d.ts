@@ -28,6 +28,7 @@ import type * as helpers_db from "../helpers/db.js";
 import type * as helpers_templates from "../helpers/templates.js";
 import type * as helpers_utils from "../helpers/utils.js";
 import type * as http from "../http.js";
+import type * as noAuth_blog from "../noAuth/blog.js";
 import type * as noAuth_jobs from "../noAuth/jobs.js";
 import type * as otp_ResendOTP from "../otp/ResendOTP.js";
 import type * as tests from "../tests.js";
@@ -62,6 +63,7 @@ declare const fullApi: ApiFromModules<{
   "helpers/templates": typeof helpers_templates;
   "helpers/utils": typeof helpers_utils;
   http: typeof http;
+  "noAuth/blog": typeof noAuth_blog;
   "noAuth/jobs": typeof noAuth_jobs;
   "otp/ResendOTP": typeof otp_ResendOTP;
   tests: typeof tests;

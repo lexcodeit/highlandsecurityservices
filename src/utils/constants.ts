@@ -8,6 +8,7 @@ export const LinkedInPage =
     "https://www.linkedin.com/company/highland-security-services-ng";
 export const FacebookPage = "https://web.facebook.com/highlandfbteam";
 export const TiktokPage = "https://www.tiktok.com/@highlandsecurity";
+export const BlogPageLink = "https://www.highlandsecurityservices.com/blog";
 
 export const ServicesListArr: ServicesEnums[] = [
     "bodyguard",
