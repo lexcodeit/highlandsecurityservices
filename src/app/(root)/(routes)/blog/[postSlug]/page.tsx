@@ -4,18 +4,18 @@ import { notFound } from "next/navigation";
 import { api } from "../../../../../../convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 
-interface BlogPostParams {
-    params: {
-        postSlug: string;
-    };
-}
+type PageProps = {
+    params: Promise<{ postSlug: string }>; // ✅ important: mark as Promise
+};
 
 // ✅ Generate OG & Twitter metadata server-side
 export async function generateMetadata({
     params,
-}: BlogPostParams): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
+    const { postSlug } = await params; // ✅ await the params to fix the Promise mismatch
+
     const postSsr = await fetchQuery(api.noAuth.blog.getPostContent, {
-        postSlug: params.postSlug,
+        postSlug,
     });
 
     if (!postSsr) return notFound();
