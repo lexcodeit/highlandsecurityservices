@@ -4,12 +4,16 @@ import { notFound } from "next/navigation";
 import { api } from "../../../../../../convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 
+interface BlogPostParams {
+    params: {
+        postSlug: string;
+    };
+}
+
 // ✅ Generate OG & Twitter metadata server-side
 export async function generateMetadata({
     params,
-}: {
-    params: { postSlug: string };
-}): Promise<Metadata> {
+}: BlogPostParams): Promise<Metadata> {
     const postSsr = await fetchQuery(api.noAuth.blog.getPostContent, {
         postSlug: params.postSlug,
     });
