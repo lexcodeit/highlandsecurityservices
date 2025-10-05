@@ -18,6 +18,26 @@ export const toggleFeaturedPost = mutation({
 
             if (!post) throw new CustomError("Post not found");
 
+            // If we are about to toggle it to featured, check number of already featured posts
+            if (!post.isFeatured) {
+                if (post.publishStatus !== "PUBLISHED") {
+                    throw new CustomError(
+                        "You can't feature an unpublished post."
+                    );
+                }
+
+                const alreadyFeaturedPost = await ctx.db
+                    .query("posts")
+                    .withIndex("by_is_featured", q => q.eq("isFeatured", true))
+                    .collect();
+
+                if (alreadyFeaturedPost.length >= 3) {
+                    throw new CustomError(
+                        "You have reached the limit for already featured posts."
+                    );
+                }
+            }
+
             await ctx.db.patch(post._id, {
                 isFeatured: post.isFeatured ? false : true,
             });
