@@ -15,7 +15,8 @@ export type ServicesEnums =
     | "residential"
     | "escort"
     | "surveillance"
-    | "specialized";
+    | "specialized"
+    | "cctv";
 
 export type PositionEnums =
     | "chief-security-officer"

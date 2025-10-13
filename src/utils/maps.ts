@@ -46,6 +46,12 @@ export const SERVICES_MAP: {
         image: "surveillance.jpg",
         title: "Surveillance & Monitoring",
     },
+    cctv: {
+        image: "cctv-guys.jpg",
+        description:
+            "We design and install intelligent CCTV systems integrated with remote monitoring. Stay informed in real time as our experts ensure continuous visibility, swift alerts, and total control over your property’s security.",
+        title: "CCTV Installation & Remote Monitioring",
+    },
 };
 
 export const JOB_POSITION_MAP: {

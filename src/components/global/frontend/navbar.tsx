@@ -22,12 +22,14 @@ const Navbar = () => {
         const logo = navRef.current.querySelector(".brand-logo");
         const links = navRef.current.querySelectorAll(".nav-link");
         const button = navRef.current.querySelector(".nav-btn");
+        const buttonText = navRef.current.querySelector(".nav-btn span");
 
         // Animate the inner cover padding on scroll
         if (cover) {
             gsap.to(cover, {
                 paddingTop: "6px",
                 paddingBottom: "6px",
+                background: "#fff",
                 duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
@@ -75,14 +77,22 @@ const Navbar = () => {
                     end: "+=200",
                 },
             });
+            gsap.to(buttonText, {
+                color: "#1e293b",
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".hero-cover",
+                    start: "bottom top",
+                    scrub: 1,
+                    end: "+=200",
+                },
+            });
         }
     }, []);
 
     return (
-        <nav
-            ref={navRef}
-            className="fixed -top-full left-0 w-full z-50 border-b border-b-border-color bg-white"
-        >
+        <nav ref={navRef} className="fixed -top-full left-0 w-full z-50 ">
             <div className="flex items-center justify-between max-w-[1300px] mx-auto py-4 px-4 nav-cover">
                 <Link href="/">
                     <Image
@@ -110,8 +120,8 @@ const Navbar = () => {
                 </div>
 
                 <Link href="/book-security">
-                    <Button className="bg-transparent border border-primary-gold text-header-text nav-btn">
-                        Book Now
+                    <Button className="bg-transparent border border-primary-gold text-off-white nav-btn">
+                        <span>Book Now</span>
                     </Button>
                 </Link>
             </div>

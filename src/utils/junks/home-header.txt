@@ -1,0 +1,632 @@
+
+.hero-cover {
+    /* Hero Section */
+    background: linear-gradient(
+        180deg,
+        #ffffff 15.1%,
+        #fbf8f0 41.61%,
+        #fffbef 61.67%,
+        #fff8e8 95.08%
+    );
+}
+"use client";
+import React, { useRef } from "react";
+import styles from "@/lib/styles/header.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import { stories } from "@/utils/data";
+import gsap from "gsap";
+
+const HomeHeader2 = () => {
+    let activeStory = 0;
+    const storyDuration = 4000;
+    const contentUpdateDelay = 0.4;
+    const cursorRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    let direction = "next";
+    let storyTimeout: string | number | NodeJS.Timeout | undefined;
+
+    function animateNewImage(imgContainer: HTMLElement) {
+        gsap.set(imgContainer, {
+            clipPath:
+                direction === "next"
+                    ? "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
+                    : "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+        });
+
+        gsap.to(imgContainer, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: 1,
+            ease: "power4.inOut",
+        });
+    }
+
+    function animateImageScale(
+        currentImg: HTMLElement,
+        upcomingImg: HTMLElement
+    ) {
+        gsap.fromTo(
+            currentImg,
+            {
+                scale: 1,
+                rotate: 0,
+            },
+            {
+                scale: 2,
+                rotate: direction === "next" ? -25 : 25,
+                duration: 1,
+                ease: "power4.inOut",
+                onComplete: () => {
+                    currentImg.parentElement?.remove();
+                },
+            }
+        );
+        gsap.fromTo(
+            upcomingImg,
+            {
+                scale: 2,
+                rotate: direction === "next" ? 25 : -25,
+            },
+            {
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: "power4.inOut",
+            }
+        );
+    }
+
+    function resetIndexHighlight(index: number) {
+        const highlight = document.querySelectorAll(
+            `.${styles["index-highlight"]}`
+        )[index];
+        gsap.killTweensOf(highlight);
+        gsap.to(highlight, {
+            width: direction === "next" ? "100%" : "0%",
+            duration: 0.3,
+            onStart: () => {
+                gsap.to(highlight, {
+                    transformOrigin: "right center",
+                    scaleX: 0,
+                    duration: 0.3,
+                });
+            },
+        });
+    }
+
+    function animateIndexHighlight(index: number) {
+        const highlight = document.querySelectorAll(
+            `.${styles["index-highlight"]}`
+        )[index];
+        gsap.set(highlight, {
+            width: "0%",
+            scaleX: 1,
+            transformOrigin: "right center",
+        });
+
+        gsap.to(highlight, {
+            width: "100%",
+            duration: storyDuration / 1000,
+            ease: "none",
+        });
+    }
+
+    function clearUpElements() {
+        const profileNameDiv = document.querySelector(
+            `.${styles["profile-name"]}`
+        );
+        const titleRows = document.querySelectorAll(`.${styles["title-row"]}`);
+        if (profileNameDiv) {
+            while (profileNameDiv?.childElementCount > 2) {
+                if (profileNameDiv.firstChild) {
+                    profileNameDiv.removeChild(profileNameDiv.firstChild);
+                }
+            }
+        }
+
+        titleRows.forEach(titleRow => {
+            while (titleRow.childElementCount > 2) {
+                if (titleRow.firstChild) {
+                    titleRow.removeChild(titleRow.firstChild);
+                }
+            }
+        });
+    }
+
+    const changeStory = () => {
+        const previousStory = activeStory;
+        if (direction === "next") {
+            activeStory = (activeStory + 1) % stories.length;
+        } else {
+            activeStory = (activeStory - 1 + stories.length) % stories.length;
+        }
+
+        const story = stories[activeStory];
+
+        gsap.to(`.${styles["profile-name"]} p`, {
+            y: direction === "next" ? -24 : 24,
+            duration: 0.5,
+            delay: contentUpdateDelay,
+        });
+
+        gsap.to(`.${styles["title-row"]} h1`, {
+            y: direction === "next" ? -48 : 48,
+            duration: 0.5,
+            delay: contentUpdateDelay,
+        });
+
+        const currentImgContainer = document.querySelector(`.${styles.img}`);
+        const currentImg = currentImgContainer?.querySelector("img");
+
+        if (currentImg) {
+            setTimeout(() => {
+                const newProfileName = document.createElement("p");
+                newProfileName.innerText = story.profileName;
+                newProfileName.style.transform =
+                    direction === "next"
+                        ? "translateY(24px)"
+                        : "translateY(-24px)";
+                const profileNameDiv = document.querySelector(
+                    `.${styles["profile-name"]}`
+                );
+                profileNameDiv?.appendChild(newProfileName);
+
+                gsap.to(newProfileName, {
+                    y: 0,
+                    duration: 0.5,
+                    delay: contentUpdateDelay,
+                });
+
+                const titleRows = document.querySelectorAll(
+                    `.${styles["title-row"]}`
+                );
+                story.title.forEach((line, index) => {
+                    if (titleRows[index]) {
+                        const newTitle = document.createElement("h1");
+                        newTitle.innerText = line;
+                        newTitle.style.transform =
+                            direction === "next"
+                                ? "translateY(48px)"
+                                : "translateY(-48px)";
+                        titleRows[index].appendChild(newTitle);
+
+                        gsap.to(newTitle, {
+                            y: 0,
+                            duration: 0.5,
+                            delay: contentUpdateDelay,
+                        });
+                    }
+                });
+
+                const newImgContainer = document.createElement("div");
+                newImgContainer.classList.add("img");
+                const newStoryImg = document.createElement("img");
+                newStoryImg.src = story.storyImg;
+                newStoryImg.alt = story.profileName;
+                newImgContainer.appendChild(newStoryImg);
+
+                const storyImgDiv = document.querySelector(
+                    `.${styles["story-img"]}`
+                );
+                storyImgDiv?.appendChild(newImgContainer);
+
+                animateNewImage(newImgContainer);
+
+                const upcomingImg = newStoryImg;
+                animateImageScale(currentImg, upcomingImg);
+                resetIndexHighlight(previousStory);
+                animateIndexHighlight(activeStory);
+
+                clearUpElements();
+
+                clearTimeout(storyTimeout);
+
+                storyTimeout = setTimeout(changeStory, storyDuration);
+            }, 200);
+        }
+
+        setTimeout(() => {
+            const profileImg = document.querySelector<HTMLImageElement>(
+                `.${styles["profile-icon"]} img`
+            );
+            if (profileImg) {
+                profileImg.src = story.profileImg;
+
+                const link = document.querySelector<HTMLAnchorElement>(
+                    `.${styles["link"]} a`
+                );
+                if (link) {
+                    link.textContent = story.linkLabel;
+                    link.href = story.linkSrc;
+                }
+            }
+        }, 600);
+    };
+
+    function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+        const { clientX, clientY } = event;
+        const cursor = cursorRef.current;
+        if (cursor) {
+            const cursorText = cursor.querySelector("p");
+            gsap.to(cursor, {
+                x: clientX - cursor.offsetWidth / 2,
+                y: clientY - cursor.offsetHeight / 2,
+                ease: "power2.out",
+                duration: 0.3,
+            });
+
+            const viewportWidth = window.innerWidth;
+            if (clientX < viewportWidth / 2) {
+                if (cursorText) {
+                    cursorText.textContent = "Prev";
+                }
+                direction = "prev";
+            } else {
+                if (cursorText) {
+                    cursorText.textContent = "Next";
+                }
+                direction = "next";
+            }
+        }
+    }
+
+    function handleOnclick() {
+        clearTimeout(storyTimeout);
+        resetIndexHighlight(activeStory);
+        changeStory();
+    }
+
+    storyTimeout = setTimeout(changeStory, storyDuration);
+    animateIndexHighlight(activeStory);
+    return (
+        <div
+            ref={containerRef}
+            className={styles.container}
+            onMouseMove={handleMouseMove}
+            onClick={handleOnclick}
+        >
+            <div ref={cursorRef} className={styles.cursor}>
+                <p></p>
+            </div>
+
+            <div className={styles["story-img"]}>
+                <div className={styles.img}>
+                    <div className=" absolute top-0 left-0 w-full h-full">
+                        <Image
+                            src={
+                                "/assets/images/services/corporate-security.jpg"
+                            }
+                            alt="Corporate Security"
+                            fill
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className={styles["story-content"]}>
+                <div className={styles["row"]}>
+                    <div className={styles["indices"]}>
+                        <div className={styles["index"]}>
+                            <div className={styles["index-highlight"]}></div>
+                        </div>
+                        <div className={styles["index"]}>
+                            <div className={styles["index-highlight"]}></div>
+                        </div>
+                        <div className={styles["index"]}>
+                            <div className={styles["index-highlight"]}></div>
+                        </div>
+                        <div className={styles["index"]}>
+                            <div className={styles["index-highlight"]}></div>
+                        </div>
+                        <div className={styles["index"]}>
+                            <div className={styles["index-highlight"]}></div>
+                        </div>
+                    </div>
+                    <div className={styles["profile"]}>
+                        <div className={styles["profile-icon"]}>
+                            {/* <div className="relative"> */}
+                            <Image
+                                src={"/assets/images/behance.png"}
+                                fill
+                                alt="services"
+                                className="object-contain rounded-full"
+                            />
+                            {/* </div> */}
+                        </div>
+                        <div className={styles["profile-name"]}>
+                            <p>Behance</p>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles["row"]}>
+                    <div className={styles["title"]}>
+                        <div className={styles["title-row"]}>
+                            <h1>Showcasing creative</h1>
+                        </div>
+                        <div className={styles["title-row"]}>
+                            <h1>portfolios and projects</h1>
+                        </div>
+                        <div className={styles["title-row"]}>
+                            <h1>from top designers.</h1>
+                        </div>
+                    </div>
+                    <div className={styles["link"]}>
+                        <Link href="behance.net" target="_blank">
+                            Read More
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default HomeHeader2;
+
+
+
+
+
+"use client";
+
+import React, { useRef } from "react";
+import "@/lib/styles/header.css";
+import Image from "next/image";
+import Link from "next/link";
+import { stories } from "@/utils/data";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+const storyDuration = 4000;
+const contentUpdateDelay = 0.4;
+
+const HomeHeader2 = () => {
+    const cursorRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const activeStoryRef = useRef(0);
+    const setActiveStory = (value: number) => {
+        activeStoryRef.current = value;
+    };
+    const directionRef = useRef<"next" | "prev">("next");
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // -----------------------
+    // Story Transition Logic
+    // -----------------------
+    const animateNewImage = (imgContainer: HTMLElement) => {
+        const dir = directionRef.current;
+        gsap.set(imgContainer, {
+            clipPath:
+                dir === "next"
+                    ? "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
+                    : "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+        });
+        gsap.to(imgContainer, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: 1,
+            ease: "power4.inOut",
+        });
+    };
+
+    const animateImageScale = (
+        currentImg: HTMLElement,
+        upcomingImg: HTMLElement
+    ) => {
+        const dir = directionRef.current;
+        gsap.fromTo(
+            currentImg,
+            { scale: 1, rotate: 0 },
+            {
+                scale: 2,
+                rotate: dir === "next" ? -25 : 25,
+                duration: 1,
+                ease: "power4.inOut",
+                onComplete: () => currentImg.parentElement?.remove(),
+            }
+        );
+
+        gsap.fromTo(
+            upcomingImg,
+            { scale: 2, rotate: dir === "next" ? 25 : -25 },
+            { scale: 1, rotate: 0, duration: 1, ease: "power4.inOut" }
+        );
+    };
+
+    const animateIndexHighlight = (index: number) => {
+        const highlight = document.querySelectorAll(".header-index-highlight")[
+            index
+        ];
+        if (!highlight) return;
+
+        gsap.set(highlight, { width: "0%" });
+        gsap.to(highlight, {
+            width: "100%",
+            duration: storyDuration / 1000,
+            ease: "none",
+        });
+    };
+
+    const resetIndexHighlight = (index: number) => {
+        const highlight = document.querySelectorAll(".header-index-highlight")[
+            index
+        ];
+        if (!highlight) return;
+
+        gsap.killTweensOf(highlight);
+        gsap.to(highlight, { width: "0%", duration: 0.3 });
+    };
+
+    // -----------------------
+    // Main story changer
+    // -----------------------
+    const changeStory = () => {
+        const dir = directionRef.current;
+        const prev = activeStoryRef.current;
+        const next =
+            dir === "next"
+                ? (activeStoryRef.current + 1) % stories.length
+                : (activeStoryRef.current - 1 + stories.length) %
+                  stories.length;
+
+        const story = stories[next];
+        setActiveStory(next);
+
+        const currentImgContainer = document.querySelector(".header-img");
+        const currentImg = currentImgContainer?.querySelector("img");
+
+        if (!currentImg) return;
+
+        // Animate content out
+        gsap.to(".header-profile-name p", {
+            y: dir === "next" ? -24 : 24,
+            duration: 0.5,
+            delay: contentUpdateDelay,
+        });
+        gsap.to(".header-title-row h1", {
+            y: dir === "next" ? -48 : 48,
+            duration: 0.5,
+            delay: contentUpdateDelay,
+        });
+
+        setTimeout(() => {
+            // Create and append new image
+            const newImgContainer = document.createElement("div");
+            newImgContainer.classList.add("header-img");
+            const newImg = document.createElement("img");
+            newImg.src = story.storyImg;
+            newImg.alt = story.profileName;
+            newImgContainer.appendChild(newImg);
+
+            const storyImgDiv = document.querySelector(".header-story-img");
+            storyImgDiv?.appendChild(newImgContainer);
+
+            // Run animations
+            animateNewImage(newImgContainer);
+            animateImageScale(currentImg, newImg);
+
+            // Reset and animate index highlight
+            resetIndexHighlight(prev);
+            animateIndexHighlight(next);
+
+            timeoutRef.current = setTimeout(changeStory, storyDuration);
+        }, 200);
+    };
+
+    // -----------------------
+    // Mouse Movement Logic
+    // -----------------------
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const { clientX, clientY } = e;
+        const cursor = cursorRef.current;
+        if (!cursor) return;
+
+        gsap.to(cursor, {
+            x: clientX - cursor.offsetWidth / 2,
+            y: clientY - cursor.offsetHeight / 2,
+            ease: "power2.out",
+            duration: 0.3,
+        });
+
+        const cursorText = cursor.querySelector("p");
+        const half = window.innerWidth / 2;
+        if (clientX < half) {
+            cursorText!.textContent = "Prev";
+            directionRef.current = "prev";
+        } else {
+            cursorText!.textContent = "Next";
+            directionRef.current = "next";
+        }
+    };
+
+    const handleClick = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        resetIndexHighlight(activeStoryRef.current);
+        changeStory();
+    };
+
+    // -----------------------
+    // Initialize GSAP on mount
+    // -----------------------
+    useGSAP(() => {
+        animateIndexHighlight(activeStoryRef.current);
+        timeoutRef.current = setTimeout(changeStory, storyDuration);
+
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
+
+    return (
+        <div
+            ref={containerRef}
+            className={"header-container"}
+            onMouseMove={handleMouseMove}
+            onClick={handleClick}
+        >
+            <div ref={cursorRef} className={"header-cursor"}>
+                <p></p>
+            </div>
+
+            <div className={"header-story-img"}>
+                <div className={"header-img"}>
+                    <Image
+                        src={"/assets/images/services/corporate-security.jpg"}
+                        alt="Corporate Security"
+                        fill
+                    />
+                </div>
+            </div>
+
+            <div className={"header-story-content"}>
+                <div className={"row"}>
+                    <div className={"header-indices"}>
+                        {stories.map((_, i) => (
+                            <div key={i} className={"header-index"}>
+                                <div className={"header-index-highlight"}></div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={"header-profile"}>
+                        <div className={"header-profile-icon"}>
+                            <Image
+                                src={"/assets/images/behance.png"}
+                                fill
+                                alt="services"
+                                className="object-contain rounded-full"
+                            />
+                        </div>
+                        <div className={"header-profile-name"}>
+                            <p>Behance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={"header-row"}>
+                    <div className={"header-title"}>
+                        <div className={"header-title-row"}>
+                            <h1>Showcasing creative</h1>
+                        </div>
+                        <div className={"header-title-row"}>
+                            <h1>portfolios and projects</h1>
+                        </div>
+                        <div className={"header-title-row"}>
+                            <h1>from top designers.</h1>
+                        </div>
+                    </div>
+                    <div className={"header-link"}>
+                        <Link href="https://behance.net" target="_blank">
+                            Read More
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default HomeHeader2;

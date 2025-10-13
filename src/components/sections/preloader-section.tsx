@@ -5,25 +5,17 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { SplitText } from "gsap/all";
+
 const PreloaderSection = () => {
     useGSAP(() => {
         // grab elements
         const counts = gsap.utils.toArray(`.${styles.count}`) as HTMLElement[];
         const counterContainer = document.querySelector(`.${styles.counter}`);
-        const serviceListContainer = document.querySelector(
-            `.${styles.servicesList}`
-        );
-        const splitServices = new SplitText(`.${styles.servicesList} p`, {
-            type: "words",
-        });
 
         // start timeline
         const tl = gsap.timeline({ delay: 0.3 });
 
         // initial state
-        gsap.set(splitServices.words, { y: 100 });
-
         counts.forEach((count, index) => {
             const digits = count.querySelectorAll(`.${styles["digit"]} h1`);
 
@@ -52,30 +44,6 @@ const PreloaderSection = () => {
         // slide container up after counts finish
         tl.to(
             counterContainer,
-            {
-                y: "-100%",
-                duration: 0.8,
-            },
-            "+=0" // right after the previous
-        );
-
-        // animate words in after container slide
-        tl.to(splitServices.words, {
-            y: "0%",
-            duration: 1,
-            stagger: 0.075,
-        });
-        // animate words out after container slide
-        tl.to(splitServices.words, {
-            y: "-100%",
-            duration: 1,
-            stagger: 0.075,
-            delay: 2,
-        });
-
-        // Animate the services list container out
-        tl.to(
-            serviceListContainer,
             {
                 y: "-100%",
                 duration: 0.8,
@@ -145,21 +113,6 @@ const PreloaderSection = () => {
                         <h1>9</h1>
                     </div>
                 </div>
-            </div>
-
-            <div
-                className={cn(
-                    "absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white z-20 text-xl font-semibold gap-y-2 font-outfit",
-                    styles.servicesList
-                )}
-            >
-                <p>Bodyguard Services</p>
-                <p>Corporate Security</p>
-                <p>Escort Services</p>
-                <p>Event Security</p>
-                <p>Residential Security</p>
-                <p>Specialized Guard Services</p>
-                <p>Surveillance & Monitoring</p>
             </div>
 
             <div className={styles["second-part"]}>
