@@ -20,7 +20,7 @@ const PostPage = () => {
     if (!post) return <ErrorScreen />;
 
     return (
-        <div className="p-4 flex flex-col overflow-hidden h-full">
+        <div className="p-4 flex flex-col overflow-hidden h-full pt-[100px]">
             <div className="flex items-center justify-between py-4 px-10">
                 <div className="flex-1 overflow-y-scroll p-5 px-[20%]">
                     <h2 className="font-outfit text-[42px] text-center mb-5">
@@ -49,12 +49,12 @@ const PostPage = () => {
                         </div>
                     </div>
 
-                    <div className="relative h-[400px] my-5">
+                    <div className="relative w-full h-[400px] my-5 overflow-hidden rounded-xl bg-gray-50">
                         <Image
-                            className="object-contain"
+                            src={post.coverImage}
                             alt="post"
                             fill
-                            src={post.coverImage}
+                            className="object-contain p-4 transition-transform duration-300 hover:scale-105"
                         />
                     </div>
 

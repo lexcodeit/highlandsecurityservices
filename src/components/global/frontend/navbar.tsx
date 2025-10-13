@@ -6,11 +6,18 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
     const navRef = useRef<HTMLElement>(null);
+
+    const pathname = usePathname();
+    const isHome = pathname === "/";
+
+    console.log("Pathname:", pathname);
 
     useGSAP(() => {
         if (!navRef.current) return;
@@ -120,7 +127,12 @@ const Navbar = () => {
                 </div>
 
                 <Link href="/book-security">
-                    <Button className="bg-transparent border border-primary-gold text-off-white nav-btn">
+                    <Button
+                        className={cn(
+                            "bg-transparent border border-primary-gold nav-btn",
+                            isHome ? "text-off-white" : "text-header-text"
+                        )}
+                    >
                         <span>Book Now</span>
                     </Button>
                 </Link>

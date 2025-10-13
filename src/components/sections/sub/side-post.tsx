@@ -48,7 +48,9 @@ const SidePost = ({ post }: Props) => {
                     <h3 className="font-outfit text-lg font-semibold">
                         {title}
                     </h3>
-                    <p className="text-supporting-text text-sm">{shortBody}</p>
+                    <p className="text-supporting-text text-sm line-clamp-1">
+                        {shortBody}
+                    </p>
                     <Link
                         className="text-primary-gold text-sm font-medium flex items-center gap-x-1"
                         href={`/blog/${slug}`}
