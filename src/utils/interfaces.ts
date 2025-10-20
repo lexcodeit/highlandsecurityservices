@@ -19,6 +19,8 @@ export interface ServiceProps {
     image: string;
     title: string;
     description: string;
+    bgColor: string;
+    textColor: string;
 }
 
 export interface ValuePropProps {

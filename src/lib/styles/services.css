@@ -1,0 +1,87 @@
+.services-container {
+    position: relative;
+}
+.services-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.services-container h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1.5em;
+}
+
+.services-container p {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.services-container .services-intro,
+.services-container .services-outro {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 2em;
+}
+
+.services-intro,
+.services-outro {
+    /* background-color: #fff; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.services-intro h1,
+.services-outro h1 {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.service-card {
+    position: relative;
+    height: 90vh;
+}
+.service-card-inner {
+    position: relative;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    padding: 4em 4em;
+    display: flex;
+    gap: 4em;
+}
+
+.service-card-content {
+    flex: 1;
+}
+
+.service-card-image {
+    flex: 1;
+    /* aspect-ratio: 16/9; */
+    border-radius: 0.75em;
+    overflow: hidden;
+    position: relative;
+}
+
+.service-card-image img {
+    /* object-fit: contain; */
+    object-position: center;
+}
+
+@media (max-width: 900px) {
+    .services-container h1 {
+        margin-bottom: 4em;
+    }
+    .service-card-image,
+    .service-card-content {
+        display: none;
+    }
+
+    .service-card {
+        height: 300px;
+    }
+}
