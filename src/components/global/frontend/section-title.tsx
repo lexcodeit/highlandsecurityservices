@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { SplitText } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,15 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
 
     useGSAP(() => {
         const ctx = gsap.context(() => {
+            const subtitleSplit = SplitText.create(".section-subtitle", {
+                type: "words",
+            });
+
+            gsap.set(subtitleSplit.lines, {
+                y: 50,
+                opacity: 0,
+            });
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -36,8 +46,9 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
             }).from(
                 ".section-subtitle",
                 {
-                    clipPath: "inset(0 100% 0 0)",
+                    // clipPath: "inset(0 100% 0 0)",
                     opacity: 0,
+                    y: 0,
                     duration: 1,
                     ease: "power3.out",
                 },

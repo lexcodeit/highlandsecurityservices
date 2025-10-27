@@ -92,6 +92,22 @@ export const SERVICES_MAP: {
         bgColor: "#F3F3F3", // Soft neutral – ties back to white layout
         textColor: "#111111",
     },
+    marine: {
+        title: "Marine Security Operations",
+        image: "marine-security.jpg",
+        description:
+            "Our Marine Security Operations team ensures the protection of vessels, crew, and valuable cargo across inland waterways and coastal zones. We provide armed escort boats, onboard security officers, and surveillance support to deter piracy, smuggling, and unauthorized access. With advanced navigation systems and trained personnel, we guarantee safe passage and operational continuity at sea.",
+        bgColor: "#002B36", // deep navy to evoke maritime security
+        textColor: "#FFFFFF",
+    },
+    bullion: {
+        title: "Bullion Van Operations",
+        image: "bullion.jpg",
+        description:
+            "Our Bullion Van Operations specialize in the secure transportation of cash, precious metals, and other high-value assets. Each convoy is manned by armed, trained professionals operating in communication with our central command for real-time monitoring and rapid response. We adhere to strict confidentiality and safety protocols, ensuring your valuables reach their destination without compromise.",
+        bgColor: "#1E1E1E", // matte charcoal or dark grey to convey strength & confidentiality
+        textColor: "#FFFFFF",
+    },
 };
 
 export const JOB_POSITION_MAP: {

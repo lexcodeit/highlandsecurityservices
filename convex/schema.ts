@@ -100,7 +100,8 @@ const schema = defineSchema({
         unpublishDate: v.optional(v.number()), // timestamp (ms)
     })
         .index("by_slug", ["slug"])
-        .index("by_is_featured", ["isFeatured"]),
+        .index("by_is_featured", ["isFeatured"])
+        .index("by_publish_status", ["publishStatus"]),
 });
 
 export default schema;

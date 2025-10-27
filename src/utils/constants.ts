@@ -19,6 +19,7 @@ export const ServicesListArr: ServicesEnums[] = [
     "specialized",
     "surveillance",
     "cctv",
+    "bullion",
 ];
 
 export const PostListArr: PostProps[] = [

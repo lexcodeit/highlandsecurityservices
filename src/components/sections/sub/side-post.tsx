@@ -40,7 +40,10 @@ const SidePost = ({ post }: Props) => {
                     <div className="flex items-center gap-x-2">
                         <IoCalendarOutline className="text-primary-gold" />
                         <p className="text-sm text-supporting-text">
-                            {formatTimeFn(postDate || _creationTime)}
+                            {formatTimeFn(
+                                postDate || _creationTime,
+                                "DD MMM, YYYY"
+                            )}
                         </p>
                     </div>
                 </div>

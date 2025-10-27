@@ -7,13 +7,37 @@ import { SERVICES_MAP } from "@/utils/maps";
 import ServiceSectionCard from "./service-section-card";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger, SplitText } from "gsap/all";
 
 const ServicesSection2 = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
         () => {
+            const servicesIntroSplit = SplitText.create(".services-intro h1", {
+                type: "lines",
+            });
+            gsap.set(servicesIntroSplit.lines, {
+                y: 120,
+                opacity: 0,
+            });
+
+            gsap.to(servicesIntroSplit.lines, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.25,
+                ease: "power2.inOut",
+                duration: 1,
+
+                scrollTrigger: {
+                    trigger: ".services-intro",
+                    start: "top 70%", // when the section enters
+                    end: "bottom 30%", // when it leaves
+                    toggleActions: "play reverse play reverse",
+                    // markers: true,
+                },
+            });
+
             const cards = gsap.utils.toArray<HTMLDivElement>(".service-card");
             ScrollTrigger.create({
                 trigger: cards[0],

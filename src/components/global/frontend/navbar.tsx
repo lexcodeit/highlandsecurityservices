@@ -8,98 +8,109 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import LinkItem from "./link-item";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
     const navRef = useRef<HTMLElement>(null);
-
     const pathname = usePathname();
     const isHome = pathname === "/";
 
-    console.log("Pathname:", pathname);
-
     useGSAP(() => {
-        if (!navRef.current) return;
+        const nav = navRef.current;
+        if (!nav) return;
+
+        const navMain = nav.querySelector(".nav-main");
+        const cover = nav.querySelector(".nav-cover");
+        const logo = nav.querySelector(".brand-logo");
+        const button = nav.querySelector(".nav-btn");
+        const buttonText = nav.querySelector(".nav-btn span");
 
         // Slide nav into view on load
-        gsap.to(navRef.current, { top: "0%" });
+        gsap.to(nav, { top: "0%" });
 
-        const cover = navRef.current.querySelector(".nav-cover");
-        const logo = navRef.current.querySelector(".brand-logo");
-        const links = navRef.current.querySelectorAll(".nav-link");
-        const button = navRef.current.querySelector(".nav-btn");
-        const buttonText = navRef.current.querySelector(".nav-btn span");
+        // === SCROLL BEHAVIOR BASED ON VIEWPORT ===
+        ScrollTrigger.create({
+            start: 100, // when scrolled 100px down
+            onEnter: () => {
+                gsap.to(navMain, {
+                    background: "#fff",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
 
-        // Animate the inner cover padding on scroll
-        if (cover) {
-            gsap.to(cover, {
-                paddingTop: "6px",
-                paddingBottom: "6px",
-                background: "#fff",
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".hero-cover",
-                    start: "bottom top",
-                    scrub: 1,
-                    end: "+=200",
-                },
-            });
-            gsap.to(logo, {
-                width: "50px",
-                height: "30px",
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".hero-cover",
-                    start: "bottom top",
-                    scrub: 1,
-                    end: "+=200",
-                },
-            });
+                gsap.to(cover, {
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                    background: "#fff",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
 
-            gsap.to(links, {
-                fontSize: "0.9rem",
-                padding: "0 12px",
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".hero-cover",
-                    start: "bottom top",
-                    scrub: 1,
-                    end: "+=200",
-                },
-            });
+                gsap.to(logo, {
+                    width: "50px",
+                    height: "30px",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
 
-            gsap.to(button, {
-                padding: "12px 16px",
-                fontSize: "0.9rem",
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".hero-cover",
-                    start: "bottom top",
-                    scrub: 1,
-                    end: "+=200",
-                },
-            });
-            gsap.to(buttonText, {
-                color: "#1e293b",
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".hero-cover",
-                    start: "bottom top",
-                    scrub: 1,
-                    end: "+=200",
-                },
-            });
-        }
-    }, []);
+                gsap.to(button, {
+                    padding: "12px 16px",
+                    fontSize: "0.9rem",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                gsap.to(buttonText, {
+                    color: "#1e293b", // slate-800
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to(navMain, {
+                    background: "transparent",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                gsap.to(cover, {
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    background: "transparent",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                gsap.to(logo, {
+                    width: "100px",
+                    height: "75px",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                gsap.to(button, {
+                    padding: "16px 24px",
+                    fontSize: "1rem",
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                gsap.to(buttonText, {
+                    color: isHome ? "#f8fafc" : "#1e293b", // adjust based on route
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+            },
+        });
+    }, [isHome]);
 
     return (
-        <nav ref={navRef} className="fixed -top-full left-0 w-full z-50 ">
+        <nav
+            ref={navRef}
+            className="fixed -top-full left-0 w-full z-50 nav-main"
+        >
             <div className="flex items-center justify-between max-w-[1300px] mx-auto py-4 px-4 nav-cover">
                 <Link href="/">
                     <Image
@@ -112,18 +123,26 @@ const Navbar = () => {
                 </Link>
 
                 <div className="bg-light-bg py-4 px-8 rounded-md flex items-center gap-x-10 text-supporting-text font-semibold">
-                    <Link href="/about" className="nav-link">
-                        About
-                    </Link>
-                    <Link href="/services" className="nav-link">
-                        Services
-                    </Link>
-                    <Link href="/blog" className="nav-link">
-                        Blog
-                    </Link>
-                    <Link href="/contact" className="nav-link">
-                        Contact
-                    </Link>
+                    <LinkItem
+                        isActive={pathname.includes("/about")}
+                        text="About"
+                        url="/about"
+                    />
+                    <LinkItem
+                        isActive={pathname.includes("/services")}
+                        text="Services"
+                        url="/services"
+                    />
+                    <LinkItem
+                        isActive={pathname.includes("/blog")}
+                        text="Blog"
+                        url="/blog"
+                    />
+                    <LinkItem
+                        isActive={pathname.includes("/contact")}
+                        text="Contact"
+                        url="/contact"
+                    />
                 </div>
 
                 <Link href="/book-security">

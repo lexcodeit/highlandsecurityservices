@@ -14,8 +14,15 @@ interface Props {
 }
 
 const FeaturedPost = ({ post }: Props) => {
-    const { category, title, slug, _creationTime, coverImage, shortBody } =
-        post;
+    const {
+        postDate,
+        category,
+        title,
+        slug,
+        _creationTime,
+        coverImage,
+        shortBody,
+    } = post;
 
     return (
         <div className="shadow bg-white rounded-[16px] overflow-hidden w-full h-fit flex flex-col">
@@ -36,7 +43,10 @@ const FeaturedPost = ({ post }: Props) => {
                     <div className="flex items-center gap-x-2">
                         <IoCalendarOutline className="text-primary-gold" />
                         <p className="text-sm text-supporting-text">
-                            {formatTimeFn(_creationTime)}
+                            {formatTimeFn(
+                                postDate || _creationTime,
+                                "DD MMM, YYYY"
+                            )}
                         </p>
                     </div>
                 </div>

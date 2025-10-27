@@ -9,7 +9,7 @@ const GetHiredSection = () => {
     const { data, isLoading } = useGetLandingPageOpenJobs();
 
     return (
-        <div>
+        <div className="py-20">
             <SectionTitle
                 subtitle="Join our dedicated security team and make a real difference. Explore our current job openings and apply in minutes."
                 title="Open Positions"
