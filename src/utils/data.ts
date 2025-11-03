@@ -29,7 +29,7 @@ export const stories = [
             "Our professional escort units guarantee safe passage across Nigeria — from airports to events. Trained, armed, and coordinated for secure transport under any circumstance.",
         linkLabel: "Learn More",
         linkSrc: "/services/escort-services",
-        storyImg: "/assets/images/highRes/escort.jpg",
+        storyImg: "/assets/images/highRes/escort.jpeg",
     },
     {
         title: ["Surveillance &", "Monitoring ", "Systems"],

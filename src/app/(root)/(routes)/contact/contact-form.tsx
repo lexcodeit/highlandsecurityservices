@@ -1,0 +1,159 @@
+import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
+const ContactForm = () => {
+    const isPending = false;
+
+    const formSchema = z.object({
+        name: z
+            .string({
+                error: "Name is required",
+            })
+            .min(3, "Enter a valid name"),
+        phone: z
+            .string({
+                error: "Phone Number is required",
+            })
+            .min(3, "Use a valid phone number"),
+        email: z.email({
+            error: "Please use a valid email",
+        }),
+        message: z
+            .string({
+                error: "Message is required",
+            })
+            .min(40, "Min. of 40 Chars")
+            .max(300, "Max. of 300 Chars"),
+    });
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            phone: "",
+            email: "",
+            message: "",
+        },
+    });
+
+    const onSubmit = (values: z.infer<typeof formSchema>) => {
+        console.log("Values:", values);
+    };
+    return (
+        <div className="bg-white rounded-xl p-6 py-12 border border-primary-gold ">
+            <div>
+                <h2 className="text-header-text mb-5 font-bold font-outfit text-center text-3xl">
+                    Send Us a Message
+                </h2>
+                <p className="text-supporting-text text-center">
+                    Fill out the form below, our team will get back to you soon
+                </p>
+            </div>
+            <Form {...form}>
+                <form
+                    className="space-y-4"
+                    onSubmit={form.handleSubmit(onSubmit)}
+                >
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => {
+                            return (
+                                <FormItem className=" my-5">
+                                    <FormLabel>Full Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            placeholder="Type here..."
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            );
+                        }}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => {
+                            return (
+                                <FormItem className=" my-5">
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            placeholder="Type here..."
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            );
+                        }}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => {
+                            return (
+                                <FormItem className=" my-5">
+                                    <FormLabel>Phone Number</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            placeholder="Type here..."
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            );
+                        }}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => {
+                            return (
+                                <FormItem className=" my-5">
+                                    <FormLabel>Message</FormLabel>
+                                    <FormControl>
+                                        <Textarea
+                                            {...field}
+                                            placeholder="Type here..."
+                                            disabled={isPending}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            );
+                        }}
+                    />
+
+                    <Button
+                        disabled={isPending}
+                        className="w-full rounded-full"
+                    >
+                        Send your message
+                    </Button>
+                </form>
+            </Form>
+        </div>
+    );
+};
+
+export default ContactForm;
