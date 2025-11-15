@@ -14,6 +14,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#F5F5F5", // Light grey – subtle contrast from white
         textColor: "#111111",
+        slug: "bodyguard-services",
     },
     corporate: {
         description:
@@ -25,6 +26,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#E8EEF5", // Soft blue-grey – calm, corporate
         textColor: "#0A0A0A",
+        slug: "corporate-security",
     },
     escort: {
         description:
@@ -36,6 +38,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#DCE3EB", // Muted steel-blue – elegance & motion
         textColor: "#0A0A0A",
+        slug: "escort-services",
     },
     event: {
         description:
@@ -47,6 +50,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#FAFAFA", // Almost white – lively & neutral
         textColor: "#111111",
+        slug: "event-security",
     },
     residential: {
         description:
@@ -58,6 +62,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#EDF4F2", // Soft mint-grey – fresh, homey tone
         textColor: "#111111",
+        slug: "residential-security",
     },
     specialized: {
         description:
@@ -69,6 +74,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#1D1F2F", // Deep navy – strength & focus
         textColor: "#FFFFFF",
+        slug: "specialized-guard-services",
     },
     surveillance: {
         description:
@@ -80,6 +86,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#202A33", // Dark slate – techy & sophisticated
         textColor: "#FFFFFF",
+        slug: "surveillance-monitoring-services",
     },
     cctv: {
         image: "cctv-guys.jpg",
@@ -91,6 +98,7 @@ export const SERVICES_MAP: {
 
         bgColor: "#F3F3F3", // Soft neutral – ties back to white layout
         textColor: "#111111",
+        slug: "cctv-installation-remote",
     },
     marine: {
         title: "Marine Security Operations",
@@ -99,6 +107,7 @@ export const SERVICES_MAP: {
             "Our Marine Security Operations team ensures the protection of vessels, crew, and valuable cargo across inland waterways and coastal zones. We provide armed escort boats, onboard security officers, and surveillance support to deter piracy, smuggling, and unauthorized access. With advanced navigation systems and trained personnel, we guarantee safe passage and operational continuity at sea.",
         bgColor: "#002B36", // deep navy to evoke maritime security
         textColor: "#FFFFFF",
+        slug: "marine-security",
     },
     bullion: {
         title: "Bullion Van Operations",
@@ -107,6 +116,7 @@ export const SERVICES_MAP: {
             "Our Bullion Van Operations specialize in the secure transportation of cash, precious metals, and other high-value assets. Each convoy is manned by armed, trained professionals operating in communication with our central command for real-time monitoring and rapid response. We adhere to strict confidentiality and safety protocols, ensuring your valuables reach their destination without compromise.",
         bgColor: "#1E1E1E", // matte charcoal or dark grey to convey strength & confidentiality
         textColor: "#FFFFFF",
+        slug: "bullion-van-operaions",
     },
 };
 

@@ -15,6 +15,7 @@ import { BsTiktok } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import FooterBanner from "./footer-banner";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,7 +83,11 @@ const Footer = () => {
     }, []);
 
     return (
-        <div ref={footerRef} className="p-10 border-t border-t-border-color">
+        <div
+            ref={footerRef}
+            className="p-10 border-t border-t-border-color relative mt-[200px] pt-[150px]"
+        >
+            <FooterBanner />
             <div className="flex justify-between max-w-[1200px] mx-auto gap-x-10 py-4">
                 {/* Logo + About */}
                 <div className="flex-2 footer-logo-block">
@@ -140,13 +145,22 @@ const Footer = () => {
                     <h3 className="text-supporting-text font-medium text-sm">
                         Company
                     </h3>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link
+                        href="/about"
+                        className="text-header-text font-medium"
+                    >
                         About Us
                     </Link>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link
+                        href="/services"
+                        className="text-header-text font-medium"
+                    >
                         Services
                     </Link>
-                    <Link className="text-header-text font-medium" href="/">
+                    <Link
+                        className="text-header-text font-medium"
+                        href="/careers"
+                    >
                         Careers
                     </Link>
                 </div>
@@ -154,10 +168,16 @@ const Footer = () => {
                     <h3 className="text-supporting-text font-medium text-sm">
                         Legal
                     </h3>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link
+                        href="/privacy-policy"
+                        className="text-header-text font-medium"
+                    >
                         Privacy Policy
                     </Link>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link
+                        href="/terms-and-conditions"
+                        className="text-header-text font-medium"
+                    >
                         Terms and Conditions
                     </Link>
                 </div>
@@ -165,13 +185,16 @@ const Footer = () => {
                     <h3 className="text-supporting-text font-medium text-sm">
                         Platform
                     </h3>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link href="/faqs" className="text-header-text font-medium">
                         FAQs
                     </Link>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link href="/blog" className="text-header-text font-medium">
                         Blog
                     </Link>
-                    <Link href="/" className="text-header-text font-medium">
+                    <Link
+                        href="/contact"
+                        className="text-header-text font-medium"
+                    >
                         Contact Us
                     </Link>
                 </div>

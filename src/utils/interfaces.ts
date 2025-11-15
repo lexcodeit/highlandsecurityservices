@@ -21,6 +21,7 @@ export interface ServiceProps {
     description: string;
     bgColor: string;
     textColor: string;
+    slug: string;
 }
 
 export interface ValuePropProps {

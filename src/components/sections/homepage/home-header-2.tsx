@@ -8,7 +8,7 @@ import { stories } from "@/utils/data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const storyDuration = 10000;
+const storyDuration = 8000;
 const contentUpdateDelay = 0.5;
 
 const HomeHeader2 = () => {

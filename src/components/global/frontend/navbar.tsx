@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
     const navRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
-    const isHome = pathname === "/";
+    const isDarkHeader = pathname === "/" || pathname === "/services";
 
     useGSAP(() => {
         const nav = navRef.current;
@@ -98,13 +98,13 @@ const Navbar = () => {
                 });
 
                 gsap.to(buttonText, {
-                    color: isHome ? "#f8fafc" : "#1e293b", // adjust based on route
+                    color: isDarkHeader ? "#f8fafc" : "#1e293b", // adjust based on route
                     duration: 0.6,
                     ease: "power2.out",
                 });
             },
         });
-    }, [isHome]);
+    }, [isDarkHeader]);
 
     return (
         <nav
@@ -149,7 +149,7 @@ const Navbar = () => {
                     <Button
                         className={cn(
                             "bg-transparent border border-primary-gold nav-btn",
-                            isHome ? "text-off-white" : "text-header-text"
+                            isDarkHeader ? "text-off-white" : "text-header-text"
                         )}
                     >
                         <span>Book Now</span>
