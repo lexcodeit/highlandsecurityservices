@@ -1,6 +1,39 @@
 import { ServicesEnums } from "./enums";
 import { PostProps, ValuePropProps } from "./interfaces";
 
+export const serviceValues = [
+    {
+        title: "Professionalism",
+        description:
+            "We uphold the highest standards of conduct in every engagement. Our team operates with discipline, courtesy, and integrity to deliver world-class service.",
+    },
+    {
+        title: "Reliability",
+        description:
+            "Clients trust us because we are consistently dependable. We show up prepared, punctual, and committed to the success of every assignment.",
+    },
+    {
+        title: "Vigilance",
+        description:
+            "Our personnel are trained to detect risks early and respond before issues escalate, ensuring a safe and controlled environment at all times.",
+    },
+    {
+        title: "Excellence in Training",
+        description:
+            "Continuous training and tactical readiness empower us to deploy highly competent officers capable of handling diverse security challenges.",
+    },
+    {
+        title: "Client-Centered Service",
+        description:
+            "Every client has unique needs. We adapt our solutions to deliver protection tailored to your environment, lifestyle, or business operations.",
+    },
+    {
+        title: "Integrity & Transparency",
+        description:
+            "Trust is the foundation of security. We operate with honesty, accountability, and clear communication in every engagement.",
+    },
+];
+
 // Instagram page
 export const InstagramPage =
     "https://www.instagram.com/highland_securityservices/";
