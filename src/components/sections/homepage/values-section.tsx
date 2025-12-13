@@ -13,23 +13,32 @@ const ValuesSection = () => {
     useGSAP(() => {
         if (!containerRef.current || !trackRef.current) return;
 
-        const track = trackRef.current;
-        const container = containerRef.current;
+        const mm = gsap.matchMedia();
 
-        const totalScroll = track.scrollWidth - container.offsetWidth;
+        // Desktop only
+        mm.add("(min-width: 1024px)", () => {
+            const track = trackRef.current;
+            const container = containerRef.current;
 
-        gsap.to(track, {
-            x: -totalScroll,
-            ease: "none",
-            scrollTrigger: {
-                trigger: container,
-                start: "18% top",
-                end: () => `+=${track.scrollWidth}`,
-                scrub: true,
-                pin: true,
-                anticipatePin: 1,
-            },
+            if (!track || !container) return;
+
+            const totalScroll = track.scrollWidth - container.offsetWidth;
+
+            gsap.to(track, {
+                x: -totalScroll,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "18% top",
+                    end: () => `+=${track.scrollWidth}`,
+                    scrub: true,
+                    pin: true,
+                    anticipatePin: 1,
+                },
+            });
         });
+
+        return () => mm.revert();
     }, []);
 
     return (
@@ -43,16 +52,26 @@ const ValuesSection = () => {
             />
 
             {/* Horizontal track */}
-            <div ref={trackRef} className="relative flex gap-x-12 px-20 w-max">
+            {/* <div ref={trackRef} className="relative flex gap-x-12 px-20 w-max"> */}
+            <div
+                ref={trackRef}
+                className="
+    relative flex gap-6 px-4
+    flex-col
+    lg:flex-row
+    lg:px-20
+    lg:w-max
+  "
+            >
                 {ValueListArr.map((value, index) => {
                     return (
                         <div
                             key={index}
                             className={cn(
-                                "flex-shrink-0 w-[500px] flex flex-col gap-y-6 border border-border-color rounded-lg p-6 bg-white shadow-md"
+                                "flex-shrink-0 w-[350px] lg:w-[500px] flex flex-col gap-y-6 border border-border-color rounded-lg p-6 bg-white shadow-md"
                             )}
                         >
-                            <div className="relative w-full h-[300px] overflow-hidden rounded-md">
+                            <div className="relative w-full h-[200px] lg:h-[300px] overflow-hidden rounded-md">
                                 <Image
                                     alt={value.count}
                                     src={`/assets/images/values/${value.image}`}

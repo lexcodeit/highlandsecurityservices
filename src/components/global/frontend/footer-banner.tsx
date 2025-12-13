@@ -3,9 +3,9 @@ import React from "react";
 
 const FooterBanner = () => {
     return (
-        <div className="absolute -top-1/2 translate-y-1/2 w-full left-0 flex justify-center">
-            <section className="w-[80%] p-10 px-10 border-t border-primary-gold/20 bg-header-text rounded-[16px]">
-                <div className="container mx-auto px-4 flex flex-col lg:flex-row justify-between lg:items-center gap-10 ">
+        <div className="relative top-0 translate-0  w-full left-0 flex justify-center">
+            <section className="w-full lg:w-[80%] p-5 py-10 lg:p-10 border-t border-primary-gold/20 bg-header-text rounded-[16px]">
+                <div className="container mx-auto px-0 lg:px-4 flex flex-col lg:flex-row justify-between lg:items-center gap-10 ">
                     {/* LEFT SIDE */}
                     <div className="w-full lg:w-2/3">
                         {/* Label + dots */}
@@ -24,12 +24,12 @@ const FooterBanner = () => {
                         </div>
 
                         {/* Header */}
-                        <h2 className="font-semibold text-3xl lg:text-4xl mt-4 uppercase text-off-white font-outfit">
+                        <h2 className="font-semibold text-2xl lg:text-4xl mt-4 uppercase text-off-white font-outfit">
                             Tell Us About Your Security Needs
                         </h2>
 
                         {/* Description */}
-                        <p className="mt-4 text-base leading-relaxed text-supporting-text max-w-xl">
+                        <p className="mt-4 text-sm lg:text-base leading-relaxed text-supporting-text max-w-xl">
                             Whether you’re protecting your home, business, or
                             next major event, we provide tailored security
                             solutions backed by discipline, technology, and
@@ -39,7 +39,7 @@ const FooterBanner = () => {
                     </div>
 
                     {/* CTA BUTTON */}
-                    <div className="relative w-fit inline-block p-[2px] rounded-full bg-gradient-to-tr from-primary-gold to-transparent transition-all duration-500 hover:bg-gradient-to-br hover:from-primary-gold hover:to-transparent">
+                    <div className="relative w-fit mx-auto inline-block p-[2px] rounded-full bg-gradient-to-tr from-primary-gold to-transparent transition-all duration-500 hover:bg-gradient-to-br hover:from-primary-gold hover:to-transparent">
                         <Link
                             href="/contact"
                             className="bg-black text-off-white border-none rounded-full py-4 px-10 pr-14 text-base font-semibold relative block"

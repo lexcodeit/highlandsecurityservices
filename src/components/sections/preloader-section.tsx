@@ -116,13 +116,13 @@ const PreloaderSection = () => {
             </div>
 
             <div className={styles["second-part"]}>
-                <h1 className="text-[80px] text-center text-header-text font-outfit mb-10 font-black">
+                <h1 className="text-[35px] lg:text-[80px] text-center text-header-text font-outfit mb-4 lg:mb-10 font-black">
                     HIGHLAND SECURITY SERVICES
                 </h1>
                 <div className="w-full flex items-center justify-center gap-x-2">
                     <h1
                         className={cn(
-                            " font-brush-script text-[100px] p-3",
+                            " font-brush-script text-[40px] lg:text-[100px] p-3",
                             styles["eagle-eye-text"]
                         )}
                     >
@@ -133,7 +133,7 @@ const PreloaderSection = () => {
                         width={100}
                         height={100}
                         alt="landing-eagle"
-                        className="object-cover w-[100px]"
+                        className="object-cover w-[50px] lg:w-[100px]"
                     />
                 </div>
             </div>

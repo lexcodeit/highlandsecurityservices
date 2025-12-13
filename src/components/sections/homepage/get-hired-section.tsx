@@ -20,7 +20,7 @@ const GetHiredSection = () => {
                 ) : !data ? (
                     <ErrorScreen />
                 ) : (
-                    <div className="flex gap-x-10">
+                    <div className="flex flex-col lg:flex-row gap-x-10">
                         {data.map(job => {
                             return <PerPosition job={job} key={job._id} />;
                         })}

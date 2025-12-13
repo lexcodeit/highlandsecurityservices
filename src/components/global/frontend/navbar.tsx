@@ -9,6 +9,8 @@ import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import LinkItem from "./link-item";
+import { useMediaQuery } from "react-responsive";
+import MobileNavBar from "./mobile-nav-bar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,9 +19,13 @@ const Navbar = () => {
     const pathname = usePathname();
     const isDarkHeader = pathname === "/" || pathname === "/services";
 
+    const isMobile = useMediaQuery({
+        query: "(max-width: 768px)",
+    });
+
     useGSAP(() => {
         const nav = navRef.current;
-        if (!nav) return;
+        if (!nav || isMobile) return;
 
         const navMain = nav.querySelector(".nav-main");
         const cover = nav.querySelector(".nav-cover");
@@ -105,6 +111,10 @@ const Navbar = () => {
             },
         });
     }, [isDarkHeader]);
+
+    if (isMobile) {
+        return <MobileNavBar />;
+    }
 
     return (
         <nav

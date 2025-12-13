@@ -11,7 +11,7 @@ import useLenis from "@/lib/hooks/use-lenis";
 export default function Home() {
     useLenis();
     return (
-        <div>
+        <div className="overflow-hidden">
             <PreloaderSection />
             <HomeHeader2 />
             <HomeAboutSection />

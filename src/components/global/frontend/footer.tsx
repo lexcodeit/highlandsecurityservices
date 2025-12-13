@@ -25,70 +25,89 @@ const Footer = () => {
     useGSAP(() => {
         if (!footerRef.current) return;
 
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: footerRef.current,
-                    start: "top 70%", // when footer enters viewport
-                },
-            });
+        const mm = gsap.matchMedia();
 
-            // wrapper fade
-            tl.from(footerRef.current, {
-                opacity: 0,
-                y: 50,
-                duration: 0.6,
-                ease: "power3.out",
-            });
+        mm.add(
+            {
+                desktop: "(min-width: 1024px)",
+                mobile: "(max-width: 1023px)",
+            },
+            context => {
+                const { mobile } = context.conditions!;
+                const trigger = footerRef.current!;
 
-            // logo block
-            tl.from(
-                ".footer-logo-block",
-                {
-                    x: -50,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power3.out",
-                },
-                "-=0.4"
-            );
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger,
+                        start: mobile ? "top 85%" : "top 70%",
+                        once: mobile, // 🔑 critical for mobile
+                    },
+                });
 
-            // links columns
-            tl.from(
-                ".footer-col",
-                {
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.6,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                },
-                "-=0.5"
-            );
+                // Wrapper
+                tl.fromTo(
+                    trigger,
+                    { opacity: 0, y: mobile ? 20 : 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power3.out",
+                    }
+                );
 
-            // bottom bar
-            tl.from(
-                ".footer-bottom",
-                {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.6,
-                    ease: "power2.out",
-                },
-                "-=0.3"
-            );
-        }, footerRef);
+                // Logo block
+                tl.fromTo(
+                    ".footer-logo-block",
+                    { opacity: 0, x: mobile ? 0 : -50, y: mobile ? 20 : 0 },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        duration: 0.7,
+                        ease: "power3.out",
+                    },
+                    "-=0.3"
+                );
 
-        return () => ctx.revert();
+                // Columns
+                tl.fromTo(
+                    ".footer-col",
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        stagger: 0.15,
+                        ease: "power2.out",
+                    },
+                    "-=0.3"
+                );
+
+                // Bottom bar
+                tl.fromTo(
+                    ".footer-bottom",
+                    { opacity: 0, y: 15 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out",
+                    },
+                    "-=0.2"
+                );
+            }
+        );
+
+        return () => mm.revert();
     }, []);
-
     return (
         <div
             ref={footerRef}
-            className="p-10 border-t border-t-border-color relative mt-[200px] pt-[150px]"
+            className="p-3 lg:p-10 border-t border-t-border-color relative mt-[200px] pt-[150px]"
         >
             <FooterBanner />
-            <div className="flex justify-between max-w-[1200px] mx-auto gap-x-10 py-4">
+            <div className="flex flex-col lg:flex-row justify-between max-w-[1200px] mx-auto gap-10 py-4 px-2 my-10">
                 {/* Logo + About */}
                 <div className="flex-2 footer-logo-block">
                     <div className="flex mb-2 items-center">
@@ -96,11 +115,11 @@ const Footer = () => {
                             src={"/assets/images/bg-logo.svg"}
                             width={100}
                             height={100}
-                            className="w-[100px] h-[100px] object-contain"
+                            className="w-16 h-16 lg:w-[100px] lg:h-[100px] object-contain"
                             alt="contain"
                         />
 
-                        <h1 className="font-bold text-primary-gold text-[48px]">
+                        <h1 className="font-bold text-primary-gold text-3xl lg:text-[48px]">
                             HSSL
                         </h1>
                     </div>
@@ -115,7 +134,7 @@ const Footer = () => {
                         </p>
                         <Link
                             href={"mailto:info@highlandsecurityservices.com"}
-                            className="text-primary-gold font-semibold block my-4 underline text-xl"
+                            className="text-primary-gold font-semibold block my-4 underline text-base lg:text-xl"
                         >
                             info@highlandsecurityservices.com
                         </Link>

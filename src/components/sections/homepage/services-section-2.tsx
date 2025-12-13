@@ -8,42 +8,44 @@ import ServiceSectionCard from "./service-section-card";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import { useMediaQuery } from "react-responsive";
 
 const ServicesSection2 = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-
+    const isMobile = useMediaQuery({
+        query: "(max-width: 768px)",
+    });
     useGSAP(
         () => {
             const servicesIntroSplit = SplitText.create(".services-intro h1", {
                 type: "lines",
             });
-            gsap.set(servicesIntroSplit.lines, {
-                y: 120,
-                opacity: 0,
-            });
-
-            gsap.to(servicesIntroSplit.lines, {
-                y: 0,
-                opacity: 1,
-                stagger: 0.25,
-                ease: "power2.inOut",
-                duration: 1,
-
-                scrollTrigger: {
-                    trigger: ".services-intro",
-                    start: "top 70%", // when the section enters
-                    end: "bottom 30%", // when it leaves
-                    toggleActions: "play reverse play reverse",
-                    // markers: true,
+            gsap.fromTo(
+                servicesIntroSplit.lines,
+                {
+                    y: isMobile ? 60 : 120,
+                    autoAlpha: 0,
                 },
-            });
-
+                {
+                    y: 0,
+                    autoAlpha: 1,
+                    stagger: 0.25,
+                    ease: "power2.inOut",
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: ".services-intro",
+                        start: "top 40%",
+                        end: "bottom 30%",
+                        toggleActions: "play reverse play reverse",
+                    },
+                }
+            );
             const cards = gsap.utils.toArray<HTMLDivElement>(".service-card");
             ScrollTrigger.create({
                 trigger: cards[0],
-                start: "top 25%",
+                start: "top 15%",
                 endTrigger: cards[cards.length - 1],
-                end: "top 30%",
+                end: "top 20%",
                 pin: ".services-intro",
                 pinSpacing: false,
             });
@@ -51,25 +53,25 @@ const ServicesSection2 = () => {
             cards.forEach((card, index) => {
                 const isLastCard = index === cards.length - 1;
                 const cardInner = card.querySelector(".service-card-inner");
+                const nextCard = cards[index + 1];
 
                 if (!isLastCard) {
                     ScrollTrigger.create({
                         trigger: card,
-                        start: "top 25%",
-                        endTrigger: ".services-outro",
-                        end: "top 65%",
+                        start: "top 15%",
+                        endTrigger: nextCard,
+                        end: "top 75%",
                         pin: true,
                         pinSpacing: false,
                     });
 
                     gsap.to(cardInner, {
-                        y: `-${(cards.length - index) * 14}vh`,
                         ease: "none",
                         scrollTrigger: {
                             trigger: card,
-                            start: "top 25%",
+                            start: "top 15%",
                             endTrigger: ".services-outro",
-                            end: "top 65%",
+                            end: "top 75%",
                             scrub: true,
                         },
                     });

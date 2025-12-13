@@ -7,6 +7,8 @@ import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SplitText } from "gsap/all";
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +20,9 @@ interface Props {
 
 const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const isMobile = useMediaQuery({
+        query: "(max-width: 768px)",
+    });
 
     useGSAP(() => {
         const ctx = gsap.context(() => {
@@ -62,11 +67,20 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     return (
         <div ref={containerRef} className="py-12">
             <div className="mx-auto max-w-[1200px] flex items-center">
-                <div>
-                    <h2 className="section-title text-header-text font-outfit text-[48px] font-bold max-w-[80%]">
+                <div className="p-4 lg:p-0">
+                    <h2 className="section-title text-header-text font-outfit text-3xl lg:text-[48px] font-bold w-full lg:max-w-[80%] mb-4 lg:mb-0">
                         {title}
                     </h2>
-                    <p className="section-subtitle text-supporting-text max-w-[60%] text-xl">
+                    <p
+                        className={cn(
+                            "section-subtitle text-supporting-text w-full lg:max-w-[60%] text-base lg:text-xl lg:block",
+                            isMobile
+                                ? buttonLink
+                                    ? "hidden "
+                                    : "block"
+                                : "block"
+                        )}
+                    >
                         {subtitle}
                     </p>
                 </div>

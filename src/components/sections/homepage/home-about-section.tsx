@@ -66,13 +66,13 @@ const HomeAboutSection = () => {
     });
 
     return (
-        <div className="mx-auto max-w-[1200px] py-24 min-h-[100vh] relative about-section">
+        <div className="mx-auto max-w-[1200px] py-24 px-6 lg:px-0 min-h-[100vh] relative about-section">
             <div
                 style={{
                     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
             >
-                <h3 className="relative text-3xl text-header-text font-outfit font-semibold mb-10 about-text top-[100px]">
+                <h3 className="relative text-xl lg:text-3xl text-header-text font-outfit font-semibold mb-10 about-text top-[100px]">
                     At Highland Security Services, we deliver trusted protection
                     for individuals, businesses, and events across Nigeria.
                 </h3>
@@ -82,7 +82,7 @@ const HomeAboutSection = () => {
                     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
             >
-                <h3 className="relative text-3xl text-header-text font-outfit font-semibold about-text top-[100px]">
+                <h3 className="relative text-2xl lg:text-3xl text-header-text font-outfit font-semibold about-text top-[100px]">
                     Our team is built on discipline, integrity, and swift
                     response to your needs. From personal bodyguards to
                     industrial security, we’ve got you covered.
@@ -90,17 +90,12 @@ const HomeAboutSection = () => {
             </div>
 
             <div
-                className="absolute bottom-0 left-0 w-full flex items-center gap-x-4"
+                className=" lg:absolute bottom-0 left-0 w-full flex flex-col lg:flex-row items-center gap-x-4"
                 style={{
                     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
             >
-                {/* <div
-                    className="bg-red-100 px-4"
-                > */}
                 <h1 className=" font-brush-script eagle-eye">Eagle Eye</h1>
-                {/* </div> */}
-                {/* <div className="flex-1 relative"> */}
                 <Image
                     src={"/assets/images/eagle-head.png"}
                     width={100}
@@ -108,7 +103,6 @@ const HomeAboutSection = () => {
                     alt="landing-eagle"
                     className="object-cover w-[200px] eagle"
                 />
-                {/* </div> */}
             </div>
         </div>
     );

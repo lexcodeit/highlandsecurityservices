@@ -29,7 +29,6 @@
 
 .services-intro,
 .services-outro {
-    /* background-color: #fff; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,15 +72,82 @@
 }
 
 @media (max-width: 900px) {
-    .services-container h1 {
-        margin-bottom: 4em;
-    }
-    .service-card-image,
+    /* .service-card-image,
     .service-card-content {
         display: none;
+    } */
+
+    /* .service-card {
+        height: 400px;
+    } */
+
+    .services-container {
+        position: relative;
+    }
+    .services-container img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .services-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+
+    .services-container p {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .services-container .services-intro,
+    .services-container .services-outro {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        padding: 2em;
+    }
+
+    .services-intro,
+    .services-outro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .services-intro h1,
+    .services-outro h1 {
+        font-size: 1.5rem;
     }
 
     .service-card {
+        position: relative;
+        height: 100vh;
+    }
+    .service-card-inner {
+        position: relative;
+        will-change: transform;
+        width: 100%;
+        height: 100%;
+        padding: 2em 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .service-card-content {
+        flex: 0;
+    }
+
+    .service-card-image {
+        height: 300px;
+        border-radius: 0.75em;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .service-card-image img {
+        object-position: center;
         height: 300px;
     }
 }

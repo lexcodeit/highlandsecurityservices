@@ -162,6 +162,10 @@
     }
 }
 
+/* * {
+    outline: 1px solid rgba(255, 0, 0, 0.4);
+} */
+
 .table-body-row {
     display: grid;
     align-items: center;
@@ -219,4 +223,34 @@
     /* ensures text box matches content */
     /* overflow: visible;  */
     /* prevents clipping */
+}
+
+@media (max-width: 900px) {
+    .eagle-eye {
+        /* Eagle Eye */
+
+        font-family: "Brush Script MT";
+        font-style: italic;
+        font-weight: 400;
+        font-size: 80px;
+        line-height: 1.2;
+
+        background: linear-gradient(
+            180deg,
+            #f5cc4e,
+            #f7cb51,
+            #e47741,
+            #c64a48,
+            #da433f,
+            #ff4500
+        );
+        background-clip: text;
+
+        padding-right: 0.3em; /* give extra breathing room */
+
+        /* display: inline-block;  */
+        /* ensures text box matches content */
+        /* overflow: visible;  */
+        /* prevents clipping */
+    }
 }
