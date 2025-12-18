@@ -2,15 +2,13 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import LinkItem from "./link-item";
-import { useMediaQuery } from "react-responsive";
-import MobileNavBar from "./mobile-nav-bar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,13 +17,9 @@ const Navbar = () => {
     const pathname = usePathname();
     const isDarkHeader = pathname === "/" || pathname === "/services";
 
-    const isMobile = useMediaQuery({
-        query: "(max-width: 768px)",
-    });
-
     useGSAP(() => {
         const nav = navRef.current;
-        if (!nav || isMobile) return;
+        if (!nav) return;
 
         const navMain = nav.querySelector(".nav-main");
         const cover = nav.querySelector(".nav-cover");
@@ -112,12 +106,11 @@ const Navbar = () => {
         });
     }, [isDarkHeader]);
 
-    if (isMobile) {
-        return <MobileNavBar />;
-    }
-
     return (
         <nav
+            style={{
+                zIndex: 50,
+            }}
             ref={navRef}
             className="fixed -top-full left-0 w-full z-50 nav-main"
         >

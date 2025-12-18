@@ -4,7 +4,6 @@ import LoaderComponent from "@/components/global/loader-component";
 import { Button } from "@/components/ui/button";
 import { useGetPostCategories } from "@/lib/features/blog/use-get-post-categories";
 import { useGetBlogPosts } from "@/lib/features/blog/use-get-posts";
-import React from "react";
 import PerBlogCategory from "./per-blog-category";
 import PerBlogPost from "./per-blog-post";
 
@@ -17,8 +16,8 @@ const BlogPage = () => {
 
     return (
         <div className="min-h-screen pt-25">
-            <div className="max-w-[1300px] mx-auto pt-10 grid grid-cols-[1fr_2fr]">
-                <div className=" ">
+            <div className="max-w-[1300px] mx-auto pt-10 grid grid-cols-1 lg:grid-cols-[1fr_2fr]">
+                <div className="px-5 lg:p-0">
                     <div className="mb-6">
                         <h1 className="uppercase font-outfit text-3xl">Blog</h1>
                     </div>
@@ -33,7 +32,7 @@ const BlogPage = () => {
                             </p>
                         </div>
                     ) : (
-                        <div className="flex items-center gap-x-4 flex-wrap gap-y-4">
+                        <div className="flex flex-row items-center gap-x-4 lg:flex-wrap gap-y-4 overflow-x-scroll w-full">
                             <PerBlogCategory
                                 text="All Posts"
                                 onClick={() => handleClickCategory()}
@@ -58,7 +57,7 @@ const BlogPage = () => {
                     ) : !posts.length ? (
                         <EmptySection text="No posts at the moment" />
                     ) : (
-                        <div className="flex-1 flex flex-col bg-white">
+                        <div className="flex-1 flex flex-col bg-white p-5 lg:p-0">
                             <div className="flex-1">
                                 {posts.map(post => {
                                     if (!post.category) return null;

@@ -23,7 +23,7 @@ const PerBlogPost = ({ post }: Props) => {
     } = post;
 
     return (
-        <div className="bg-gray-50 shadow-sm border-border-color grid grid-cols-[1fr_1fr] gap-x-4 p-4 rounded-md mb-6">
+        <div className="bg-gray-50 shadow-sm border-border-color grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4 p-4 rounded-md mb-6">
             {/* <div className="h-[300px] relative"> */}
             <Image
                 width={300}
@@ -36,8 +36,10 @@ const PerBlogPost = ({ post }: Props) => {
             <div className="flex flex-col gap-y-2">
                 <h1 className="font-outfit mb-2">{title}</h1>
 
-                <div className="flex items-center justify-between py-2">
-                    <PerCategory category={category!.title} />
+                <div className="flex flex-col lg:flex-row  lg:items-center justify-between py-2">
+                    <div>
+                        <PerCategory category={category!.title} />
+                    </div>
 
                     <div className="flex items-center gap-x-2">
                         <IoCalendarOutline className="text-primary-gold" />

@@ -2,7 +2,7 @@ import React from "react";
 
 const EagleEyeApproach = () => {
     return (
-        <div className="p-20">
+        <div className="px-8 py-20 lg:p-20">
             <div className="">
                 <h1 className="font-bold text-4xl mb-5 font-outfit">
                     The Eagle Eye Approach

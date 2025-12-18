@@ -12,7 +12,7 @@ export default function Home() {
     useLenis();
     return (
         <div className="overflow-hidden">
-            <PreloaderSection />
+            {/* <PreloaderSection /> */}
             <HomeHeader2 />
             <HomeAboutSection />
             <ServicesSection2 />

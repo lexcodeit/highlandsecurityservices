@@ -9,7 +9,7 @@ const ServicesPage = () => {
     return (
         <div className="min-h-screen">
             <div className="relative h-screen pt-24 z-20 flex items-center justify-center">
-                <div className="z-30 w-1/2">
+                <div className="z-30 w-[90%] lg:w-1/2">
                     <h1 className="font-outfit text-center text-6xl font-bold text-primary-gold mb-10">
                         Our Services
                     </h1>
@@ -29,14 +29,14 @@ const ServicesPage = () => {
                     muted
                     playsInline
                 />
-                <div className="absolute left-1/2 bottom-2 text-off-white flex flex-col items-center w-24 h-24">
+                <div className="absolute left-1/2 bottom-2 text-off-white flex flex-col items-center w-24 h-24 -translate-x-1/2">
                     <HiOutlineChevronDown className="size-12 absolute top-3" />
                     <HiOutlineChevronDown className="size-8 absolute top-10" />
                 </div>
             </div>
 
-            <div className="px-24 py-24">
-                <div className="grid grid-cols-2 gap-6">
+            <div className="px-6 lg:px-24 py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {ServicesListArr.map((service, index) => {
                         const serviceProp = SERVICES_MAP[service];
                         return (

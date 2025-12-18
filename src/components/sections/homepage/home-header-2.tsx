@@ -7,6 +7,7 @@ import Link from "next/link";
 import { stories } from "@/utils/data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useMediaQuery } from "react-responsive";
 
 const storyDuration = 8000;
 const contentUpdateDelay = 0.5;
@@ -14,6 +15,10 @@ const contentUpdateDelay = 0.5;
 const HomeHeader2 = () => {
     const cursorRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const isMobile = useMediaQuery({
+        query: "(max-width: 768px)",
+    });
 
     const activeStoryRef = useRef(0);
     const setActiveStory = (value: number) => {

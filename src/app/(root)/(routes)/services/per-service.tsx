@@ -2,7 +2,6 @@ import { ServiceProps } from "@/utils/interfaces";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { TbChevronsUpRight } from "react-icons/tb";
 
 const PerService = ({ service }: { service: ServiceProps; index: number }) => {
@@ -14,10 +13,10 @@ const PerService = ({ service }: { service: ServiceProps; index: number }) => {
                 background: bgColor,
                 color: textColor,
             }}
-            className="p-10 border border-border rounded-md"
+            className="p-4 lg:p-10 border border-border rounded-md w-full"
         >
-            <div className="flex justify-between">
-                <div className="service-card-image relative w-[200px] h-[200px] rounded-md overflow-hidden">
+            <div className="flex justify-between w-full">
+                <div className="service-card-image relative w-full lg:w-[200px] h-[200px] rounded-md overflow-hidden">
                     <Image
                         src={`/assets/images/services/${image}`}
                         alt={title}
@@ -26,7 +25,7 @@ const PerService = ({ service }: { service: ServiceProps; index: number }) => {
                     />
                 </div>
 
-                <h2 className="text-4xl opacity-70">
+                <h2 className="hidden lg:block text-4xl opacity-70">
                     {title.split(" ").map(t => t[0])}
                 </h2>
             </div>

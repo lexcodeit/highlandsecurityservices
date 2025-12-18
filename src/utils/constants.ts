@@ -1,5 +1,39 @@
 import { ServicesEnums } from "./enums";
 import { PostProps, ValuePropProps } from "./interfaces";
+import { NavItem } from "./types";
+
+export const NAV_ITEMS: NavItem[] = [
+    {
+        text: "About",
+        url: "/about",
+        matchPath: "/about",
+    },
+    {
+        text: "Services",
+        url: "/services",
+        matchPath: "/services",
+    },
+    {
+        text: "Blog",
+        url: "/blog",
+        matchPath: "/blog",
+    },
+    {
+        text: "Careers",
+        url: "/careers",
+        matchPath: "/careers",
+    },
+    {
+        text: "FAQs",
+        url: "/faqs",
+        matchPath: "/faqs",
+    },
+    {
+        text: "Contact",
+        url: "/contact",
+        matchPath: "/contact",
+    },
+];
 
 export const serviceValues = [
     {

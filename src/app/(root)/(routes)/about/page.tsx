@@ -13,15 +13,16 @@ const AboutPage = () => {
                 <Image
                     src={"/assets/images/about-hero.jpg"}
                     fill
-                    className="object-cover object-bottom -z-10"
+                    // className="object-contain lg:object-cover object-bottom -z-10"
+                    className="object-cover object-top lg:object-bottom -z-10"
                     alt="about-hero"
                 />
 
                 <div className="z-10 text-center w-[75%]">
-                    <h1 className="text-primary-gold text-[100px] font-semibold">
+                    <h1 className="text-primary-gold font-outfit text-[50px] lg:text-[100px] font-semibold">
                         Precision. Discipline. Protection.
                     </h1>
-                    <p className="text-2xl font-medium text-off-white mx-auto w-[70%]">
+                    <p className=" lg:text-2xl font-medium text-off-white mx-auto w-full lg:w-[70%]">
                         We are Highland Security — trusted by corporations,
                         executives, and institutions to safeguard what matters
                         most.
@@ -34,7 +35,7 @@ const AboutPage = () => {
             <ValuesSection />
 
             <div className="relative pt-24 z-20">
-                <div className="px-24 py-24">
+                <div className="px-6 lg:px-24 py-24">
                     <div className="grid grid-cols-2 gap-6">
                         {serviceValues.map((value, index) => {
                             return (
