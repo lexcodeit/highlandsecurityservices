@@ -87,6 +87,7 @@ export const ServicesListArr: ServicesEnums[] = [
     "surveillance",
     "cctv",
     "bullion",
+    "marine",
 ];
 
 export const PostListArr: PostProps[] = [
@@ -124,28 +125,28 @@ export const ValueListArr: ValuePropProps[] = [
         count: "01",
         description:
             "With over a decade of proven security expertise, we have safeguarded businesses, estates, and high-profile individuals across Nigeria. Our track record speaks for itself — trusted protection in every situation.",
-        image: "shield.svg",
+        image: "security-in-vest.jpg",
         title: "10+ Years of Experience",
     },
     {
         count: "02",
         description:
             "Every guard is carefully selected, rigorously trained, and fully vetted to ensure the highest level of discipline and reliability. We hold our personnel to the strictest professional standards in the industry.",
-        image: "professional.svg",
+        image: "guards-ready-to-go.jpg",
         title: "Trained & Vetted Guards",
     },
     {
         count: "03",
         description:
             "Your safety doesn’t take breaks — and neither do we. Our teams operate day and night, ensuring rapid response and continuous protection for individuals, businesses, and communities.",
-        image: "247.svg",
+        image: "security-in-raincoat.jpg",
         title: "Always On Guard",
     },
     {
         count: "04",
         description:
             "No two clients are alike, which is why we design security solutions to match unique risks and requirements. From industrial sites to personal protection, our strategies are built around you.",
-        image: "strategy.svg",
+        image: "supervisor-giving-out-gears.jpg",
         title: "Custom Security Strategies",
     },
 ];

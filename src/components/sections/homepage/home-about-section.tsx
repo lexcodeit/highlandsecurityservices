@@ -1,13 +1,17 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
-import React from "react";
 
 const HomeAboutSection = () => {
     useGSAP(() => {
         const aboutText = gsap.utils.toArray(`.about-text`) as HTMLElement[];
+        const hsslText = gsap.utils.toArray(`.hssl-text h1`) as HTMLElement[];
 
         const eagleEyeText = document.querySelector(".eagle-eye");
+
+        gsap.set(hsslText, {
+            y: "-100%",
+        });
 
         gsap.fromTo(
             aboutText,
@@ -28,6 +32,18 @@ const HomeAboutSection = () => {
             }
         );
 
+        gsap.to(hsslText, {
+            y: "0%",
+            duration: 1.2,
+            stagger: 0.05,
+            ease: "power4.inOut",
+            scrollTrigger: {
+                trigger: ".hssl-text",
+                start: "top 70%",
+                toggleActions: "play none none reverse",
+            },
+        });
+
         gsap.fromTo(
             eagleEyeText,
             {
@@ -39,7 +55,7 @@ const HomeAboutSection = () => {
                 ease: "power2.inOut",
                 scrollTrigger: {
                     trigger: eagleEyeText,
-                    start: "top 80%",
+                    start: "top 50%",
                     toggleActions: "restart none none reset", // replay every time
                     scrub: 1,
                 },
@@ -57,7 +73,7 @@ const HomeAboutSection = () => {
                 ease: "power2.inOut",
                 scrollTrigger: {
                     trigger: ".eagle",
-                    start: "top 70%",
+                    start: "top 50%",
                     toggleActions: "restart none none reset", // replay every time
                     scrub: 1,
                 },
@@ -87,6 +103,13 @@ const HomeAboutSection = () => {
                     response to your needs. From personal bodyguards to
                     industrial security, we’ve got you covered.
                 </h3>
+            </div>
+
+            <div className="flex justify-around font-dm-sans text-primary-gold font-bold overflow-hidden hssl-text">
+                <h1 className="text-[100px]">H</h1>
+                <h1 className="text-[100px]">S</h1>
+                <h1 className="text-[100px]">S</h1>
+                <h1 className="text-[100px]">L</h1>
             </div>
 
             <div

@@ -54,30 +54,44 @@ const MobileNav = () => {
                 onComplete: () => {
                     splitTextByContainer.forEach(containerSplits => {
                         const lines = containerSplits.flatMap(s => s.lines);
-                        gsap.set(lines, { y: "110%" });
+                        gsap.set(lines, { y: "-100%" });
                     });
 
-                    gsap.set(copyContainers, { opacity: 1 });
+                    // gsap.set(copyContainers, { opacity: 1 });
 
                     isAnimating = false;
                     isMenuOpen = false;
                 },
             });
 
+            // Animate text out FAST first
+            splitTextByContainer.forEach(containerSplits => {
+                const lines = containerSplits.flatMap(s => s.lines);
+                tl.to(
+                    lines,
+                    {
+                        y: "110%",
+                        duration: 0.4,
+                        ease: "power2.in",
+                    },
+                    0
+                );
+            });
+
             tl.to(
                 menuOverlay,
                 {
                     clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-                    duration: 1,
-                    ease: "power3.inOut",
+                    duration: 0.8,
+                    ease: "expo.inOut",
                 },
-                "<"
+                "0.2"
             ).to(
                 menuOverlayContainer,
                 {
                     yPercent: -50,
-                    duration: 1,
-                    ease: "power3.inOut",
+                    duration: 0.8,
+                    ease: "expo.inOut",
                 },
                 "<"
             );
@@ -95,23 +109,15 @@ const MobileNav = () => {
                 },
             });
 
-            tl.to(
-                menuOverlay,
-                {
-                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                    duration: 1,
-                    ease: "power2.in",
-                },
-                "<"
-            ).to(
-                menuOverlayContainer,
-                {
-                    yPercent: 0,
-                    duration: 1,
-                    ease: "power2.inOut",
-                },
-                "<"
-            );
+            tl.to(menuOverlay, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                duration: 1.2,
+                ease: "expo.inOut",
+            }).to(menuOverlayContainer, {
+                yPercent: 0,
+                duration: 1.2,
+                ease: "expo.inOut",
+            });
 
             splitTextByContainer.forEach(containerSplits => {
                 const lines = containerSplits.flatMap(s => s.lines);
@@ -119,11 +125,11 @@ const MobileNav = () => {
                     lines,
                     {
                         y: "0%",
-                        duration: 1.5,
-                        ease: "power2.inOut",
-                        stagger: -0.1,
+                        duration: 1,
+                        ease: "power4.inOut",
+                        stagger: 0.05,
                     },
-                    -0.15
+                    0.4
                 );
             });
 

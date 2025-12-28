@@ -142,7 +142,6 @@ const HomeHeader2 = () => {
                 const titleRows = document.querySelectorAll(
                     ".header-title-row h1"
                 );
-                const link = document.querySelector(".header-link a");
                 const storyDesc = document.querySelector(
                     ".header-story-description p"
                 );
@@ -152,14 +151,10 @@ const HomeHeader2 = () => {
                     titleRows[1].textContent = story.title[1];
                     titleRows[2].textContent = story.title[2];
                 }
-                if (link) link.setAttribute("href", story.linkSrc);
 
                 if (storyDesc) storyDesc.textContent = story.shortDesc;
 
                 gsap.set(".header-title-row h1", {
-                    y: dir === "next" ? 48 : -48,
-                });
-                gsap.set(link, {
                     y: dir === "next" ? 48 : -48,
                 });
                 gsap.set(storyDesc, {
@@ -170,13 +165,6 @@ const HomeHeader2 = () => {
                     y: 0,
                     duration: 0.6,
                     stagger: 0.1,
-                    ease: "power2.out",
-                });
-
-                gsap.to(link, {
-                    y: 0,
-                    duration: 0.6,
-                    delay: 0.3,
                     ease: "power2.out",
                 });
                 gsap.to(storyDesc, {
@@ -244,7 +232,7 @@ const HomeHeader2 = () => {
             <div className={"header-story-img"}>
                 <div className={"header-img"}>
                     <Image
-                        src={"/assets/images/services/corporate-security.jpg"}
+                        src={"/assets/images/header/hssl-police-4.jpg"}
                         alt="Corporate Security"
                         fill
                     />
@@ -277,11 +265,6 @@ const HomeHeader2 = () => {
 
                     <div className="header-story-description">
                         <p>{stories[0].shortDesc}</p>
-                    </div>
-                    <div className={"header-link"}>
-                        <Link href="https://behance.net" target="_blank">
-                            Read More
-                        </Link>
                     </div>
                 </div>
             </div>

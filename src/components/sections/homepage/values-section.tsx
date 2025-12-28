@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { ValueListArr } from "@/utils/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";

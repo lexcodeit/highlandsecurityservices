@@ -1,6 +1,5 @@
 import { ServiceProps } from "@/utils/interfaces";
 import Image from "next/image";
-import React from "react";
 
 const ServiceSectionCard = ({
     service,
@@ -10,6 +9,8 @@ const ServiceSectionCard = ({
     index: number;
 }) => {
     const { description, image, title, bgColor, textColor } = service;
+
+    const currentImg = image[Math.floor(Math.random() * image.length)];
     return (
         <div className="service-card" id={`service-card-${index + 1}`}>
             <div
@@ -25,7 +26,7 @@ const ServiceSectionCard = ({
                 </div>
                 <div className="service-card-image relative">
                     <Image
-                        src={`/assets/images/services/${image}`}
+                        src={`/assets/images/services/${currentImg}`}
                         alt={title}
                         fill
                     />

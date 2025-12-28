@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import SectionTitle from "@/components/global/frontend/section-title";
 import "@/lib/styles/services.css";
 import { ServicesListArr } from "@/utils/constants";

@@ -16,7 +16,7 @@ export interface JobApplicationInterface {
 }
 
 export interface ServiceProps {
-    image: string;
+    image: string[];
     title: string;
     description: string;
     bgColor: string;
