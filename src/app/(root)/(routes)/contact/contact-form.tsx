@@ -9,14 +9,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useSendMessage } from "@/lib/features/users/use-send-message";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const ContactForm = () => {
-    const isPending = false;
-
     const formSchema = z.object({
         name: z
             .string({
@@ -35,7 +34,7 @@ const ContactForm = () => {
             .string({
                 error: "Message is required",
             })
-            .min(40, "Min. of 40 Chars")
+            .min(5, "Min. of 40 Chars")
             .max(300, "Max. of 300 Chars"),
     });
 
@@ -49,13 +48,37 @@ const ContactForm = () => {
         },
     });
 
+    const { isPending, mutate } = useSendMessage();
+
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         console.log("Values:", values);
+
+        mutate(
+            {
+                email: values.email,
+                message: values.message,
+                name: values.name,
+                phone: values.phone,
+            },
+            {
+                onSuccess() {
+                    toast.success("Message submitted successfully!");
+                    form.reset();
+                },
+                onError(error) {
+                    toast.error(
+                        error.message ||
+                            "An error occurred while submitting your message."
+                    );
+                    console.log("CONTACT_ERROR:", error);
+                },
+            }
+        );
     };
     return (
-        <div className="bg-white rounded-xl p-6 py-12 border border-primary-gold ">
+        <div className="bg-white rounded-xl lg:px-4 px-8 lg:p-6 py-12 border border-primary-gold ">
             <div>
-                <h2 className="text-header-text mb-5 font-bold font-outfit text-center text-3xl">
+                <h2 className="text-header-text mb-5 font-bold font-outfit text-center text-xl lg:text-3xl">
                     Send Us a Message
                 </h2>
                 <p className="text-supporting-text text-center">
