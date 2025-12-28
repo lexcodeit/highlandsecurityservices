@@ -18,7 +18,7 @@ const PerService = ({ service }: { service: ServiceProps; index: number }) => {
             <div className="flex justify-between w-full">
                 <div className="service-card-image relative w-full lg:w-[200px] h-[200px] rounded-md overflow-hidden">
                     <Image
-                        src={`/assets/images/services/${image}`}
+                        src={`/assets/images/services/${image[0]}`}
                         alt={title}
                         fill
                         className="object-cover"

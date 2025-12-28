@@ -1,7 +1,6 @@
 "use client";
 import { ServicesListArr } from "@/utils/constants";
 import { SERVICES_MAP } from "@/utils/maps";
-import React from "react";
 import { HiOutlineChevronDown } from "react-icons/hi2";
 import PerService from "./per-service";
 
