@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SplitText } from "gsap/all";
@@ -20,9 +20,16 @@ interface Props {
 
 const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [hasMounted, setHasMounted] = useState(false); // Track mounting
+
     const isMobile = useMediaQuery({
         query: "(max-width: 768px)",
     });
+
+    // Set mounted to true once we are on the client
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
 
     useGSAP(() => {
         const ctx = gsap.context(() => {
@@ -74,7 +81,7 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
                     <p
                         className={cn(
                             "section-subtitle text-supporting-text w-full lg:max-w-[60%] text-base lg:text-xl lg:block",
-                            isMobile
+                            hasMounted && isMobile
                                 ? buttonLink
                                     ? "hidden "
                                     : "block"

@@ -1,5 +1,6 @@
 import { ServiceProps } from "@/utils/interfaces";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const ServiceSectionCard = ({
     service,
@@ -10,7 +11,19 @@ const ServiceSectionCard = ({
 }) => {
     const { description, image, title, bgColor, textColor } = service;
 
-    const currentImg = image[Math.floor(Math.random() * image.length)];
+    // 1. Initialize state as null or the first image
+    const [currentImg, setCurrentImg] = useState<string | null>(null);
+
+    // 2. Run the random logic only once on the client
+    useEffect(() => {
+        const randomImg = image[Math.floor(Math.random() * image.length)];
+        setCurrentImg(randomImg);
+    }, [image]);
+
+    // 3. Don't render the image until the client has picked one
+    // (Or provide a stable fallback image)
+    if (!currentImg) return <div className="service-card" />;
+
     return (
         <div className="service-card" id={`service-card-${index + 1}`}>
             <div
@@ -28,7 +41,9 @@ const ServiceSectionCard = ({
                     <Image
                         src={`/assets/images/services/${currentImg}`}
                         alt={title}
-                        fill
+                        width={400}
+                        height={600}
+                        className="w-full"
                     />
                 </div>
             </div>

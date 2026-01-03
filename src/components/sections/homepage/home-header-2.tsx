@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import "@/lib/styles/header.css";
 import Image from "next/image";
-import Link from "next/link";
 import { stories } from "@/utils/data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
