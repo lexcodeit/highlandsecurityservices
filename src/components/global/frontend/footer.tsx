@@ -222,7 +222,8 @@ const Footer = () => {
             {/* Bottom */}
             <div className="footer-bottom border-t border-t-border-color p-6 flex items-center justify-center">
                 <p className="text-supporting-text text-sm font-outfit text-center">
-                    © 2025 Highland Security Services. All rights reserved.
+                    © {new Date().getFullYear()} Highland Security Services.
+                    All rights reserved.
                 </p>
             </div>
         </div>

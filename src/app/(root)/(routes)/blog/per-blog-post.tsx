@@ -3,7 +3,6 @@ import { BlogPostType } from "@/lib/features/returnTypes";
 import { formatTimeFn } from "@/utils/helpers";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { IoCalendarOutline } from "react-icons/io5";
 
@@ -37,7 +36,7 @@ const PerBlogPost = ({ post }: Props) => {
                 <h1 className="font-outfit mb-2">{title}</h1>
 
                 <div className="flex flex-col lg:flex-row  lg:items-center justify-between py-2">
-                    <div>
+                    <div className="w-fit">
                         <PerCategory category={category!.title} />
                     </div>
 

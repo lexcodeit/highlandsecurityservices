@@ -34,40 +34,50 @@ export const NAV_ITEMS: NavItem[] = [
         matchPath: "/contact",
     },
 ];
-
 export const serviceValues = [
     {
         title: "Professionalism",
         description:
             "We uphold the highest standards of conduct in every engagement. Our team operates with discipline, courtesy, and integrity to deliver world-class service.",
+        bgColor: "#1A2E44", // Deep Navy
+        textColor: "#FFFFFF",
     },
     {
         title: "Reliability",
         description:
             "Clients trust us because we are consistently dependable. We show up prepared, punctual, and committed to the success of every assignment.",
+        bgColor: "#E5E7EB", // Soft Platinum/Grey
+        textColor: "#111827",
     },
     {
         title: "Vigilance",
         description:
             "Our personnel are trained to detect risks early and respond before issues escalate, ensuring a safe and controlled environment at all times.",
+        bgColor: "#F59E0B", // Alert Amber
+        textColor: "#000000",
     },
     {
         title: "Excellence in Training",
         description:
             "Continuous training and tactical readiness empower us to deploy highly competent officers capable of handling diverse security challenges.",
+        bgColor: "#065F46", // Tactical Forest Green
+        textColor: "#FFFFFF",
     },
     {
         title: "Client-Centered Service",
         description:
             "Every client has unique needs. We adapt our solutions to deliver protection tailored to your environment, lifestyle, or business operations.",
+        bgColor: "#0F172A", // Slate Black
+        textColor: "#F1F5F9",
     },
     {
         title: "Integrity & Transparency",
         description:
             "Trust is the foundation of security. We operate with honesty, accountability, and clear communication in every engagement.",
+        bgColor: "#0D9488", // Trust Teal
+        textColor: "#FFFFFF",
     },
 ];
-
 // Instagram page
 export const InstagramPage =
     "https://www.instagram.com/highland_securityservices/";

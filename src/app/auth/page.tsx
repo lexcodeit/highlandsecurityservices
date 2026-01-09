@@ -1,7 +1,6 @@
 "use client";
 import SigninCard from "@/components/screens/auth/signin-card";
 import Image from "next/image";
-import React from "react";
 
 const AuthPage = () => {
     return (

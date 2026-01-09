@@ -1,6 +1,5 @@
 "use client";
 import { serviceValues } from "@/utils/constants";
-import React from "react";
 import PerValue from "./per-value";
 import Image from "next/image";
 import EagleEyeApproach from "./eagle-eye-approach";
@@ -8,7 +7,7 @@ import ValuesSection from "@/components/sections/homepage/values-section";
 
 const AboutPage = () => {
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen overflow-hidden">
             <div className="about-hero relative h-screen flex items-center justify-center z-20">
                 <Image
                     src={"/assets/images/about-hero.jpg"}
@@ -36,13 +35,15 @@ const AboutPage = () => {
 
             <div className="relative pt-24 z-20">
                 <div className="px-6 lg:px-24 py-24">
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {serviceValues.map((value, index) => {
                             return (
                                 <PerValue
-                                    // index={index}
-                                    // service={serviceProp}
+                                    description={value.description}
+                                    title={value.title}
                                     key={index}
+                                    bgColor={value.bgColor}
+                                    textColor={value.textColor}
                                 />
                             );
                         })}

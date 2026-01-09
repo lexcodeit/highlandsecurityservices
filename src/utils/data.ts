@@ -16,6 +16,14 @@ export const stories = [
         storyImg: "/assets/images/highRes/event-security-1.jpg",
     },
     {
+        title: ["Our Central", "Operations", "Headquarters"],
+        shortDesc:
+            "Based in the heart of our operations, our dedicated facility serves as the nerve center for coordination, 24/7 monitoring, and rapid deployment across the region. A physical testament to our stability and commitment to your safety.",
+        linkLabel: "Visit Us", // or "Contact Us"
+        linkSrc: "/contact",
+        storyImg: "/assets/images/highRes/building-hq.jpg", // Replace with your actual filename
+    },
+    {
         title: ["Corporate", "Security", "Solutions"],
         shortDesc:
             "Protect your organization with tailored security strategies built for corporate offices, factories, and industrial facilities. Experience peace of mind backed by precision and discipline.",

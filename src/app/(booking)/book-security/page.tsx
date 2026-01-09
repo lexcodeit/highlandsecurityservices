@@ -1,7 +1,11 @@
 import React from "react";
 
 const BookSecurity = () => {
-    return <div>Book Security Page</div>;
+    return (
+        <div>
+            <h3>High Land</h3>
+        </div>
+    );
 };
 
 export default BookSecurity;

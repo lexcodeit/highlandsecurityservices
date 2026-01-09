@@ -67,7 +67,7 @@
 
 .service-card-image img {
     /* object-fit: contain; */
-    object-position: center;
+    object-position: top center;
 }
 
 @media (max-width: 900px) {

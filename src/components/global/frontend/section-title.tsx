@@ -32,6 +32,7 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     }, []);
 
     useGSAP(() => {
+        if (!hasMounted) return;
         const ctx = gsap.context(() => {
             const subtitleSplit = SplitText.create(".section-subtitle", {
                 type: "words",
@@ -46,7 +47,7 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top 70%",
-                    toggleActions: "restart none none reset", // replay every time
+                    toggleActions: "restart none none reverse", // replay every time
                 },
             });
 
@@ -69,7 +70,7 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
         }, containerRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [hasMounted]);
 
     return (
         <div ref={containerRef} className="py-12">

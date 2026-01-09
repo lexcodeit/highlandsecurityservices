@@ -51,10 +51,11 @@ const HomeHeader2 = () => {
         const dir = directionRef.current;
         gsap.fromTo(
             currentImg,
-            { scale: 1, rotate: 0 },
+            { scale: 1, rotate: 0, opacity: 1 },
             {
                 scale: 2,
                 rotate: dir === "next" ? -25 : 25,
+                opacity: 0,
                 duration: 1,
                 ease: "power4.inOut",
                 onComplete: () => currentImg.parentElement?.remove(),
@@ -63,8 +64,14 @@ const HomeHeader2 = () => {
 
         gsap.fromTo(
             upcomingImg,
-            { scale: 2, rotate: dir === "next" ? 25 : -25 },
-            { scale: 1, rotate: 0, duration: 1, ease: "power4.inOut" }
+            { scale: 2, rotate: dir === "next" ? 25 : -25, opacity: 0 },
+            {
+                scale: 1,
+                rotate: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power4.inOut",
+            }
         );
     };
 
