@@ -10,8 +10,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import LinkItem from "./link-item";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Navbar = () => {
     const navRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
@@ -145,6 +143,11 @@ const Navbar = () => {
                         isActive={pathname.includes("/contact")}
                         text="Contact"
                         url="/contact"
+                    />
+                    <LinkItem
+                        isActive={pathname.includes("/training")}
+                        text="Training"
+                        url="/training"
                     />
                 </div>
 

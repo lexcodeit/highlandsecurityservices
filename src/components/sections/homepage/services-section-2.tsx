@@ -17,29 +17,58 @@ const ServicesSection2 = () => {
     });
     useGSAP(
         () => {
-            const servicesIntroSplit = SplitText.create(".services-intro h1", {
+            const splitIntroText = document.querySelector(".services-intro h1");
+
+            const splitOutroText = document.querySelector(".services-outro h1");
+
+            // if (!splitIntroText || !splitOutroText) return;
+
+            const servicesIntroSplit = new SplitText(splitIntroText, {
                 type: "lines",
+                mask: "lines",
+                linesClass: "lines-split-setup",
             });
-            gsap.fromTo(
-                servicesIntroSplit.lines,
-                {
-                    y: isMobile ? 60 : 120,
-                    autoAlpha: 0,
+
+            const servicesOutroSplit = new SplitText(splitOutroText, {
+                type: "lines",
+                mask: "lines",
+                linesClass: "lines-split-setup",
+            });
+
+            const tl1 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".services-intro",
+                    start: "top 80%",
+                    end: "bottom 30%",
+                    toggleActions: "play none none reverse",
                 },
-                {
-                    y: 0,
-                    autoAlpha: 1,
-                    stagger: 0.25,
-                    ease: "power2.inOut",
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: ".services-intro",
-                        start: "top 40%",
-                        end: "bottom 30%",
-                        toggleActions: "play reverse play reverse",
-                    },
-                }
-            );
+            });
+
+            const tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".services-outro",
+                    start: "top 80%",
+                    end: "bottom 30%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            tl1.to(servicesIntroSplit.lines, {
+                y: 0,
+                autoAlpha: 1,
+                stagger: 0.25,
+                ease: "power4.inOut",
+                duration: 1,
+            });
+
+            tl2.to(servicesOutroSplit.lines, {
+                y: 0,
+                autoAlpha: 1,
+                stagger: 0.25,
+                ease: "power4.inOut",
+                duration: 1,
+            });
+
             const cards = gsap.utils.toArray<HTMLDivElement>(".service-card");
             ScrollTrigger.create({
                 trigger: cards[0],
@@ -95,8 +124,8 @@ const ServicesSection2 = () => {
             />
 
             <div className="services-container" ref={containerRef}>
-                <section className="services-intro">
-                    <h1>
+                <section className="services-intro service-big-text">
+                    <h1 className="text-center px-6 w-full lg:max-w-3/4 ">
                         Every client deserves the assurance of safety without
                         compromise. At Highland Security Services Limited (Eagle
                         Eye), we deliver world-class security solutions built on
@@ -115,8 +144,8 @@ const ServicesSection2 = () => {
                         );
                     })}
                 </section>
-                <section className="services-outro">
-                    <h1>
+                <section className="services-outro service-big-text">
+                    <h1 className="text-center px-6 lg:px-[10%]">
                         Your security story begins with a single step. Partner
                         with Highland Security Services Limited today and
                         experience protection that’s personal, professional, and

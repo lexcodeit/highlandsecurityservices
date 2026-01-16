@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import RootModal from "@/components/modals/root-modal";
 import NextTopLoader from "nextjs-toploader";
 import localFont from "next/font/local";
+import GSAPProvider from "@/components/providers/gsap-provider";
 
 const dmSans = DM_Sans({
     variable: "--font-dm-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
                     className={`${dmSans.variable} ${outfit.variable} ${scriptFont.className} antialiased`}
                 >
                     <ConvexClientProvider>
+                        <GSAPProvider />
                         <JotaiProvider>
                             <NextTopLoader color="#f7c74b" />
                             {children}

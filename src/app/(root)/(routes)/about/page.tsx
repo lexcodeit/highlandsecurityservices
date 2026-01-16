@@ -4,6 +4,8 @@ import PerValue from "./per-value";
 import Image from "next/image";
 import EagleEyeApproach from "./eagle-eye-approach";
 import ValuesSection from "@/components/sections/homepage/values-section";
+import HomeAboutSection from "@/components/sections/homepage/home-about-section";
+import SectionTitle from "@/components/global/frontend/section-title";
 
 const AboutPage = () => {
     return (
@@ -31,9 +33,14 @@ const AboutPage = () => {
 
             {/* The Eagle Eye Approach */}
             <EagleEyeApproach />
+            <HomeAboutSection />
             <ValuesSection />
 
             <div className="relative pt-24 z-20">
+                <SectionTitle
+                    title="Our Service Values"
+                    subtitle="The core principles that guide our commitment to your protection."
+                />
                 <div className="px-6 lg:px-24 py-24">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {serviceValues.map((value, index) => {

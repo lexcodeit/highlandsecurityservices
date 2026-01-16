@@ -239,6 +239,11 @@
     border-radius: 4px;
 }
 
+.line-anim-setup {
+    transform: translateY(100%);
+    will-change: transform;
+}
+
 @media (max-width: 900px) {
     .eagle-eye {
         /* Eagle Eye */

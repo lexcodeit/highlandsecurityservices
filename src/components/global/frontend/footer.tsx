@@ -8,16 +8,13 @@ import {
 } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { BsTiktok } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FooterBanner from "./footer-banner";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
     const footerRef = useRef<HTMLDivElement>(null);
@@ -44,58 +41,58 @@ const Footer = () => {
                     },
                 });
 
-                // Wrapper
-                tl.fromTo(
-                    trigger,
-                    { opacity: 0, y: mobile ? 20 : 50 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.6,
-                        ease: "power3.out",
-                    }
-                );
+                // // Wrapper
+                // tl.fromTo(
+                //     trigger,
+                //     { opacity: 0, y: mobile ? 20 : 50 },
+                //     {
+                //         opacity: 1,
+                //         y: 0,
+                //         duration: 0.6,
+                //         ease: "power3.out",
+                //     }
+                // );
 
-                // Logo block
-                tl.fromTo(
-                    ".footer-logo-block",
-                    { opacity: 0, x: mobile ? 0 : -50, y: mobile ? 20 : 0 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        y: 0,
-                        duration: 0.7,
-                        ease: "power3.out",
-                    },
-                    "-=0.3"
-                );
+                // // Logo block
+                // tl.fromTo(
+                //     ".footer-logo-block",
+                //     { opacity: 0, x: mobile ? 0 : -50, y: mobile ? 20 : 0 },
+                //     {
+                //         opacity: 1,
+                //         x: 0,
+                //         y: 0,
+                //         duration: 0.7,
+                //         ease: "power3.out",
+                //     },
+                //     "-=0.3"
+                // );
 
-                // Columns
-                tl.fromTo(
-                    ".footer-col",
-                    { opacity: 0, y: 20 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.5,
-                        stagger: 0.15,
-                        ease: "power2.out",
-                    },
-                    "-=0.3"
-                );
+                // // Columns
+                // tl.fromTo(
+                //     ".footer-col",
+                //     { opacity: 0, y: 20 },
+                //     {
+                //         opacity: 1,
+                //         y: 0,
+                //         duration: 0.5,
+                //         stagger: 0.15,
+                //         ease: "power2.out",
+                //     },
+                //     "-=0.3"
+                // );
 
-                // Bottom bar
-                tl.fromTo(
-                    ".footer-bottom",
-                    { opacity: 0, y: 15 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: "power2.out",
-                    },
-                    "-=0.2"
-                );
+                // // Bottom bar
+                // tl.fromTo(
+                //     ".footer-bottom",
+                //     { opacity: 0, y: 15 },
+                //     {
+                //         opacity: 1,
+                //         y: 0,
+                //         duration: 0.4,
+                //         ease: "power2.out",
+                //     },
+                //     "-=0.2"
+                // );
             }
         );
 

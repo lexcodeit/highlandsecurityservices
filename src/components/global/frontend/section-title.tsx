@@ -3,14 +3,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SplitText } from "gsap/all";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "react-responsive";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
     title: string;
@@ -20,6 +18,8 @@ interface Props {
 
 const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
     const [hasMounted, setHasMounted] = useState(false); // Track mounting
 
     const isMobile = useMediaQuery({
@@ -32,40 +32,42 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
     }, []);
 
     useGSAP(() => {
-        if (!hasMounted) return;
+        if (!hasMounted || !titleRef.current) return;
         const ctx = gsap.context(() => {
-            const subtitleSplit = SplitText.create(".section-subtitle", {
-                type: "words",
+            // 1. Split the text
+            const subtitleSplit = new SplitText(".section-subtitle", {
+                type: "lines",
+                mask: "lines",
+                linesClass: "overflow-hidden", // Wrapper to hide the text as it slides up
             });
 
-            gsap.set(subtitleSplit.lines, {
-                y: 50,
-                opacity: 0,
+            // 2. Set initial states via GSAP (more reliable than CSS for SplitText)
+            gsap.set(subtitleSplit.lines, { yPercent: 100 });
+            gsap.set(titleRef.current, {
+                clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
             });
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 70%",
-                    toggleActions: "restart none none reverse", // replay every time
+                    start: "top 80%", // Adjusted for better visibility
+                    toggleActions: "play none none reverse",
                 },
             });
 
-            tl.from(".section-title", {
-                clipPath: "inset(0 100% 0 0)", // hidden from right
-                opacity: 0,
+            tl.to(titleRef.current, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 duration: 1,
                 ease: "power3.out",
-            }).from(
-                ".section-subtitle",
+            }).to(
+                subtitleSplit.lines,
                 {
-                    // clipPath: "inset(0 100% 0 0)",
-                    opacity: 0,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out",
+                    yPercent: 0,
+                    stagger: 0.1,
+                    duration: 0.8,
+                    ease: "power4.out",
                 },
-                "-=0.6" // start a bit before title finishes
+                "-=0.6"
             );
         }, containerRef);
 
@@ -76,12 +78,16 @@ const SectionTitle = ({ subtitle, title, buttonLink }: Props) => {
         <div ref={containerRef} className="py-12">
             <div className="mx-auto max-w-[1200px] flex items-center">
                 <div className="p-4 lg:p-0">
-                    <h2 className="section-title text-header-text font-outfit text-3xl lg:text-[48px] font-bold w-full lg:max-w-[80%] mb-4 lg:mb-0">
+                    <h2
+                        ref={titleRef}
+                        className="section-title text-header-text font-outfit text-3xl lg:text-3xl font-bold w-full lg:max-w-[90%] mb-4 lg:mb-0"
+                    >
                         {title}
                     </h2>
                     <p
+                        ref={subtitleRef}
                         className={cn(
-                            "section-subtitle text-supporting-text w-full lg:max-w-[60%] text-base lg:text-xl lg:block",
+                            "section-subtitle text-supporting-text w-full lg:max-w-[80%] text-base lg:text-xl lg:block",
                             hasMounted && isMobile
                                 ? buttonLink
                                     ? "hidden "

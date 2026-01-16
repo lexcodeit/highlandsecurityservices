@@ -1,17 +1,26 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
 const HomeAboutSection = () => {
+    const values = [
+        "Integrity",
+        "Professionalism",
+        "Expertise",
+        "Teamwork",
+        "Trust",
+        "Transparency",
+        "Respect",
+        "Responsiveness",
+        "Dependability",
+        "Recognition",
+        "Excellence",
+        "Confidentiality",
+    ];
+
     useGSAP(() => {
         const aboutText = gsap.utils.toArray(`.about-text`) as HTMLElement[];
-        const hsslText = gsap.utils.toArray(`.hssl-text h1`) as HTMLElement[];
-
-        const eagleEyeText = document.querySelector(".eagle-eye");
-
-        gsap.set(hsslText, {
-            y: "-100%",
-        });
 
         gsap.fromTo(
             aboutText,
@@ -28,54 +37,6 @@ const HomeAboutSection = () => {
                     toggleActions: "play none none reverse",
                     // markers: true, // uncomment for debugging
                     // scrub: 1,
-                },
-            }
-        );
-
-        gsap.to(hsslText, {
-            y: "0%",
-            duration: 1.2,
-            stagger: 0.05,
-            ease: "power4.inOut",
-            scrollTrigger: {
-                trigger: ".hssl-text",
-                start: "top 70%",
-                toggleActions: "play none none reverse",
-            },
-        });
-
-        gsap.fromTo(
-            eagleEyeText,
-            {
-                y: 100,
-            },
-            {
-                y: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: eagleEyeText,
-                    start: "top 50%",
-                    toggleActions: "restart none none reset", // replay every time
-                    scrub: 1,
-                },
-            }
-        );
-
-        gsap.fromTo(
-            ".eagle",
-            {
-                x: 100,
-            },
-            {
-                x: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: ".eagle",
-                    start: "top 50%",
-                    toggleActions: "restart none none reset", // replay every time
-                    scrub: 1,
                 },
             }
         );
@@ -104,29 +65,65 @@ const HomeAboutSection = () => {
                     industrial security, we’ve got you covered.
                 </h3>
             </div>
+            <section className="py-24 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid lg:grid-cols-12 gap-12 items-start">
+                        {/* Sticky Left Side: Visual & Heading */}
+                        <div className="lg:col-span-5 lg:sticky lg:top-10">
+                            <h2 className="text-primary-gold font-bold uppercase tracking-[0.2em] mb-4">
+                                Our Foundation
+                            </h2>
+                            <h3 className="text-5xl font-bold text-slate-900 mb-8 font-outfit">
+                                Our Shared <br /> Values
+                            </h3>
+                            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                                At Highland Security Services Limited, our
+                                culture is defined by a commitment to
+                                excellence. These core values guide every
+                                officer and consultant in our mission to protect
+                                your assets with unwavering dedication.
+                            </p>
 
-            <div className="flex justify-around font-dm-sans text-primary-gold font-bold overflow-hidden hssl-text">
-                <h1 className="text-[100px]">H</h1>
-                <h1 className="text-[100px]">S</h1>
-                <h1 className="text-[100px]">S</h1>
-                <h1 className="text-[100px]">L</h1>
-            </div>
+                            {/* High-Impact Image */}
+                            <div className="relative h-[300px] w-full rounded-2xl overflow-hidden shadow-xl">
+                                <Image
+                                    src="/assets/images/conference-room.jpg" // Suggestion: A firm handshake or a team standing together
+                                    fill
+                                    className="object-cover"
+                                    alt="HSSL Professionalism"
+                                />
+                                <div className="absolute inset-0 bg-slate-900/20" />
+                            </div>
+                        </div>
 
-            <div
-                className=" lg:absolute bottom-0 left-0 w-full flex flex-col lg:flex-row items-center gap-x-4"
-                style={{
-                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                }}
-            >
-                <h1 className=" font-brush-script eagle-eye">Eagle Eye</h1>
-                <Image
-                    src={"/assets/images/eagle-head.png"}
-                    width={100}
-                    height={100}
-                    alt="landing-eagle"
-                    className="object-cover w-[200px] eagle"
-                />
-            </div>
+                        {/* Right Side: Values Grid */}
+                        <div className="lg:col-span-7">
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {values.map((value, index) => (
+                                    <div
+                                        key={index}
+                                        className="group flex items-center p-6 bg-slate-50 rounded-xl border border-slate-100 transition-all duration-300 hover:bg-slate-900 hover:shadow-lg"
+                                    >
+                                        <div className="mr-4 transition-colors duration-300 group-hover:text-primary-gold text-slate-400">
+                                            <CheckCircle2 className="w-6 h-6" />
+                                        </div>
+                                        <span className="text-xl font-semibold text-slate-800 transition-colors duration-300 group-hover:text-white font-outfit">
+                                            {value}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Corporate Quote at the bottom */}
+                            <div className="mt-12 p-8 border-l-4 border-primary-gold bg-slate-50 italic text-slate-700">
+                                "Our commitment to creating the safest possible
+                                environment has earned us a reputation for
+                                excellence and long-term client relationships."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

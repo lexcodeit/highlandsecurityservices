@@ -33,8 +33,8 @@ const PerValue = ({ description, title, bgColor, textColor }: Props) => {
                 },
                 scrollTrigger: {
                     trigger: mainCardRef.current,
-                    start: "top 85%",
-                    toggleActions: "play none none reset",
+                    start: "top 95%",
+                    toggleActions: "play none none reverse",
                 },
             });
 

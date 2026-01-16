@@ -8,9 +8,8 @@
 }
 
 .services-container h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 600;
-    line-height: 1;
     margin-bottom: 1.5em;
 }
 
@@ -32,12 +31,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.services-intro h1,
-.services-outro h1 {
-    margin-bottom: 0;
-    text-align: center;
 }
 
 .service-card {
@@ -70,6 +63,11 @@
     object-position: top center;
 }
 
+.lines-split-setup {
+    transform: translateY(100%);
+    will-change: transform;
+}
+
 @media (max-width: 900px) {
     .services-container {
         position: relative;
@@ -96,18 +94,6 @@
         width: 100vw;
         height: 100vh;
         padding: 2em;
-    }
-
-    .services-intro,
-    .services-outro {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .services-intro h1,
-    .services-outro h1 {
-        font-size: 1.5rem;
     }
 
     .service-card {
