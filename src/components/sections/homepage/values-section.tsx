@@ -68,7 +68,7 @@ const ValuesSection = () => {
                         <div
                             key={index}
                             className={cn(
-                                "flex-shrink-0 w-[350px] lg:w-[500px] flex flex-col gap-y-6 border border-border-color rounded-lg p-6 bg-white shadow-md"
+                                "flex-shrink-0 w-[350px] lg:w-[500px] flex flex-col gap-y-6 border border-border-color rounded-lg p-6 bg-white shadow-md",
                             )}
                         >
                             <div className="relative w-full h-[200px] lg:h-[300px] overflow-hidden rounded-md">
@@ -80,13 +80,15 @@ const ValuesSection = () => {
                                 />
                             </div>
 
-                            <div className="space-y-3">
-                                <h4 className="font-outfit text-lg font-semibold text-primary-gold">
-                                    ({value.count})
-                                </h4>
-                                <h3 className="font-outfit text-2xl font-semibold text-header-text">
-                                    {value.title}
-                                </h3>
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-4">
+                                    <h4 className="font-outfit text-lg font-semibold text-primary-gold">
+                                        ({value.count})
+                                    </h4>
+                                    <h3 className="font-outfit text-2xl font-semibold text-header-text">
+                                        {value.title}
+                                    </h3>
+                                </div>
                                 <p className="text-supporting-text leading-relaxed">
                                     {value.description}
                                 </p>

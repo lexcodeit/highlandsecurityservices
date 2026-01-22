@@ -3,24 +3,8 @@ import Image from "next/image";
 // Suggested structural change for the About Section
 const AboutIntro = () => {
     return (
-        <section className="py-20 px-6 bg-white">
+        <section className="py-20 px-6 ">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-                {/* Visual Side */}
-                <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                    <Image
-                        src="/assets/images/hssl-eagle.png"
-                        fill
-                        className="object-contain"
-                        alt="Highland Security Team"
-                    />
-                    {/* <div className="absolute bottom-6 left-6 bg-primary-gold p-6 text-black font-bold">
-                        <p className="text-4xl">15+</p>
-                        <p className="text-sm uppercase tracking-widest">
-                            Years of Experience
-                        </p>
-                    </div> */}
-                </div>
-
                 {/* Content Side */}
                 <div>
                     <h2 className="text-primary-gold font-outfit font-bold uppercase tracking-widest mb-4">
@@ -29,12 +13,13 @@ const AboutIntro = () => {
                     <h3 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
                         Proactive Corporate Security & Safety Solutions
                     </h3>
-                    <p className="text-gray-600 text-lg mb-6 leading-relaxed">
-                        Highland Security Services Limited is a risk management
-                        consulting company licensed to operate multi-dimensional
-                        security throughout Nigeria. We believe the best
-                        security systems incorporate both technology and high
-                        instincts.
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                        HIGHLAND SECURITY SERVICES LIMITED, an incorporated
+                        security service company duly registered and licensed in
+                        Nigeria under CATEGORY “A” with registered offices at
+                        30, Sule Abore Street, Ojodu, Ikeja, Lagos, Mainland
+                        Garden Estate Obafemi Owode, Ogun State and Nwaniba
+                        Road, Uyo Akwa Ibon State.
                     </p>
                     <div className="grid grid-cols-2 gap-4 border-t pt-6">
                         <div>
@@ -56,6 +41,16 @@ const AboutIntro = () => {
                             </p>
                         </div>
                     </div>
+                </div>
+
+                {/* Visual Side */}
+                <div className="relative h-[500px] rounded-2xl overflow-hidden">
+                    <Image
+                        src="/assets/images/hssl-eagle.png"
+                        fill
+                        className="object-contain"
+                        alt="Highland Security Team"
+                    />
                 </div>
             </div>
         </section>

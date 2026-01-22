@@ -244,6 +244,11 @@
     will-change: transform;
 }
 
+.line-wrapper {
+    transform: translateY(100%);
+    will-change: transform;
+}
+
 @media (max-width: 900px) {
     .eagle-eye {
         /* Eagle Eye */

@@ -55,7 +55,7 @@ const CEOInvitation = () => {
                         <p className="text-slate-900 font-semibold mb-1">
                             Yours Sincerely,
                         </p>
-                        <p className="text-2xl font-brush-script text-primary-gold mb-1">
+                        <p className="text-2xl font-outfit text-primary-gold mb-1 font-semibold">
                             Dr Ade Omishore
                         </p>
                         <p className="text-slate-900 font-bold uppercase tracking-wider text-sm">

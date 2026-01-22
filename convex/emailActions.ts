@@ -43,7 +43,7 @@ export const sendContactMail = internalAction({
 
             await resend.emails.send({
                 from: "no-reply@highlandsecurityservices.com", // Replace with your verified sender email
-                to: "info@highlandsecurityservices.com", // Recipient email
+                to: "protect@highlandsecurityservices.com", // Recipient email
                 subject: "New Message Received", // Email subject
                 html,
             });
