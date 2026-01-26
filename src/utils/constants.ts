@@ -91,6 +91,7 @@ export const ServicesListArr: ServicesEnums[] = [
     "bodyguard",
     "corporate",
     "escort",
+    "cyber",
     "event",
     "residential",
     "specialized",

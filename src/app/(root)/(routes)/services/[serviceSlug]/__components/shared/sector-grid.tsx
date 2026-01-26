@@ -4,7 +4,7 @@ import { SplitText } from "gsap/SplitText";
 import { ElementType, useRef } from "react";
 import ServiceSectionTitle from "./service-section-title";
 
-interface SectorProps {
+export interface SectorProps {
     icon: ElementType; // Accepts the component itself, e.g., HardHat
     title: string;
     desc: string;

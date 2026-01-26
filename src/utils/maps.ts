@@ -92,7 +92,16 @@ export const SERVICES_MAP: {
             "Our Bullion Van Operations specialize in the secure transportation of cash, precious metals, and other high-value assets. Each convoy is manned by armed, trained professionals operating in communication with our central command for real-time monitoring and rapid response. We adhere to strict confidentiality and safety protocols, ensuring your valuables reach their destination without compromise.",
         bgColor: "#1E1E1E", // matte charcoal or dark grey to convey strength & confidentiality
         textColor: "#FFFFFF",
-        slug: "bullion-van-operaions",
+        slug: "bullion-van-operations",
+    },
+    cyber: {
+        title: "Cyber Security & Data Defense",
+        image: ["cyber-security.jpg"], // Suggestion: An image of a high-tech SOC (Security Operations Center)
+        description:
+            "In an era of digital threats, HSSL extends its protective envelope to your virtual assets. We provide end-to-end cyber defense, including threat monitoring, vulnerability assessments, and robust data encryption. Our goal is to safeguard your intellectual property and digital infrastructure against breaches, ensuring your business remains resilient in the face of evolving cyber risks.",
+        bgColor: "#0D1117", // Deep Tech Black/Blue
+        textColor: "#FFFFFF",
+        slug: "cyber-security",
     },
 };
 

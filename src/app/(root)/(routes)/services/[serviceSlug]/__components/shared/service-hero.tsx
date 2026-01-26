@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -14,6 +15,8 @@ interface Props {
     imgUrl: string;
     bgColor: string;
     icons: ElementType[];
+    isDarkBg?: boolean;
+    textColor?: string;
 }
 
 const ServiceHero = ({
@@ -23,6 +26,8 @@ const ServiceHero = ({
     tagline,
     title,
     icons,
+    isDarkBg = false,
+    textColor,
 }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
@@ -30,6 +35,9 @@ const ServiceHero = ({
     const tagLineRef = useRef<HTMLHeadingElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
     const [hasMounted, setHasMounted] = useState(false); // Track mounting
+
+    const subTextColor = isDarkBg ? "text-slate-300" : "text-slate-700";
+    const trustLabelColor = isDarkBg ? "text-slate-400" : "text-slate-600";
 
     // Set mounted to true once we are on the client
     useEffect(() => {
@@ -134,30 +142,40 @@ const ServiceHero = ({
                     </h2>
                     <h1
                         ref={titleRef}
-                        className="text-6xl lg:text-7xl font-bold font-outfit leading-tight mb-6 text-[#0A0A0A]"
+                        className={cn(
+                            "text-6xl lg:text-7xl font-bold font-outfit leading-tight mb-6 text-header-text",
+                        )}
+                        style={{
+                            color: textColor,
+                        }}
                     >
                         {title.main} <br />{" "}
                         <span className="opacity-70">{title.dimmed}.</span>
                     </h1>
                     <p
                         ref={descriptionRef}
-                        className="text-xl text-slate-700 max-w-md mb-8 leading-relaxed"
+                        className={`text-xl max-w-md mb-8 leading-relaxed ${subTextColor}`}
                     >
                         {description}
                     </p>
                     <div className="flex items-center gap-6">
                         <div className="flex -space-x-3">
                             {/* Place small circular icons or profile placeholders here */}
-                            {icons.map(icon => {
+                            {icons.map((icon, i) => {
                                 const Icon = icon;
                                 return (
-                                    <div className="w-12 h-12 rounded-full border-2 border-slate-300 bg-white trust-circle flex items-center justify-center text-primary-gold">
+                                    <div
+                                        key={i}
+                                        className="w-12 h-12 rounded-full border-2 border-slate-300 bg-white trust-circle flex items-center justify-center text-primary-gold"
+                                    >
                                         <Icon />
                                     </div>
                                 );
                             })}
                         </div>
-                        <p className="text-sm font-bold text-slate-600 uppercase tracking-tighter">
+                        <p
+                            className={`text-sm font-bold uppercase tracking-tighter ${trustLabelColor}`}
+                        >
                             Trusted by Nigeria's <br /> Leading Firms
                         </p>
                     </div>

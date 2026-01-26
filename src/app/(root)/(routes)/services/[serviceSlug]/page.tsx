@@ -7,6 +7,15 @@ import { SERVICES_MAP } from "@/utils/maps";
 import { ServiceProps } from "@/utils/interfaces";
 import BodyGuardSection from "./__components/bodyguard";
 import CorporatePage from "./__components/corporate";
+import EscortServicePage from "./__components/escort-service";
+import EventsServicePage from "./__components/events";
+import ResidentialServices from "./__components/residential";
+import SpecializedServicesPage from "./__components/specialized-guard-services";
+import SurveillanceServicePage from "./__components/surveillance";
+import CCTVServicePage from "./__components/cctv-service";
+import MarineServicePage from "./__components/marine";
+import BullionServicesPage from "./__components/bullion-services";
+import CyberServicePage from "./__components/cyber-service";
 
 // Find the service by matching the URL slug to the object slug
 export const getServiceBySlug = (slug: string): ServiceProps | undefined => {
@@ -26,6 +35,24 @@ const ServiceDetailPage = () => {
                 <BodyGuardSection />
             ) : serviceSlug === "corporate-security" ? (
                 <CorporatePage />
+            ) : serviceSlug === "escort-services" ? (
+                <EscortServicePage />
+            ) : serviceSlug === "event-security" ? (
+                <EventsServicePage />
+            ) : serviceSlug === "residential-security" ? (
+                <ResidentialServices />
+            ) : serviceSlug === "specialized-guard-services" ? (
+                <SpecializedServicesPage />
+            ) : serviceSlug === "surveillance-monitoring-services" ? (
+                <SurveillanceServicePage />
+            ) : serviceSlug === "cctv-installation-remote" ? (
+                <CCTVServicePage />
+            ) : serviceSlug === "marine-security" ? (
+                <MarineServicePage />
+            ) : serviceSlug === "bullion-van-operations" ? (
+                <BullionServicesPage />
+            ) : serviceSlug === "cyber-security" ? (
+                <CyberServicePage />
             ) : (
                 <>
                     {/* 1. HERO SECTION */}

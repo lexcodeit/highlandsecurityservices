@@ -1,3 +1,15 @@
+export type ServicesSlugEnum =
+    | "bodyguard-services"
+    | "corporate-security"
+    | "escort-services"
+    | "event-security"
+    | "residential-security"
+    | "specialized-guard-services"
+    | "surveillance-monitoring-services"
+    | "cctv-installation-remote"
+    | "marine-security"
+    | "bullion-van-operations"
+    | "cyber-security";
 export type GenderTypeEnum = "MALE" | "FEMALE";
 export type YesNoEnum = "Yes" | "No";
 
@@ -18,7 +30,8 @@ export type ServicesEnums =
     | "specialized"
     | "cctv"
     | "marine"
-    | "bullion";
+    | "bullion"
+    | "cyber";
 
 export type PositionEnums =
     | "chief-security-officer"
