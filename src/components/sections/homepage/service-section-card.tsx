@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { ServiceProps } from "@/utils/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const ServiceSectionCard = ({
@@ -9,7 +11,7 @@ const ServiceSectionCard = ({
     service: ServiceProps;
     index: number;
 }) => {
-    const { description, image, title, bgColor, textColor } = service;
+    const { description, image, title, bgColor, textColor, slug } = service;
 
     // 1. Initialize state as null or the first image
     const [currentImg, setCurrentImg] = useState<string | null>(null);
@@ -36,6 +38,9 @@ const ServiceSectionCard = ({
                 <div className="service-card-content">
                     <h1>{title}</h1>
                     <p>{description}</p>
+                    <Link href={`/services/${slug}`} className="mt-3 block">
+                        <Button>Learn More</Button>
+                    </Link>
                 </div>
                 <div className="service-card-image relative">
                     <Image

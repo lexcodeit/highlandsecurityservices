@@ -4,11 +4,20 @@ import { authTables } from "@convex-dev/auth/server";
 import {
     AccountRoleUnion,
     AccountStatusUnion,
+    ServiceTypeUnion,
+    BookingStatusUnion,
+    EventTypeUnion,
+    EventVenueTypeUnion,
+    InfrastructureTypeUnion,
     JobApplicationStatusUnion,
     PostPublishStatusUnion,
+    ProtectionLevelUnion,
     SourceOfInfoUnion,
+    ThreatLevelUnion,
     UserGenderUnion,
     WorkspaceRoleUnion,
+    PropertyTypeUnion,
+    ShiftRequirementUnion,
 } from "./unions";
 
 const schema = defineSchema({
@@ -102,6 +111,63 @@ const schema = defineSchema({
         .index("by_slug", ["slug"])
         .index("by_is_featured", ["isFeatured"])
         .index("by_publish_status", ["publishStatus"]),
+    bookings: defineTable({
+        // --- Core Fields (Shared by all) ---
+        bookingCode: v.string(), // e.g., HSSL-XXXX-2026
+        serviceType: ServiceTypeUnion, // "bodyguard", "bullion", etc.
+        status: BookingStatusUnion, // "pending", "confirmed", "completed"
+
+        // --- 2. CLIENT INFO ---
+        userId: v.optional(v.string()), // For logged-in users
+        fullName: v.string(),
+        email: v.string(),
+        phone: v.string(),
+        companyName: v.optional(v.string()),
+
+        // --- Logistics Fields (Common to most) ---
+        // --- 3. GENERAL LOGISTICS ---
+        startDate: v.number(),
+        endDate: v.optional(v.number()),
+        location: v.string(),
+        destination: v.optional(v.string()), // For Escort/Bullion/Marine
+
+        // Bodyguard / Specialized
+        protectionLevel: v.optional(ProtectionLevelUnion), // "Armed", "Unarmed", "Executive"
+        numberOfPrincipals: v.optional(v.number()),
+        threatLevel: v.optional(ThreatLevelUnion), // "Low", "Medium", "High"
+
+        // Event Security
+        eventVenueType: v.optional(EventVenueTypeUnion), // "Indoor", "Outdoor", "Stadium"
+        expectedGuestCount: v.optional(v.number()),
+        eventType: v.optional(EventTypeUnion), // "Wedding", "AGM", "Concert"
+
+        // Escort / Bullion
+        vehiclePreference: v.optional(v.string()), // "Armored SUV", "Sedan", "Van"
+        numberOfEscortVehicles: v.optional(v.number()),
+        assetValueCategory: v.optional(v.string()), // For Bullion risk assessment
+
+        // Marine
+        vesselName: v.optional(v.string()),
+        imoNumber: v.optional(v.string()), // Maritime ID
+        onBoardCrewCount: v.optional(v.number()),
+
+        // Residential / Corporate / Industrial
+        propertyType: v.optional(PropertyTypeUnion), // "Estate", "Factory", "Warehouse"
+        siteAcreage: v.optional(v.string()),
+        shiftRequirement: v.optional(ShiftRequirementUnion), // "24/7", "Night Only", "Day Only"
+
+        // CCTV / Surveillance / Cyber
+        hardwareRequired: v.optional(v.boolean()), // If they need installation vs just monitoring
+        numberOfPoints: v.optional(v.number()), // Camera points or Network nodes
+        infrastructureType: v.optional(InfrastructureTypeUnion), // "Cloud", "On-Premise", "Hybrid"
+
+        // Additional unstructured notes
+        notes: v.optional(v.string()),
+        lastUpdated: v.number(),
+    })
+        .index("by_bookingCode", ["bookingCode"])
+        .index("by_email", ["email"])
+        .index("by_service", ["serviceType"]),
 });
 
 export default schema;

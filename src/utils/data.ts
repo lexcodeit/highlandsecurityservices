@@ -8,6 +8,14 @@ export const stories = [
         storyImg: "/assets/images/highRes/guards.jpg",
     },
     {
+        title: ["Large-Scale", "Personnel", "Deployment"],
+        shortDesc:
+            "We maintain a deep roster of trained officers, allowing us to scale security presence for any requirement. From small teams to full-platoon deployments, we have the numbers to cover your assets.",
+        linkLabel: "View Our Scale",
+        linkSrc: "/services/specialized-guard-services",
+        storyImg: "/assets/images/header/instructions-standing.jpg",
+    },
+    {
         title: ["Comprehensive", "Event", "Security Experts"],
         shortDesc:
             "From corporate functions to high-profile gatherings, our event security teams ensure safety, order, and discretion. We manage crowd control, access points, and on-site surveillance so your event runs flawlessly.",
@@ -22,6 +30,15 @@ export const stories = [
         linkLabel: "Visit Us", // or "Contact Us"
         linkSrc: "/contact",
         storyImg: "/assets/images/highRes/building-hq.jpg", // Replace with your actual filename
+    },
+    // POSITION 5: Highlighting operational discipline and briefing
+    {
+        title: ["Rigorous", "Operational", "Briefings"],
+        shortDesc:
+            "Every mission begins with a detailed tactical briefing. Our supervisors ensure every officer understands their specific post instructions, venue layouts, and emergency protocols before deployment.",
+        linkLabel: "Our Standards",
+        linkSrc: "/services/corporate-security",
+        storyImg: "/assets/images/header/explanations.jpg",
     },
     {
         title: ["Corporate", "Security", "Solutions"],
