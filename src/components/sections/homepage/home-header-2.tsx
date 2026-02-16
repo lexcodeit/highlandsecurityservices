@@ -6,7 +6,6 @@ import Image from "next/image";
 import { stories } from "@/utils/data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useMediaQuery } from "react-responsive";
 
 const storyDuration = 8000;
 const contentUpdateDelay = 0.5;
@@ -14,10 +13,6 @@ const contentUpdateDelay = 0.5;
 const HomeHeader2 = () => {
     const cursorRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    const isMobile = useMediaQuery({
-        query: "(max-width: 768px)",
-    });
 
     const activeStoryRef = useRef(0);
     const setActiveStory = (value: number) => {
@@ -46,7 +41,7 @@ const HomeHeader2 = () => {
 
     const animateImageScale = (
         currentImg: HTMLElement,
-        upcomingImg: HTMLElement
+        upcomingImg: HTMLElement,
     ) => {
         const dir = directionRef.current;
         gsap.fromTo(
@@ -59,7 +54,7 @@ const HomeHeader2 = () => {
                 duration: 1,
                 ease: "power4.inOut",
                 onComplete: () => currentImg.parentElement?.remove(),
-            }
+            },
         );
 
         gsap.fromTo(
@@ -71,7 +66,7 @@ const HomeHeader2 = () => {
                 opacity: 1,
                 duration: 1,
                 ease: "power4.inOut",
-            }
+            },
         );
     };
 
@@ -103,6 +98,8 @@ const HomeHeader2 = () => {
     // Main story changer
     // -----------------------
     const changeStory = () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
         const dir = directionRef.current;
         const prev = activeStoryRef.current;
         const next =
@@ -118,6 +115,9 @@ const HomeHeader2 = () => {
         const currentImg = currentImgContainer?.querySelector("img");
 
         if (!currentImg) return;
+
+        // Reset the highlight of the one we just left
+        resetIndexHighlight(prev);
 
         gsap.to(".header-title-row h1", {
             y: dir === "next" ? -48 : 48,
@@ -146,10 +146,10 @@ const HomeHeader2 = () => {
             setTimeout(() => {
                 // Update DOM text to the new story
                 const titleRows = document.querySelectorAll(
-                    ".header-title-row h1"
+                    ".header-title-row h1",
                 );
                 const storyDesc = document.querySelector(
-                    ".header-story-description p"
+                    ".header-story-description p",
                 );
 
                 if (titleRows.length >= 3) {
@@ -182,11 +182,27 @@ const HomeHeader2 = () => {
             }, 600); // wait for image transition to start
 
             // Reset and animate index highlight
-            resetIndexHighlight(prev);
+            // resetIndexHighlight(prev);
             animateIndexHighlight(next);
 
             timeoutRef.current = setTimeout(changeStory, storyDuration);
         }, 200);
+    };
+
+    // -----------------------
+    // Click Navigation Logic
+    // -----------------------
+    const handleNavigationClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const { clientX } = e;
+        const half = window.innerWidth / 2;
+
+        if (clientX < half) {
+            directionRef.current = "prev";
+        } else {
+            directionRef.current = "next";
+        }
+
+        changeStory();
     };
 
     // -----------------------
@@ -207,9 +223,9 @@ const HomeHeader2 = () => {
         const cursorText = cursor.querySelector("p");
         const half = window.innerWidth / 2;
         if (clientX < half) {
-            cursorText!.textContent = "HSSL";
+            cursorText!.textContent = "Prev";
         } else {
-            cursorText!.textContent = "Eagle Eye";
+            cursorText!.textContent = "Next";
         }
     };
 
@@ -230,6 +246,7 @@ const HomeHeader2 = () => {
             ref={containerRef}
             className={"header-container hero-cover"}
             onMouseMove={handleMouseMove}
+            onClick={handleNavigationClick}
         >
             <div ref={cursorRef} className={"header-cursor"}>
                 <p></p>
@@ -238,7 +255,7 @@ const HomeHeader2 = () => {
             <div className={"header-story-img"}>
                 <div className={"header-img"}>
                     <Image
-                        src={"/assets/images/header/hssl-police-4.jpg"}
+                        src={"/assets/images/highRes/building-hq.jpg"}
                         alt="Corporate Security"
                         fill
                     />

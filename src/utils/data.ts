@@ -1,5 +1,13 @@
 export const stories = [
     {
+        title: ["Our Central", "Operations", "Headquarters"],
+        shortDesc:
+            "Based in the heart of our operations, our dedicated facility serves as the nerve center for coordination, 24/7 monitoring, and rapid deployment across the region. A physical testament to our stability and commitment to your safety.",
+        linkLabel: "Visit Us", // or "Contact Us"
+        linkSrc: "/contact",
+        storyImg: "/assets/images/highRes/building-hq.jpg", // Replace with your actual filename
+    },
+    {
         title: ["Professional", "Bodyguard", "Anytime"],
         shortDesc:
             "Our elite bodyguards are rigorously trained for executive protection, discreet presence, and 24/7 readiness. From VIP events to private residences, we ensure total safety with professionalism.",
@@ -23,14 +31,7 @@ export const stories = [
         linkSrc: "/services/event-security",
         storyImg: "/assets/images/highRes/event-security-1.jpg",
     },
-    {
-        title: ["Our Central", "Operations", "Headquarters"],
-        shortDesc:
-            "Based in the heart of our operations, our dedicated facility serves as the nerve center for coordination, 24/7 monitoring, and rapid deployment across the region. A physical testament to our stability and commitment to your safety.",
-        linkLabel: "Visit Us", // or "Contact Us"
-        linkSrc: "/contact",
-        storyImg: "/assets/images/highRes/building-hq.jpg", // Replace with your actual filename
-    },
+
     // POSITION 5: Highlighting operational discipline and briefing
     {
         title: ["Rigorous", "Operational", "Briefings"],
@@ -114,5 +115,21 @@ export const stories = [
             "With teams deployed across major cities in Nigeria, we deliver fast, coordinated response wherever our clients need protection.",
         tag: "National Coverage",
         storyImg: "/assets/images/header/police-hssl-3.jpg",
+    },
+    {
+        title: ["Maritime &", "Vessel", "Protection"],
+        shortDesc:
+            "Secure maritime operations with specialized vessel protection, armed transit security, and port facility guarding. Our marine units are trained for high-risk water zones and rapid tactical response.",
+        linkLabel: "View Marine Services",
+        linkSrc: "/services/marine-security", // Update with your actual route
+        storyImg: "/assets/images/services/maritime.jpg",
+    },
+    {
+        title: ["Cyber Defense", "& Digital", "Surveillance"],
+        shortDesc:
+            "Protect your digital assets with advanced network monitoring, cloud infrastructure security, and hybrid surveillance systems. We bridge the gap between physical guarding and digital fortress-building.",
+        linkLabel: "Explore Tech Solutions",
+        linkSrc: "/services/cyber-security", // Update with your actual route
+        storyImg: "/assets/images/services/cyber-security.jpg",
     },
 ];

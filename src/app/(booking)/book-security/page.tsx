@@ -6,6 +6,7 @@ import { useBookingStore } from "@/lib/stores/booking-store";
 import ServiceForm from "./__components/service-form";
 import LogisticsForm from "./__components/logistics-form";
 import ReviewDetails from "./__components/review-details";
+import Link from "next/link";
 
 const BookSecurity = () => {
     const { step } = useBookingStore();
@@ -14,15 +15,17 @@ const BookSecurity = () => {
         <div className="h-screen overflow-hidden flex flex-col bg-[#F9FAFB]">
             {/* Header stays consistent */}
             <header className="p-6 flex items-center gap-4 border-b bg-white">
-                <Image
-                    src="/assets/images/bg-logo.svg"
-                    alt="logo"
-                    width={40}
-                    height={40}
-                />
-                <h3 className="font-outfit font-bold text-slate-800">
-                    Highland Security Services Limited
-                </h3>
+                <Link href="/" className="flex items-center gap-4">
+                    <Image
+                        src="/assets/images/bg-logo.svg"
+                        alt="logo"
+                        width={40}
+                        height={40}
+                    />
+                    <h3 className="font-outfit font-bold text-slate-800">
+                        Highland Security Services Limited
+                    </h3>
+                </Link>
             </header>
 
             <main className="flex-1 grid lg:grid-cols-[350px_1fr] overflow-hidden">

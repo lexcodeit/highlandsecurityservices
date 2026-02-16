@@ -9,6 +9,7 @@ import useLenis from "@/lib/hooks/use-lenis";
 import AboutIntro from "@/components/sections/homepage/about-intro";
 import CEOInvitation from "@/components/sections/homepage/ceo-invitation";
 import SectorList from "@/components/sections/homepage/sector-section";
+import FeatureSpotlight from "@/components/sections/homepage/feature-spotlight";
 
 export default function Home() {
     useLenis();
@@ -19,6 +20,7 @@ export default function Home() {
             <CEOInvitation />
             <VettingSection />
             <ServicesSection2 />
+            <FeatureSpotlight />
             <ValuesSection />
             <SectorList />
             <BlogSection />
